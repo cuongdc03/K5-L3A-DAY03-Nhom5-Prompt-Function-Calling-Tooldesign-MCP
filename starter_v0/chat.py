@@ -56,14 +56,70 @@ def execute_tool_call(call: ToolCall) -> dict[str, Any]:
     return {"tool": call.name, "args": call.args, "result": result}
 
 
-def tool_results_message(events: list[dict[str, Any]]) -> dict[str, str]:
+def _extract_candidate_urls(events: list[dict[str, Any]]) -> list[str]:
+    urls: list[str] = []
+    seen: set[str] = set()
+    url_pattern = re.compile(r"https?://[^\s)\]\"'<>]+")
+    for event in events:
+        if event.get("tool") == "check_url":
+            continue
+        result = event.get("result")
+        if not isinstance(result, dict) or "error" in result:
+            continue
+        for item in result.get("items") or []:
+            if not isinstance(item, dict):
+                continue
+            for key in ("url", "hn_url"):
+                u = str(item.get(key) or "").strip()
+                if u.startswith(("http://", "https://")) and u not in seen:
+                    seen.add(u)
+                    urls.append(u)
+            summary = str(item.get("summary") or "")
+            for match in url_pattern.findall(summary):
+                cleaned = match.rstrip(".,;:!?")
+                if cleaned not in seen:
+                    seen.add(cleaned)
+                    urls.append(cleaned)
+    return urls[:8]
+
+
+def tool_results_message(
+    events: list[dict[str, Any]],
+    all_tool_events: list[dict[str, Any]] | None = None,
+) -> dict[str, str]:
+    history_events = all_tool_events if all_tool_events is not None else events
+    called_tools = {e.get("tool") for e in history_events}
+    latest_tools = {e.get("tool") for e in events}
+    candidate_urls = _extract_candidate_urls(events)
+
+    guidance_lines = ["Use only these tool results."]
+    if "current_time" in latest_tools and len(called_tools) == 1:
+        guidance_lines.append(
+            "You now have the exact system date/time from `current_time`. "
+            "If the user's request also requires searching or reading external sources, call the appropriate research tool now using this date/year context. "
+            "Otherwise, answer the user's date/time question directly in Vietnamese."
+        )
+    if candidate_urls and "check_url" not in called_tools:
+        guidance_lines.append(
+            f"IMPORTANT — URL VALIDATION REQUIRED: Before citing any links from these results (or links extracted from article text) in your response, "
+            f"call `check_url` on the candidate URLs you plan to include (e.g. {candidate_urls[:5]}) to verify they do not return HTTP 404 or redirect to an invalid/unrelated page."
+        )
+    elif "check_url" in called_tools:
+        guidance_lines.append(
+            "URL validation (`check_url`) has been completed. Cite ONLY links where `is_valid` is true. "
+            "Never include broken/404 links (`is_valid: false`) or links that redirected to an unrelated/homepage URL. "
+            "If a valid link redirected (`redirected: true`), use its verified `final_url`."
+        )
+    guidance_lines.append(
+        "If the user asked for a digest and the items are ready (and links validated), call `format`. "
+        "Otherwise answer the user directly in Vietnamese with verified sources when available."
+    )
     return {
         "role": "user",
         "content": (
             "TOOL_RESULTS_JSON:\n"
             f"{json_text(events, max_chars=24000)}\n\n"
-            "Use only these tool results. If the user asked for a digest and the items are ready, "
-            "call the formatting tool. Otherwise answer the user directly with cited sources when available."
+            + "\n".join(guidance_lines)
         ),
     }
 
@@ -136,7 +192,7 @@ def run_model_tool_loop(
             non_clarification_events.append(event)
 
         rounds.append(round_record)
-        working_messages.append(tool_results_message(non_clarification_events))
+        working_messages.append(tool_results_message(non_clarification_events, all_tool_events))
 
     return {
         "status": "max_tool_rounds",
@@ -161,7 +217,7 @@ def main() -> None:
     parser.add_argument("--tools", type=Path, default=ARTIFACTS_DIR / "tools.yaml")
     parser.add_argument("--transcripts-dir", type=Path, default=ROOT / "transcripts")
     parser.add_argument("--history-window", type=int, default=5, help="Keep the last N user/assistant pairs in context.")
-    parser.add_argument("--max-tool-rounds", type=int, default=4)
+    parser.add_argument("--max-tool-rounds", type=int, default=6)
     args = parser.parse_args()
 
     system_prompt = args.system_prompt.read_text(encoding="utf-8")

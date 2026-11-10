@@ -125,7 +125,7 @@ with st.sidebar:
     model = st.text_input("Model (blank = provider default)", value="").strip() or None
     version = st.text_input("Version label", value="v0")
     history_window = st.slider("History window (turns)", 0, 10, 5)
-    max_rounds = st.slider("Max tool rounds", 1, 8, 4)
+    max_rounds = st.slider("Max tool rounds", 1, 10, 6)
     if "messages" not in st.session_state:
         new_session(provider_name, model, version)
     if st.button("🗑️ New chat", use_container_width=True):

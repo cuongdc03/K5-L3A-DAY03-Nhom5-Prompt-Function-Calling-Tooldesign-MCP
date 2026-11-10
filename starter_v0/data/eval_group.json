@@ -70,6 +70,32 @@
       }
     },
     {
+      "id": "G06_current_time_routing",
+      "phase": "B",
+      "suite": "group",
+      "query": "Hôm nay là ngày bao nhiêu?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "current_time", "args": {}}]},
+      "metadata": {
+        "skill": "routing_new_tool_current_time",
+        "difficulty": "easy",
+        "what_it_tests": "Hỏi ngày tháng năm hiện tại → gọi tool current_time thay vì đoán từ dữ liệu huấn luyện hoặc gọi lookup."
+      }
+    },
+    {
+      "id": "G07_check_url_routing",
+      "phase": "B",
+      "suite": "group",
+      "query": "Kiểm tra giúp mình xem đường link https://openai.com/blog/gpt-5 có bị lỗi 404 hay redirect sang trang khác không?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "check_url", "args": {"urls": ["https://openai.com/blog/gpt-5"]}}]},
+      "metadata": {
+        "skill": "routing_new_tool_check_url",
+        "difficulty": "medium",
+        "what_it_tests": "Yêu cầu kiểm tra tính hợp lệ/404/redirect của URL → gọi tool check_url với danh sách urls."
+      }
+    },
+    {
       "id": "GM01_clarify_then_send_confirmed",
       "phase": "B",
       "suite": "group",
