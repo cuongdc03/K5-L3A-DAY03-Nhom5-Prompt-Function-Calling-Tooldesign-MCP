@@ -49,37 +49,37 @@ Bonus:
 
 **Prompt & tool declaration**
 
-- [ ] Chạy baseline `v0`, ghi vào `artifacts/version_log.csv`
-- [ ] Liệt kê các case FAIL của `v0` và gán mỗi case một loại lỗi (`wrong_tool`, `wrong_arg_value`, `missing_info`...)
-- [ ] `artifacts/system_prompt.md`: bỏ các chỉ dẫn xấu cố ý của starter (đoán thay vì hỏi, gửi không cần xác nhận, ép một bước)
-- [ ] `artifacts/system_prompt.md`: thêm rule routing (khi nào `timeline` / `social_search` / `lookup` / `fetch` / `clarify`)
-- [ ] `artifacts/tools.yaml`: viết lại `description` mỗi tool: làm gì, **khi nào dùng / khi nào không dùng**
-- [ ] `artifacts/tools.yaml`: mô tả rõ convention args (handle không có `@`, `topic=news` cho tin tức, `timeframe`, `search_type=Top|Latest`)
-- [ ] `artifacts/tools.yaml`: `send` mô tả rõ chỉ gửi khi user đã xác nhận (`confirmed=true`)
-- [ ] `v1`, `v2`, `v3`: mỗi version **một** giả thuyết, metric trước/sau trong `version_log.csv`
+- [x] Chạy baseline `v0`, ghi vào `artifacts/version_log.csv`
+- [x] Liệt kê các case FAIL của `v0` và gán mỗi case một loại lỗi (`wrong_tool`, `wrong_arg_value`, `missing_info`...)
+- [x] `artifacts/system_prompt.md`: bỏ các chỉ dẫn xấu cố ý của starter (đoán thay vì hỏi, gửi không cần xác nhận, ép một bước)
+- [x] `artifacts/system_prompt.md`: thêm rule routing (khi nào `timeline` / `social_search` / `lookup` / `fetch` / `clarify`)
+- [x] `artifacts/tools.yaml`: viết lại `description` mỗi tool: làm gì, **khi nào dùng / khi nào không dùng**
+- [x] `artifacts/tools.yaml`: mô tả rõ convention args (handle không có `@`, `topic=news` cho tin tức, `timeframe`, `search_type=Top|Latest`)
+- [x] `artifacts/tools.yaml`: `send` mô tả rõ chỉ gửi khi user đã xác nhận (`confirmed=true`)
+- [x] `v1`, `v2`, `v3`: mỗi version **một** giả thuyết, metric trước/sau trong `version_log.csv`
 
 **Tool mới**
 
-- [ ] `tools/<tên>/tool.py` + `TOOL.md` (frontmatter đúng contract trong `tools/README.md`)
-- [ ] Đăng ký trong `tools/__init__.py` (`TOOL_FUNCTIONS`) và `artifacts/tools.yaml`
-- [ ] Unit test cho tool mới trong `tests/test_tools_todo.py` (≥ 3 test)
-- [ ] Ít nhất 1 eval case trong `data/eval_group.json` kiểm tra model có route tới tool mới đúng lúc
+- [x] `tools/<tên>/tool.py` + `TOOL.md` (frontmatter đúng contract trong `tools/README.md`)
+- [x] Đăng ký trong `tools/__init__.py` (`TOOL_FUNCTIONS`) và `artifacts/tools.yaml`
+- [x] Unit test cho tool mới trong `tests/test_tools_todo.py` (≥ 3 test)
+- [x] Ít nhất 1 eval case trong `data/eval_group.json` kiểm tra model có route tới tool mới đúng lúc
 
 **Testing**
 
-- [ ] `data/eval_group.json`: case cho model (routing / args / boundary), xem Step 4
-- [ ] `tests/test_tools_todo.py`: unit test cho code của tool, xem Step 4b
-- [ ] `pytest`: 0 failed, 0 skipped
+- [x] `data/eval_group.json`: case cho model (routing / args / boundary), xem Step 4
+- [x] `tests/test_tools_todo.py`: unit test cho code của tool, xem Step 4b
+- [x] `pytest`: 0 failed, 0 skipped
 
 **Demo & report**
 
-- [ ] UI chạy được + link dùng thử
-- [ ] `chat.py`: ≥ 3 lượt live, có transcript
-- [ ] `artifacts/REPORT.md` Phần A trước 16:30, Phần B trước khi nộp
+- [x] UI chạy được + link dùng thử
+- [x] `chat.py`: ≥ 3 lượt live, có transcript
+- [x] `artifacts/REPORT.md` Phần A trước 16:30, Phần B trước khi nộp
 
 **Bonus (tuỳ chọn)**
 
-- [ ] `send` có xác nhận trước khi gửi, có transcript chứng minh
+- [x] `send` có xác nhận trước khi gửi, có transcript chứng minh
 - [ ] Small Local Model Challenge (Step 7)
 
 ## Folder Map
@@ -321,19 +321,19 @@ Try at least 3 live turns, for example:
 
 1. Chạy UI local trước (ví dụ Streamlit mặc định cổng `8501`):
    ```bash
-     streamlit run app.py            # → http://localhost:8501
+      streamlit run app.py            # → http://localhost:8501
    ```
 2. Cài `cloudflared`:
    ```bash
-     brew install cloudflared                          # macOS
-     winget install --id Cloudflare.cloudflared        # Windows (hoặc: scoop install cloudflared)
-     # Linux: xem https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/
+      brew install cloudflared                          # macOS
+      winget install --id Cloudflare.cloudflared        # Windows (hoặc: scoop install cloudflared)
+      # Linux: xem https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/
    ```
 
-     Windows: nếu báo `cloudflared not recognized`, mở terminal mới rồi chạy lại.
+      Windows: nếu báo `cloudflared not recognized`, mở terminal mới rồi chạy lại.
 3. Mở tunnel trỏ vào cổng UI — lệnh trả về ngay một URL `https://<random>.trycloudflare.com`:
    ```bash
-     cloudflared tunnel --url http://localhost:8501
+      cloudflared tunnel --url http://localhost:8501
    ```
 4. Copy URL đó, dán vào `REPORT.md` Phần A (mục "Link dùng thử") để team khác mở thử.
 
@@ -357,24 +357,24 @@ Câu hỏi: **prompt + tool declaration nhóm vừa tối ưu cho model cloud c�
 1. Cài [Ollama](https://ollama.com/download) (`brew install ollama` trên macOS), rồi chạy `ollama serve` (app desktop tự chạy sẵn).
 2. Kéo **ít nhất 2** model hỗ trợ tool calling, có kích thước khác nhau:
    ```bash
-     ollama pull qwen2.5:7b      # mặc định của provider, ~4.7 GB
-     ollama pull llama3.2:3b     # nhỏ hơn, ~2 GB
-     # Gợi ý khác: qwen2.5:3b, llama3.1:8b, mistral:7b
-     # Model phải có tag "tools" trên https://ollama.com/search?c=tools
+      ollama pull qwen2.5:7b      # mặc định của provider, ~4.7 GB
+      ollama pull llama3.2:3b     # nhỏ hơn, ~2 GB
+      # Gợi ý khác: qwen2.5:3b, llama3.1:8b, mistral:7b
+      # Model phải có tag "tools" trên https://ollama.com/search?c=tools
    ```
 
-     Máy yếu (RAM < 16 GB): dùng model 3B. Không cần API key; provider `ollama` gọi `http://localhost:11434/v1` (đổi bằng `OLLAMA_BASE_URL` nếu dùng LM Studio / llama.cpp server).
+      Máy yếu (RAM < 16 GB): dùng model 3B. Không cần API key; provider `ollama` gọi `http://localhost:11434/v1` (đổi bằng `OLLAMA_BASE_URL` nếu dùng LM Studio / llama.cpp server).
 3. Preflight:
    ```bash
-     python scripts/preflight_provider.py --provider ollama --model qwen2.5:7b
+      python scripts/preflight_provider.py --provider ollama --model qwen2.5:7b
    ```
 
 ### Nhiệm vụ
 
 1. **Baseline local:** chạy base eval với prompt/tools **v3** (bản tốt nhất của nhóm), không sửa gì, trên từng model local:
    ```bash
-     python run_eval.py --provider ollama --model qwen2.5:7b  --version v3-qwen7b --suite base --eval-cases data/eval_base.json
-     python run_eval.py --provider ollama --model llama3.2:3b --version v3-llama3b --suite base --eval-cases data/eval_base.json
+      python run_eval.py --provider ollama --model qwen2.5:7b  --version v3-qwen7b --suite base --eval-cases data/eval_base.json
+      python run_eval.py --provider ollama --model llama3.2:3b --version v3-llama3b --suite base --eval-cases data/eval_base.json
    ```
 2. **Phân loại lỗi:** đọc run JSON, đếm lỗi đặc thù của model nhỏ mà model cloud không mắc:
    - `wrong_tool` / bịa tên tool không có trong `tools.yaml`
