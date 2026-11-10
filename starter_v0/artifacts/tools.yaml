@@ -16,12 +16,12 @@
 tools:
   # ---------------- Core tools ----------------
   - name: clarify
-    description: "Gửi một câu hỏi cho người dùng."
+    description: "Hỏi lại người dùng và dừng chờ câu trả lời. Dùng khi thiếu thông tin bắt buộc (không có tài khoản, URL, chủ đề) hoặc khi cần người dùng xác nhận trước một hành động không hoàn tác được như gửi Telegram. KHÔNG dùng khi đã đủ thông tin để gọi tool khác."
     parameters:
       type: object
       properties:
-        question: {type: string, default: "", description: "Câu hỏi"}
-        response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "Kiểu trả lời"}
+        question: {type: string, default: "", description: "Một câu hỏi ngắn, cụ thể."}
+        response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "LUÔN điền tường minh. 'text' = xin thông tin còn thiếu (handle, URL, chủ đề). 'yes_no' = xin xác nhận trước khi thực hiện hành động (ví dụ gửi Telegram). 'choice' = chọn một trong options."}
         options: {type: array, default: [], items: {type: string}, description: "Các lựa chọn"}
       required: [question]
 
@@ -86,12 +86,12 @@ tools:
 
   # ---------------- Bonus tools ----------------
   - name: send
-    description: "Gửi một đoạn văn bản đi."
+    description: "Đăng một đoạn văn bản lên kênh Telegram. Hành động không hoàn tác: CHỈ gọi sau khi đã hỏi người dùng bằng clarify(response_type=yes_no) và họ trả lời đồng ý. Không dùng để trả lời câu hỏi của người dùng."
     parameters:
       type: object
       properties:
-        text: {type: string, default: "", description: "Nội dung"}
-        confirmed: {type: boolean, default: false, description: "Cờ xác nhận"}
+        text: {type: string, default: "", description: "Đúng nội dung sẽ đăng, đã cho người dùng xem."}
+        confirmed: {type: boolean, default: false, description: "true CHỈ KHI người dùng đã xác nhận rõ ràng trong cuộc trò chuyện; nếu chưa thì để false."}
       required: [text]
 
   - name: policy
