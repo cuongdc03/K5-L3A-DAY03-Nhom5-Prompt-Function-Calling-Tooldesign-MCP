@@ -10,7 +10,7 @@
   "tools": "C:\\Users\\Asus\\OneDrive - camann\\Desktop\\notebook\\AI_in_action\\Day_3\\LAB\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\tools.yaml",
   "interface": "streamlit",
   "created_at": "2026-11-10T11:02:31",
-  "updated_at": "2026-11-10T11:15:50",
+  "updated_at": "2026-11-10T11:19:09",
   "turns": [
     {
       "turn_index": 1,
@@ -151,6 +151,128 @@
         }
       ],
       "ended_at": "2026-11-10T11:15:50"
+    },
+    {
+      "turn_index": 4,
+      "started_at": "2026-11-10T11:18:37",
+      "user": "$1M bằng bao nhiêu VNĐ ",
+      "status": "answered",
+      "assistant_text": "1 triệu USD (1M) tương đương khoảng 29.220.000 VNĐ.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "crypto_price",
+              "args": {
+                "coin_id": "usd",
+                "currency": "vnd"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "crypto_price",
+              "args": {
+                "coin_id": "usd",
+                "currency": "vnd"
+              },
+              "result": {
+                "tool": "crypto_price",
+                "coin": "usd",
+                "currency": "vnd",
+                "price": 29.22,
+                "formatted": "29.22 VND"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "1 triệu USD (1M) tương đương khoảng 29.220.000 VNĐ.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "crypto_price",
+          "args": {
+            "coin_id": "usd",
+            "currency": "vnd"
+          },
+          "result": {
+            "tool": "crypto_price",
+            "coin": "usd",
+            "currency": "vnd",
+            "price": 29.22,
+            "formatted": "29.22 VND"
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T11:18:41"
+    },
+    {
+      "turn_index": 5,
+      "started_at": "2026-11-10T11:19:03",
+      "user": "sai rồi ",
+      "status": "answered",
+      "assistant_text": "1 triệu USD (1M) tương đương khoảng 29.220.000 VNĐ.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "crypto_price",
+              "args": {
+                "coin_id": "usd",
+                "currency": "vnd"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "crypto_price",
+              "args": {
+                "coin_id": "usd",
+                "currency": "vnd"
+              },
+              "result": {
+                "tool": "crypto_price",
+                "coin": "usd",
+                "currency": "vnd",
+                "price": 29.22,
+                "formatted": "29.22 VND"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "1 triệu USD (1M) tương đương khoảng 29.220.000 VNĐ.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "crypto_price",
+          "args": {
+            "coin_id": "usd",
+            "currency": "vnd"
+          },
+          "result": {
+            "tool": "crypto_price",
+            "coin": "usd",
+            "currency": "vnd",
+            "price": 29.22,
+            "formatted": "29.22 VND"
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T11:19:09"
     }
   ]
 }
