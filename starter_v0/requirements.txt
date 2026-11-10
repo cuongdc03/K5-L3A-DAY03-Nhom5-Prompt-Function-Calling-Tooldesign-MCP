@@ -5,6 +5,7 @@ google-genai>=0.8.0
 # Research tools:
 requests>=2.31.0
 PyYAML>=6.0
+tzdata>=2024.1; platform_system == "Windows"
 pypdf>=4.0.0
 # UI:
 streamlit>=1.40.0

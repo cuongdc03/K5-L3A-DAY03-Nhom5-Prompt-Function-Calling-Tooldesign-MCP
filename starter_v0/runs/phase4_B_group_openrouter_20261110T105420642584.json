@@ -1,0 +1,244 @@
+{
+  "run_id": "phase4_B_group_openrouter_20261110T105420642584",
+  "version": "phase4",
+  "artifact_version": "phase4+p74b4300a2d50+tc224d7a4b51e",
+  "prompt_hash": "74b4300a2d5090ca18be65f55345ef950dd25a85b017919aca4879213351c0f3",
+  "tools_hash": "c224d7a4b51ec0c715514201f6c2c34c159af66d3b5f2d14c094fb20449addba",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "/Users/cuong/workspaces/ai-in-action/K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-/starter_v0/artifacts/system_prompt.md",
+  "tools": "/Users/cuong/workspaces/ai-in-action/K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-/starter_v0/artifacts/tools.yaml",
+  "eval_cases": "data/eval_group.json",
+  "dataset_id": "day04_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
+  "generated_at": "2026-11-10T10:54:20",
+  "summary": {
+    "total_cases": 3,
+    "measured_cases": 3,
+    "provider_error_cases": 0,
+    "passed_cases": 3,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": null,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_current_date_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "datetime_now",
+        "difficulty": "easy",
+        "what_it_tests": "Câu hỏi về ngày/thứ hiện tại → datetime_now (model không tự biết 'hôm nay'), không dùng lookup."
+      },
+      "input": "Hôm nay là ngày mấy, thứ mấy vậy?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "datetime_now",
+            "args": {}
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "datetime_now",
+            "args": {}
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "datetime_now",
+          "args": {},
+          "result": {
+            "tool": "get_current_datetime",
+            "timezone": "Asia/Ho_Chi_Minh",
+            "iso": "2026-11-10T10:54:10+07:00",
+            "date": "2026-11-10",
+            "time": "10:54:10",
+            "weekday": "Tuesday",
+            "weekday_vi": "Thứ Ba",
+            "utc_offset": "+07:00",
+            "iso_week": 46,
+            "week_start": "2026-11-09",
+            "week_end": "2026-11-15",
+            "unix": 1794282850
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_timezone_arg",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "datetime_now",
+        "difficulty": "medium",
+        "what_it_tests": "Tên thành phố phải được đổi thành tên múi giờ IANA (Asia/Tokyo), không để mặc định."
+      },
+      "input": "Bây giờ là mấy giờ ở Tokyo?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "datetime_now",
+            "args": {
+              "timezone": "Asia/Tokyo"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "datetime_now",
+            "args": {
+              "timezone": "Asia/Tokyo"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "datetime_now",
+          "args": {
+            "timezone": "Asia/Tokyo"
+          },
+          "result": {
+            "tool": "get_current_datetime",
+            "timezone": "Asia/Tokyo",
+            "iso": "2026-11-10T12:54:15+09:00",
+            "date": "2026-11-10",
+            "time": "12:54:15",
+            "weekday": "Tuesday",
+            "weekday_vi": "Thứ Ba",
+            "utc_offset": "+09:00",
+            "iso_week": 46,
+            "week_start": "2026-11-09",
+            "week_end": "2026-11-15",
+            "unix": 1794282855
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_news_not_datetime",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "datetime_now",
+        "difficulty": "medium",
+        "what_it_tests": "Boundary: có chữ 'tuần này' nhưng đây là tin tức → lookup(timeframe=week), không gọi datetime_now."
+      },
+      "input": "Tin tức AI nổi bật tuần này là gì?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "topic": "news",
+              "timeframe": "week"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "AI",
+              "topic": "news",
+              "timeframe": "week",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "unnecessary_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "week",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "week",
+            "items": [
+              {
+                "title": "Voters deliver \"AI earthquake,\" rebuking tech and billionaires",
+                "url": "https://www.axios.com/2026/11/04/ai-data-center-election-slowdown",
+                "source": "axios.com",
+                "summary": "AI had its \"official debut\" as the biggest issue in American politics, former New York Assemblymember and RAISE Act author Alex Bores told Axios. \"AI is reaching into every part of our society and economy and it's now crystal clear it's impacting every part of our politics, too.\" [...] Voters showed deep distrust of the AI race Tuesday, approving dozens of data center moratoriums and electing a raft of candidates who favor slowing a $10 trillion buildout, including in Texas — the epicenter of the boom.\n\nWhy it matters: In an election that hinged on an affordability crisis for many Americans, voters made it clear they view Silicon Valley's AI ambitions not as a technological miracle, but as a resource-draining threat to their wallets and communities. [...] Democratic challengers successfully weaponized AI policy, ousting Republicans in Ohio, Wisconsin, Arizona and Pennsylvania.\n   Democratic groups had poured ads into these districts attacking GOP incumbents for a 2025 vote that would've neutered state AI legislation.\n   AI safety advocates won or were poised to win races on Tuesday that will expand their coalition in the new Congress, including Colorado's Manny Rutinel and Minnesota's Matt Little.",
+                "score": 0.31843266
+              },
+              {
+                "title": "A single AI model simulates the behavior of many substances, from sliding sand to folding proteins | MIT News | Massachusetts Institute of Technology",
+                "url": "https://news.mit.edu/2026/single-ai-model-simulates-many-substances-behavior-1109",
+                "source": "news.mit.edu",
+                "summary": "Unified simulation\n\nFor this work, the researchers drew inspiration from world models. These powerful AI systems learn the rules that govern the physical world so they can predict how objects or environments will change over time in response to certain actions or conditions.\n\nThe researchers applied these concepts to develop a unified AI architecture that can simulate multiple types of physical phenomena. [...] ## More MIT News\n\nRobot serving a cup of coffee while being instructed not to spill on the laptop\n\n### AI-assisted learning platform helps robots reason beyond literal commands\n\nThe new approach, known as FLEX, could lead to more intuitive, interactive household and assistive robots.\n\nRead full story →\n\nMan wearing a T-shirt and safety goggles standing above a concrete beam in the lab, operating a bench-mounted laser tool scanning the concrete. [...] The system represents every material it simulates, from a dune of sand to a protein molecule, as tiny particles and predicts where those particles will move one step at a time. Because it learns the underlying dynamics rather than being programmed with an equation, the model can adapt to materials, forces, and environments it never encountered during training.",
+                "score": 0.2975827
+              },
+              {
+                "title": "Measuring how AI agents handle everyday wet-lab science",
+                "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
+                "source": "openai.com",
+                "summary": "Our mission is to ensure that artificial general intelligence benefits all of humanity. As part of that mission, we want to help scientists accelerate biological research—from understanding disease to developing new treatments. For AI agents to contribute, they need to reliably interpret the experimental evidence scientists work with every day in wet labs, where they run experiments with biological samples. Everyday wet-lab work involves failed experiments, ambiguous images and conflicting",
+                "score": 0.24436794
+              },
+              {
+                "title": "Authors Can Defend Against AI Allegations With ‘Paper Trail’ Tools. Is It Enough? | WIRED",
+                "url": "https://www.wired.com/story/authors-can-defend-against-ai-allegations-with-paper-trail-tools",
+                "source": "wired.com",
+                "summary": "But Bartz notes that once the accusations start, the damage is done. As the Shy Girl scandal erupted, she says, “I kind of immediately felt like this was going to lead to a potential witch hunt.” The unavoidable emergence of AI in publishing, she explains, will “have the unintended effect of leading anyone to be able to accuse anyone of using AI,” and at the moment, authors have little recourse in defending themselves against these charges. “There’s no agreed upon standard,” Bartz says, in [...] Mia Ballard, the author of Shy Girl, has denied allegations that she used AI to write the novel, claiming that an editor was responsible for AI-assisted changes to a previously self-published version of the book. She has also said that she is pursuing legal action. Since that scandal broke, several more fiction authors have run afoul of AI suspicions, one after winning a short story prize, another after publishers bid into the millions for his crime novel. Both have denied these allegations as [...] “If what you're selling are your words and your voice and your imagination, your creativity, using AI doesn't make sense,” Rasenberger says, noting that authors’ pride in their own work means AI slop is far less common in publishing than one might think. “I've talked to editors, particularly editors of literary nonfiction and fiction,” Rasenberger says, “and some of them will say, ‘I never see AI-generated submissions, I'd know it if I did.’”",
+                "score": 0.2249995
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

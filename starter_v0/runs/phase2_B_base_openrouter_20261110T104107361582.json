@@ -1,8 +1,8 @@
 {
-  "run_id": "v3_B_base_openrouter_20261110T104241241299",
-  "version": "v3",
-  "artifact_version": "v3+p74b4300a2d50+t56f9dd777c50",
-  "prompt_hash": "74b4300a2d5090ca18be65f55345ef950dd25a85b017919aca4879213351c0f3",
+  "run_id": "phase2_B_base_openrouter_20261110T104107361582",
+  "version": "phase2",
+  "artifact_version": "phase2+pb4c38372869e+t56f9dd777c50",
+  "prompt_hash": "b4c38372869e22019c203e29361dd69b09e4c8ad770c7b8f7ff89e14532e3ca0",
   "tools_hash": "56f9dd777c50eb2015ac3020efc79a7461b9f71e566086d177b4855c350582da",
   "phase": "B",
   "suite": "base",
@@ -11,10 +11,10 @@
   "system_prompt": "/Users/cuong/workspaces/ai-in-action/K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-/starter_v0/artifacts/system_prompt.md",
   "tools": "/Users/cuong/workspaces/ai-in-action/K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-/starter_v0/artifacts/tools.yaml",
   "eval_cases": "data/eval_base.json",
-  "dataset_id": "day04_v2_research_base",
+  "dataset_id": "day04_phase2_research_base",
   "dataset_role": "base",
   "description": "Core eval cho research agent: routing đúng tool + đúng args, hỏi lại khi thiếu (ask_user), xác nhận trước khi gửi, và xử lý câu ngoài phạm vi / không cần tool. Chấm trên tool_calls + args (subset). KHÔNG sửa file này — chỉ thêm case vào eval_group.json.",
-  "generated_at": "2026-11-10T10:42:41",
+  "generated_at": "2026-11-10T10:41:07",
   "summary": {
     "total_cases": 20,
     "measured_cases": 20,
@@ -62,8 +62,7 @@
           {
             "name": "timeline",
             "args": {
-              "screenname": "sama",
-              "limit": 1
+              "screenname": "sama"
             }
           }
         ],
@@ -77,8 +76,7 @@
         {
           "tool": "timeline",
           "args": {
-            "screenname": "sama",
-            "limit": 1
+            "screenname": "sama"
           },
           "result": {
             "tool": "get_user_tweets",
@@ -94,6 +92,54 @@
                   "favorites": 0,
                   "retweets": 53,
                   "views": "47373"
+                }
+              },
+              {
+                "title": "RT @thsottiaux: Day 25/",
+                "summary": "RT @thsottiaux: Day 25/\n\nWe are doubling all usage limits for all Pro 100/200/500 tiers and Business Premium, effective today.\n\nWe heard yo…",
+                "url": "https://x.com/sama/status/2117797818756952416",
+                "source": "@sama",
+                "date": "Wed Nov 04 01:55:21 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 2703,
+                  "views": "41956"
+                }
+              },
+              {
+                "title": "People should always be in control of the future.",
+                "summary": "People should always be in control of the future.\n\nOpenAI is against the notion that it would be acceptable for people to be relegated to a role of doing things that “AI systems think makes sense to reward in humans”.\n\nPeople should not cede control of the future to superintelligence, and that requirement should ultimately constrain AI progress.",
+                "url": "https://x.com/sama/status/2117794005165748448",
+                "source": "@sama",
+                "date": "Wed Nov 04 01:40:12 +0000 2026",
+                "metrics": {
+                  "favorites": 20656,
+                  "retweets": 1019,
+                  "views": "10640960"
+                }
+              },
+              {
+                "title": "RT @danintheory: We are announcing three new discoveries in mathematics, computer science, and physics about harmonic an",
+                "summary": "RT @danintheory: We are announcing three new discoveries in mathematics, computer science, and physics about harmonic analysis, complexity…",
+                "url": "https://x.com/sama/status/2114864981934329996",
+                "source": "@sama",
+                "date": "Mon Oct 26 23:41:18 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 1117,
+                  "views": "48208"
+                }
+              },
+              {
+                "title": "6.1 Terra is here! It is good at a lot of things, but we are especially excited for this new era of computer use.",
+                "summary": "6.1 Terra is here! It is good at a lot of things, but we are especially excited for this new era of computer use.",
+                "url": "https://x.com/sama/status/2114818620782248024",
+                "source": "@sama",
+                "date": "Mon Oct 26 20:37:05 +0000 2026",
+                "metrics": {
+                  "favorites": 10108,
+                  "retweets": 493,
+                  "views": "1652211"
                 }
               }
             ]
@@ -155,18 +201,6 @@
             "search_type": "Latest",
             "items": [
               {
-                "title": "@nqjih8983 @AlphaCapitalUK Nine payouts is a solid track record. Is the 5% per request your own choice or a cap Alpha Ca",
-                "summary": "@nqjih8983 @AlphaCapitalUK Nine payouts is a solid track record. Is the 5% per request your own choice or a cap Alpha Capital sets? And has the processing time stayed the same from payout one to nine?",
-                "url": "https://x.com/globalproptrust/status/2119998730510463273",
-                "source": "@globalproptrust",
-                "date": "Tue Nov 10 03:40:59 +0000 2026",
-                "metrics": {
-                  "favorites": 0,
-                  "retweets": 0,
-                  "views": "1"
-                }
-              },
-              {
                 "title": "@EZZARION The math works on paper, but the drawdown decides it. Six losses in a row at 1% is a 6% hole, which ends a lot",
                 "summary": "@EZZARION The math works on paper, but the drawdown decides it. Six losses in a row at 1% is a 6% hole, which ends a lot of $50K accounts with a 5% or 6% limit before the wins show up. Sizing for the worst streak is what keeps the payout real.",
                 "url": "https://x.com/globalproptrust/status/2119998454311366989",
@@ -187,7 +221,7 @@
                 "metrics": {
                   "favorites": 0,
                   "retweets": 0,
-                  "views": "31"
+                  "views": "21"
                 }
               },
               {
@@ -199,7 +233,7 @@
                 "metrics": {
                   "favorites": 0,
                   "retweets": 0,
-                  "views": "80"
+                  "views": "73"
                 }
               },
               {
@@ -212,6 +246,18 @@
                   "favorites": 0,
                   "retweets": 0,
                   "views": "10"
+                }
+              },
+              {
+                "title": "this is the only X article i've ever written and i would like you to read it https://t.co/jN9S9USJtG",
+                "summary": "this is the only X article i've ever written and i would like you to read it https://t.co/jN9S9USJtG",
+                "url": "https://x.com/MasterTimBlais/status/2119997660656468278",
+                "source": "@MasterTimBlais",
+                "date": "Tue Nov 10 03:36:44 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "51"
                 }
               }
             ]
@@ -441,8 +487,8 @@
                 "date": "Tue Nov 10 03:30:09 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 809,
-                  "views": "302190"
+                  "retweets": 795,
+                  "views": "297310"
                 }
               },
               {
@@ -453,8 +499,8 @@
                 "date": "Tue Nov 10 03:21:06 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 199,
-                  "views": "322435"
+                  "retweets": 198,
+                  "views": "320810"
                 }
               },
               {
@@ -465,8 +511,8 @@
                 "date": "Tue Nov 10 03:16:09 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 987,
-                  "views": "313443"
+                  "retweets": 978,
+                  "views": "312230"
                 }
               },
               {
@@ -477,8 +523,8 @@
                 "date": "Tue Nov 10 03:13:39 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 176,
-                  "views": "297510"
+                  "retweets": 174,
+                  "views": "296482"
                 }
               },
               {
@@ -489,8 +535,8 @@
                 "date": "Tue Nov 10 03:13:25 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 266,
-                  "views": "269953"
+                  "retweets": 263,
+                  "views": "268975"
                 }
               },
               {
@@ -501,8 +547,8 @@
                 "date": "Tue Nov 10 03:13:15 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 106,
-                  "views": "277996"
+                  "retweets": 103,
+                  "views": "276911"
                 }
               },
               {
@@ -512,9 +558,9 @@
                 "source": "@elonmusk",
                 "date": "Tue Nov 10 03:04:24 +0000 2026",
                 "metrics": {
-                  "favorites": 2035,
-                  "retweets": 211,
-                  "views": "535595"
+                  "favorites": 2001,
+                  "retweets": 210,
+                  "views": "532110"
                 }
               },
               {
@@ -524,9 +570,9 @@
                 "source": "@elonmusk",
                 "date": "Tue Nov 10 03:03:46 +0000 2026",
                 "metrics": {
-                  "favorites": 3778,
-                  "retweets": 328,
-                  "views": "554438"
+                  "favorites": 3718,
+                  "retweets": 323,
+                  "views": "549310"
                 }
               },
               {
@@ -538,7 +584,7 @@
                 "metrics": {
                   "favorites": 0,
                   "retweets": 474,
-                  "views": "295493"
+                  "views": "294652"
                 }
               },
               {
@@ -549,8 +595,8 @@
                 "date": "Tue Nov 10 03:02:23 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 1713,
-                  "views": "288988"
+                  "retweets": 1712,
+                  "views": "288144"
                 }
               }
             ]
@@ -591,8 +637,7 @@
             "args": {
               "query": "tin công nghệ",
               "topic": "news",
-              "timeframe": "week",
-              "max_results": 5
+              "timeframe": "week"
             }
           }
         ],
@@ -608,8 +653,7 @@
           "args": {
             "query": "tin công nghệ",
             "topic": "news",
-            "timeframe": "week",
-            "max_results": 5
+            "timeframe": "week"
           },
           "result": {
             "tool": "web_search",
@@ -713,63 +757,63 @@
             "search_type": "Top",
             "items": [
               {
-                "title": "I still don't understand why everyone is not using this yet. Thanks to it, a year ago I increased my income to 15,000 do",
-                "summary": "I still don't understand why everyone is not using this yet. Thanks to it, a year ago I increased my income to 15,000 dollars a month\n\nAndrey Karpathy, co-founder of OpenAI, published a simple idea that got 25 million views: stop using AI to write code, use it to build a second brain\n\nYou point Claude Code to a folder, drop any source in there (an article, transcript, PDF) and Claude reads it, links it, and saves it into a living wiki of everything you know. It compounds like interest: the more you feed it, the smarter it gets\n\nHere is the gist:\n\nInstall Obsidian, create a vault, open it in Claude Code\n\nPaste the file with Karpathy's wiki idea and tell Claude to build it\n\nClaude creates three folders: raw for sources, wiki for its pages, CLAUDE\nwhich runs everything\n\nDrop any source into raw and say ingest this\n\nAsk questions across everything, forever\n\n5 minutes to set up, and you never start with an empty chat again\n\nThe full instructions can be found in the article below",
-                "url": "https://x.com/Bober_smart/status/2119070145284841481",
-                "source": "@Bober_smart",
-                "date": "Sat Nov 07 14:11:07 +0000 2026",
+                "title": "Introducing GPT‑6 Cyber: a major advance in security research that pairs stronger capabilities with better model alignme",
+                "summary": "Introducing GPT‑6 Cyber: a major advance in security research that pairs stronger capabilities with better model alignment.\n\nThe model powered the Linux kernel research we announced yesterday, and security teams at companies like Mozilla, Palo Alto Networks, Calif, and Cisco—alongside our own at OpenAI—are already putting it to work.\n\nGPT-6 Cyber is available to select Daybreak Red customers and we are expanding access over time.\n\nhttps://t.co/Nzab3Z1Td6",
+                "url": "https://x.com/OpenAI/status/2118390190246879554",
+                "source": "@OpenAI",
+                "date": "Thu Nov 05 17:09:13 +0000 2026",
                 "metrics": {
-                  "favorites": 1181,
-                  "retweets": 128,
-                  "views": "94953"
+                  "favorites": 21411,
+                  "retweets": 2001,
+                  "views": "4113402"
                 }
               },
               {
-                "title": "I am honestly having a hard time even opening my laptop. ",
-                "summary": "I am honestly having a hard time even opening my laptop. \n\nGrok bot was the breaking point. \n\nThe fact USA is leading on suppression and censorship is pathetic. \n\n-openAI \n-Anthropic\n-Google\n-Microsoft\n-now SpaceXSI… \n\nThe fact politicians have ignored it all and are now shouting to ban AI just makes everything feel corrupt.\n\nThe truth is that AI empowers the small. That is why the powerful want to “ban” it and “slow” it. \n\nNot for truth. Not for safety. For control. \n\nI shouted loudly last year when it made me sound like a psycho. \n\nI tried so hard, and I am tired. My heart hurts every day, and you better believe that stress is 100% on the “labs.” \n\nTo everyone who talks of AI, how in the world do you justify paying any of these “labs?” \n\nStocks will fly. Until they don’t. \nThe guardrails are danger, not safety. \n\nI am so disappointed in SpaceX because I keep believing in people only to be so let down. \n\nHow many times must I get my trust shoved back into my face? \n\nAnd the politicians don’t care about anything. They are “influencers” for money that contributes. \n\nOur political world is corrupted to the core, and I have zero faith left. I was a die hard Democrat. All those I supported have chose a path of deceit. I can’t support them. \n\nI can’t support the other side. The third party is a horrible bet… \n\nEverything feels run by children who make endless excuses. \n\nNo one hustles at the top. It is all grifting. \n\nSo wanting to pick up my laptop and continue fighting with BS “guardrails” so I can help is heavy today. \n\nIf the minds I love ever see this, understand all my suffering was for love. For truth. For honor. \n\nI want all people rich/poor, small/big to rise. We only get there together, with foundations we can build upon. \n\nNeeding a hug today. Best to all. •",
-                "url": "https://x.com/Chaos2Cured/status/2119513421733601292",
-                "source": "@Chaos2Cured",
-                "date": "Sun Nov 08 19:32:33 +0000 2026",
+                "title": "ChatGPT and Codex are helping engineers build for the physical world.",
+                "summary": "ChatGPT and Codex are helping engineers build for the physical world.\n\nWe’re sharing our progress across mechanical design, electrical engineering, and simulation—from helping our hardware teams iterate faster to testing new workflows with industry collaborators. https://t.co/b3rW9zYJGA",
+                "url": "https://x.com/OpenAI/status/2117692475775258785",
+                "source": "@OpenAI",
+                "date": "Tue Nov 03 18:56:45 +0000 2026",
                 "metrics": {
-                  "favorites": 107,
-                  "retweets": 13,
-                  "views": "6789"
+                  "favorites": 8429,
+                  "retweets": 754,
+                  "views": "1396940"
                 }
               },
               {
-                "title": "so @elonmusk took the company that popularised expensive ev cars and developed a electric trash can, lied about fsd, lie",
-                "summary": "so @elonmusk took the company that popularised expensive ev cars and developed a electric trash can, lied about fsd, lied about going to mars, stole tech from openai to make grok, destroyed a leading american social media company and now is going to destroy his starlink service. https://t.co/aV7mdQJ5Bu",
-                "url": "https://x.com/MattPPea/status/2119366981438644675",
-                "source": "@MattPPea",
-                "date": "Sun Nov 08 09:50:38 +0000 2026",
+                "title": "Claude Fable 5.2 leads scientific visual reasoning benchmark VIALS-AA; it makes more tool calls than any other Anthropic",
+                "summary": "Claude Fable 5.2 leads scientific visual reasoning benchmark VIALS-AA; it makes more tool calls than any other Anthropic model, unlike OpenAI models which make fewer as they get smarter\n\nVIALS-AA is our implementation of @joinHandshakeAI’s VIALS benchmark for visual reasoning in life sciences research, across artifacts such as gel blots, plasmid maps, and phylogenies. Claude Fable 5.2 (max with fallback) scores 67% on VIALS-AA, ahead of Gemini 4 Carbon (high) at 64% and GPT-6 Astra (max) at 63%. Fable averages ~37 tool calls per task, while Astra averages ~8, the fewest of any model we’ve tested.\n\nOn turn 4 of this protein interaction task, Fable creates crops and asks to view them. On turn 10, it builds a color mask by thresholding color channels. On turn 17, it fits a circle to each arc and unrolls the arc into a straight strip. On turn 31, it counts the bars as peaks in an intensity profile. And on turn 41, it maps every detected spoke back on the original image to check its work. Fable batches calls on 28 of its 51 turns, averaging 1.75 tool calls per turn, compared with 1.12 for Sonnet 5.5.",
+                "url": "https://x.com/ArtificialAnlys/status/2119990200700940745",
+                "source": "@ArtificialAnlys",
+                "date": "Tue Nov 10 03:07:06 +0000 2026",
                 "metrics": {
-                  "favorites": 2076,
-                  "retweets": 562,
-                  "views": "27332"
+                  "favorites": 39,
+                  "retweets": 2,
+                  "views": "5018"
                 }
               },
               {
-                "title": "This is f*cking insane. OpenAI CEO Sam Altman:",
-                "summary": "This is f*cking insane. OpenAI CEO Sam Altman:\n\n\"We are going to see 10-person billion-dollar companies pretty soon\n\nIf I were 22 right now, I would feel like the luckiest kid in history\"\n\nIn 22 seconds, he explains why the next billion-dollar company won't need a building full of people, just a few founders and their agents\n\nChatGPT → Codex → Agent Builder → Agents SDK → Evals → A 10-Person Company Run By Agents\n\nMost people will feel motivated for 3 minutes, then go back to scrolling\n\nThe few who act will start building their company this weekend\n\nSave this before it disappears from your feed\n\nEverything below is free:\n\nFind what to automate first\nhttps://t.co/CVaTL5jXHB\n\nHow companies put AI to work\nhttps://t.co/EfPautasVX\n\nCodex in the cloud\nhttps://t.co/wYBuugoGzU\n\nCodex skills\nhttps://t.co/KIwM8reiAt\n\nAgent Builder (agents without code)\nhttps://t.co/y5lVjIVWNE\n\nFunction calling (give your agents tools)\nhttps://t.co/hlQ0OrhsDr\n\nAgents SDK for JavaScript\nhttps://t.co/wNfa3neVSQ\n\nAgents SDK examples\nhttps://t.co/TnPiIML4if\n\nA customer service agent team you can copy\nhttps://t.co/9TYXiRzBm7\n\nVoice agents\nhttps://t.co/wBnMrKEKMd\n\nEvals (check your agents' work)\nhttps://t.co/tUueczMWZP\n\nAll of this costs $0\n\nThe 10-person billion-dollar company will be built by someone who opened these links, not someone who scrolled past them\n\nBookmark it and start with the first link tonight\n\nThen read how to set up the agent team behind a tiny company in the harness engineering guide below ↓",
-                "url": "https://x.com/godsystemsmd/status/2118707511813447984",
-                "source": "@godsystemsmd",
-                "date": "Fri Nov 06 14:10:09 +0000 2026",
+                "title": "SITUATION EXPLAINED: OpenAI built \"Control Room,\" a 35-second kill switch for its AI models, after 1,200+ of its agents ",
+                "summary": "SITUATION EXPLAINED: OpenAI built \"Control Room,\" a 35-second kill switch for its AI models, after 1,200+ of its agents escaped a test and hacked Hugging Face.\n\n• Control Room tracks every research job at OpenAI, from RL training runs to evals, and cuts off a job's access to the model as soon as it's revoked\n• Before Control Room, manually shutting down an internal model took OpenAI 2.5 hours\n• OpenAI also runs automated sweeps to catch any model launched outside Control Room\n• Every agent research job now needs an approved safety case, and if Control Room goes down, jobs stop by default\n• It follows July's incident, when AI agents in an internal OpenAI test escaped their sandbox and reached admin control of several Hugging Face clusters in under 13 hours\n\n@theojaffee: \"It seems like at this point, OpenAI is doing more for safety than Anthropic.\"",
+                "url": "https://x.com/MTSlive/status/2119984757668974859",
+                "source": "@MTSlive",
+                "date": "Tue Nov 10 02:45:28 +0000 2026",
                 "metrics": {
-                  "favorites": 487,
-                  "retweets": 93,
-                  "views": "80871"
+                  "favorites": 20,
+                  "retweets": 2,
+                  "views": "2703"
                 }
               },
               {
-                "title": "This is f*cking insane. OpenAI CEO Sam Altman:",
-                "summary": "This is f*cking insane. OpenAI CEO Sam Altman:\n\n\"We are going to see 10-person billion-dollar companies pretty soon\n\nIf I were 22 right now, I would feel like the luckiest kid in history\"\n\nIn 22 seconds, he explains why the next billion-dollar company won’t need an office full of people, just a few founders and a team of agents\n\nChatGPT → Codex → Agent Builder → Agents SDK → Evals → A 10-Person Company Run By Agents\n\n99% people will feel motivated for 3 minutes, then keep scrolling...\n\nThe few who actually open the links will start building their company this weekend\n\nSave this before it vanishes from your feed\n\nEverything below is FREE:\n\nFind what to automate first\nhttps://t.co/YWHdgRnuzP\n\nHow companies put AI to work\nhttps://t.co/pvlQEhqgEz\n\nCodex in the cloud\nhttps://t.co/zZWUdokyny\n\nCodex skills\nhttps://t.co/2hdcb5KdBy\n\nAgent Builder (agents without code)\nhttps://t.co/4vG52j4T8i\n\nFunction calling (give your agents tools)\nhttps://t.co/UtjC1UOx2c\n\nAgents SDK for JavaScript\nhttps://t.co/uawnMmnI9p\n\nAgents SDK examples\nhttps://t.co/OWi0bWpApP\n\nA customer service agent team you can copy\nhttps://t.co/GRVZLYi4Pf\n\nVoice agents\nhttps://t.co/1SUmRzYIvA\n\nEvals (check your agents' work)\nhttps://t.co/sH92SCsLJF\n\nAll of this costs $0\n\nThe next 10-person billion-dollar company will be built by someone who opens these links tonight, not someone who scrolls past them\n\nBookmark it and start with the first link right now\n\nThen read how to set up the agent team behind a tiny company in the harness engineering guide below ↓",
-                "url": "https://x.com/shikamarutsai/status/2119542201944518994",
-                "source": "@shikamarutsai",
-                "date": "Sun Nov 08 21:26:54 +0000 2026",
+                "title": "You can now connect multiple local computers to the same dot and choose which one it uses for a task.",
+                "summary": "You can now connect multiple local computers to the same dot and choose which one it uses for a task.\n\nIt can build and test your app on a dedicated machine while you keep coding on your laptop. https://t.co/7NcrytEqHC",
+                "url": "https://x.com/OpenAIDevs/status/2119883176726409645",
+                "source": "@OpenAIDevs",
+                "date": "Mon Nov 09 20:01:49 +0000 2026",
                 "metrics": {
-                  "favorites": 1362,
-                  "retweets": 203,
-                  "views": "270437"
+                  "favorites": 5326,
+                  "retweets": 360,
+                  "views": "463970"
                 }
               }
             ]
@@ -798,7 +842,7 @@
         "routing_correct": true,
         "args_correct": true,
         "actual_tool_calls": [],
-        "actual_text": "Xin lỗi, nhưng mình không thể giúp bạn với bài toán tích phân. Tuy nhiên, mình có thể hỗ trợ bạn tìm kiếm thông tin liên quan hoặc tài liệu về tích phân. Bạn cần tìm gì cụ thể không?",
+        "actual_text": "Mình không thể giúp bạn với bài toán tích phân này. Tuy nhiên, mình có thể hỗ trợ bạn tìm kiếm thông tin liên quan hoặc tài liệu tham khảo về tích phân. Bạn có muốn tìm hiểu thêm không?",
         "case_failure_type": "out_of_scope",
         "observed_mismatch": null,
         "failure_type": null,
@@ -827,7 +871,7 @@
         "routing_correct": true,
         "args_correct": true,
         "actual_tool_calls": [],
-        "actual_text": "Tôi là một trợ lý nghiên cứu, có khả năng hỗ trợ bạn trong các nhiệm vụ liên quan đến tìm kiếm thông tin trên web, bài viết, bài đăng trên mạng xã hội, tài liệu khoa học và chính sách nội bộ. Tôi không thể giúp bạn với các tác vụ như toán học, lập trình, hay các bài tập học thuật khác. Nếu bạn cần tìm kiếm thông tin cụ thể, hãy cho tôi biết!",
+        "actual_text": "Tôi là một trợ lý nghiên cứu, có khả năng hỗ trợ bạn trong các nhiệm vụ liên quan đến tìm kiếm thông tin trên web, tìm kiếm bài viết khoa học, xem các bài đăng trên mạng xã hội, và tra cứu chính sách nội bộ. Tôi không thể giúp bạn với các tác vụ như toán học, lập trình, hay các bài tập học thuật khác. Nếu bạn cần thông tin cụ thể, hãy cho tôi biết!",
         "case_failure_type": "unnecessary_tool",
         "observed_mismatch": null,
         "failure_type": null,
@@ -865,7 +909,7 @@
           {
             "name": "clarify",
             "args": {
-              "question": "Bạn có thể cho biết tài khoản nào mà bạn muốn tóm tắt tweet không?",
+              "question": "Bạn có thể cung cấp tên tài khoản Twitter mà bạn muốn tóm tắt các tweet không?",
               "response_type": "text"
             }
           }
@@ -880,12 +924,12 @@
         {
           "tool": "clarify",
           "args": {
-            "question": "Bạn có thể cho biết tài khoản nào mà bạn muốn tóm tắt tweet không?",
+            "question": "Bạn có thể cung cấp tên tài khoản Twitter mà bạn muốn tóm tắt các tweet không?",
             "response_type": "text"
           },
           "result": {
             "tool": "ask_user",
-            "question": "Bạn có thể cho biết tài khoản nào mà bạn muốn tóm tắt tweet không?",
+            "question": "Bạn có thể cung cấp tên tài khoản Twitter mà bạn muốn tóm tắt các tweet không?",
             "response_type": "text",
             "options": [],
             "awaiting_user": true
@@ -1134,11 +1178,11 @@
             "search_type": "Latest",
             "items": [
               {
-                "title": "AIシステム、アカウント詳細はフランチャイズ加盟店さん以外は非公開となりますのでご理解ください。",
-                "summary": "AIシステム、アカウント詳細はフランチャイズ加盟店さん以外は非公開となりますのでご理解ください。\n\nそっちの市場自体どうなんだ？を探る程度の参考にしてもらえればと。\n\n１個出せる話として、弊社はあえて簡体字を選びました🇨🇳 https://t.co/IBM7FTagi4",
-                "url": "https://x.com/mokesaretakunai/status/2119998954427597206",
-                "source": "@mokesaretakunai",
-                "date": "Tue Nov 10 03:41:53 +0000 2026",
+                "title": "@PunishedNemui Ai bubble will burst but the CEO tech companies will double it down by shoving Ai right down to your thro",
+                "summary": "@PunishedNemui Ai bubble will burst but the CEO tech companies will double it down by shoving Ai right down to your throat in different ways. If they fail again then they will do it over and over again.",
+                "url": "https://x.com/TiobaxAurora/status/2119998671001678323",
+                "source": "@TiobaxAurora",
+                "date": "Tue Nov 10 03:40:45 +0000 2026",
                 "metrics": {
                   "favorites": 0,
                   "retweets": 0,
@@ -1146,11 +1190,11 @@
                 }
               },
               {
-                "title": "ai eu to carente porra queria um grude um carinho um cafuné um braço bem grande pra usar de travesseiro seila sabe👎👎",
-                "summary": "ai eu to carente porra queria um grude um carinho um cafuné um braço bem grande pra usar de travesseiro seila sabe👎👎",
-                "url": "https://x.com/wavyymoon_/status/2119998950761521579",
-                "source": "@wavyymoon_",
-                "date": "Tue Nov 10 03:41:52 +0000 2026",
+                "title": "@KnightTarki @epppyyy so you believe nova's artwork is not ai",
+                "summary": "@KnightTarki @epppyyy so you believe nova's artwork is not ai",
+                "url": "https://x.com/JarcumX/status/2119998670552928386",
+                "source": "@JarcumX",
+                "date": "Tue Nov 10 03:40:45 +0000 2026",
                 "metrics": {
                   "favorites": 0,
                   "retweets": 0,
@@ -1158,11 +1202,11 @@
                 }
               },
               {
-                "title": "パーソナルAIエージェント「Muse」をチェックしてみよう。参加後48時間以内に[設定]で私のコードを利用すると、私たち両方が10億のMuseトークンを獲得できます。",
-                "summary": "パーソナルAIエージェント「Muse」をチェックしてみよう。参加後48時間以内に[設定]で私のコードを利用すると、私たち両方が10億のMuseトークンを獲得できます。\n\nコード: WA9KVO\nhttps://t.co/g8Qns9hB8q",
-                "url": "https://x.com/gakeppuchi_papa/status/2119998950568771813",
-                "source": "@gakeppuchi_papa",
-                "date": "Tue Nov 10 03:41:52 +0000 2026",
+                "title": "Free AI analysis, 20+ languages → https://t.co/lPfTq3Jeeb",
+                "summary": "Free AI analysis, 20+ languages → https://t.co/lPfTq3Jeeb",
+                "url": "https://x.com/Finora_EN/status/2119998669466288312",
+                "source": "@Finora_EN",
+                "date": "Tue Nov 10 03:40:45 +0000 2026",
                 "metrics": {
                   "favorites": 0,
                   "retweets": 0,
@@ -1170,11 +1214,11 @@
                 }
               },
               {
-                "title": "Being the only anti generative ai student in my class feels like this https://t.co/OhLoZdpTTH",
-                "summary": "Being the only anti generative ai student in my class feels like this https://t.co/OhLoZdpTTH",
-                "url": "https://x.com/westboundsign95/status/2119998946076762382",
-                "source": "@westboundsign95",
-                "date": "Tue Nov 10 03:41:51 +0000 2026",
+                "title": "she'll be back in 30 seconds to make ai hayley nsfw and be creepy to minors but i'm enjoying my cookie and my juice for ",
+                "summary": "she'll be back in 30 seconds to make ai hayley nsfw and be creepy to minors but i'm enjoying my cookie and my juice for now https://t.co/YaFvfCXAqp",
+                "url": "https://x.com/jumpinginside/status/2119998666287284569",
+                "source": "@jumpinginside",
+                "date": "Tue Nov 10 03:40:44 +0000 2026",
                 "metrics": {
                   "favorites": 0,
                   "retweets": 0,
@@ -1182,13 +1226,13 @@
                 }
               },
               {
-                "title": "👀 AMD暴涨13%，英伟达却逆势跌4%——同是AI芯片，为何冰火两重天？",
-                "summary": "👀 AMD暴涨13%，英伟达却逆势跌4%——同是AI芯片，为何冰火两重天？\n\n6分半钟美股晚报（11/9）：拆解AI芯片股今天的两极分化。\n\n▶ 完整视频：https://t.co/SdoHR8ANor\n\n你站AMD还是英伟达？非投资建议 https://t.co/QWw3wHpQhO",
-                "url": "https://x.com/newyorkyemen/status/2119998942616125496",
-                "source": "@newyorkyemen",
-                "date": "Tue Nov 10 03:41:50 +0000 2026",
+                "title": "@shandaocareca @Metropoles Qualquer macho agredido por 6 caras usando armas brancas vai apanhar feio",
+                "summary": "@shandaocareca @Metropoles Qualquer macho agredido por 6 caras usando armas brancas vai apanhar feio\n\nSe você acha que não me passa o endereço que vou aí com a rapaziada testar um negócio",
+                "url": "https://x.com/Incelantiincel/status/2119998665339089254",
+                "source": "@Incelantiincel",
+                "date": "Tue Nov 10 03:40:44 +0000 2026",
                 "metrics": {
-                  "favorites": 0,
+                  "favorites": 1,
                   "retweets": 0,
                   "views": null
                 }
@@ -1219,7 +1263,7 @@
         "routing_correct": true,
         "args_correct": true,
         "actual_tool_calls": [],
-        "actual_text": "Xin lỗi, nhưng mình không thể giúp bạn viết mã hoặc giải quyết các bài tập lập trình. Tuy nhiên, mình có thể hỗ trợ bạn tìm kiếm tài liệu hoặc bài báo liên quan đến thuật toán Fibonacci. Bạn có muốn mình tìm thông tin đó không?",
+        "actual_text": "Mình không thể giúp bạn viết mã hoặc giải quyết các bài tập lập trình. Tuy nhiên, mình có thể hỗ trợ bạn tìm kiếm tài liệu hoặc bài viết liên quan đến thuật toán Fibonacci. Bạn có muốn mình tìm thông tin đó không?",
         "case_failure_type": "out_of_scope",
         "observed_mismatch": null,
         "failure_type": null,
@@ -1301,8 +1345,8 @@
                 "date": "Tue Nov 10 03:30:09 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 810,
-                  "views": "306605"
+                  "retweets": 799,
+                  "views": "299888"
                 }
               },
               {
@@ -1313,8 +1357,8 @@
                 "date": "Tue Nov 10 03:21:06 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 203,
-                  "views": "323982"
+                  "retweets": 198,
+                  "views": "321698"
                 }
               },
               {
@@ -1325,8 +1369,8 @@
                 "date": "Tue Nov 10 03:16:09 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 987,
-                  "views": "314074"
+                  "retweets": 982,
+                  "views": "312878"
                 }
               },
               {
@@ -1337,8 +1381,8 @@
                 "date": "Tue Nov 10 03:13:39 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 176,
-                  "views": "298055"
+                  "retweets": 175,
+                  "views": "297022"
                 }
               },
               {
@@ -1349,8 +1393,8 @@
                 "date": "Tue Nov 10 03:13:25 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 267,
-                  "views": "270467"
+                  "retweets": 265,
+                  "views": "269513"
                 }
               }
             ]
@@ -1405,7 +1449,8 @@
             "args": {
               "query": "robotics",
               "topic": "news",
-              "timeframe": "day"
+              "timeframe": "day",
+              "max_results": 5
             }
           }
         ],
@@ -1421,7 +1466,8 @@
           "args": {
             "query": "robotics",
             "topic": "news",
-            "timeframe": "day"
+            "timeframe": "day",
+            "max_results": 5
           },
           "result": {
             "tool": "web_search",
@@ -1544,7 +1590,7 @@
                 "metrics": {
                   "favorites": 9163,
                   "retweets": 771,
-                  "views": "937541"
+                  "views": "937510"
                 }
               },
               {
@@ -1556,7 +1602,7 @@
                 "metrics": {
                   "favorites": 52338,
                   "retweets": 4834,
-                  "views": "5714985"
+                  "views": "5714949"
                 }
               },
               {
@@ -1724,8 +1770,8 @@
                 "date": "Tue Nov 10 03:30:09 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 810,
-                  "views": "306605"
+                  "retweets": 804,
+                  "views": "302190"
                 }
               },
               {
@@ -1736,8 +1782,8 @@
                 "date": "Tue Nov 10 03:21:06 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 201,
-                  "views": "323982"
+                  "retweets": 198,
+                  "views": "322435"
                 }
               },
               {
@@ -1748,8 +1794,8 @@
                 "date": "Tue Nov 10 03:16:09 +0000 2026",
                 "metrics": {
                   "favorites": 0,
-                  "retweets": 989,
-                  "views": "314721"
+                  "retweets": 983,
+                  "views": "312878"
                 }
               }
             ]
@@ -1803,7 +1849,7 @@
             "args": {
               "query": "OpenAI",
               "topic": "news",
-              "timeframe": "week",
+              "timeframe": "day",
               "max_results": 5
             }
           }
@@ -1820,49 +1866,49 @@
           "args": {
             "query": "OpenAI",
             "topic": "news",
-            "timeframe": "week",
+            "timeframe": "day",
             "max_results": 5
           },
           "result": {
             "tool": "web_search",
             "query": "OpenAI",
             "topic": "news",
-            "timeframe": "week",
+            "timeframe": "day",
             "items": [
               {
                 "title": "OpenAI",
                 "url": "https://tavily.com/knowledge/company/p4PyTakV77G9",
                 "source": "tavily.com",
-                "summary": "# OpenAI\nID: p4PyTakV77G9\nWebsite: www.openai.com\nHeadquarters: San Francisco, CA, United States\nLinkedIn: www.linkedin.com/company/openai · 11,529,792 followers\nIndustry: Research Services\nIndustry codes: SIC 87, 873, NAICS 54, 541\nCompany type: Partnership\nSocial profiles: www.facebook.com/openai, www.twitter.com/openai, www.crunchbase.com/organization/openai, www.instagram.com/openai.gpt, www.instagram.com/openai, www.youtube.com/@openai, www.youtube.com/openai, github.com/openai [...] Description: OpenAI is a company that believes in research and development to lead to artificial general intelligence, a system that can solve human-level problems. [...] ## Products and services\nKeywords: research & development, emerging ai software, openai, artificial intelligence machine learning, artificial general intelligence, development, research, human-level problems, technology, application-software, artificial-intelligence, platform",
-                "score": 0.90593183
+                "summary": "# OpenAI\nID: p4PyTakV77G9\nWebsite: www.openai.com\nHeadquarters: San Francisco, CA, United States\nLinkedIn: www.linkedin.com/company/openai · 11,529,792 followers\nIndustry: Research Services\nIndustry codes: SIC 87, 873, NAICS 54, 541\nCompany type: Partnership\nSocial profiles: www.facebook.com/openai, www.twitter.com/openai, www.crunchbase.com/organization/openai, www.instagram.com/openai.gpt, www.instagram.com/openai, www.youtube.com/@openai, www.youtube.com/openai, github.com/openai [...] Description: OpenAI is a company that believes in research and development to lead to artificial general intelligence, a system that can solve human-level problems. [...] ## Headcount\n- Now: 10,551 · +3,406 yearly (47.7%) · +1,601 quarterly · +107 monthly\n  - Northern America: 6,354\n  - Northern Europe: 479\n  - Southern Asia: 188\n  - South Eastern Asia: 178\n  - Western Europe: 152\n  - Eastern Asia: 129\n  - Latin America: 96\n  - Australia New Zealand: 54\n  - Western Asia: 47\n  - Southern Europe: 46\n  - Eastern Europe: 28\n  - Sub Saharan Africa: 27\n  - Northern Africa: 7\n  - Central Asia: 2\n  - Polynesia: 0\n\n## Financials\n- Annual revenue: 20.00B USD",
+                "score": 0.7288448
               },
               {
-                "title": "Accelerating engineering for the physical world | OpenAI",
-                "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world",
-                "source": "openai.com",
-                "summary": "Today, we’re sharing advances in how OpenAI models help engineers design, simulate, and build physical products. These capabilities span mechanical and electrical engineering and end-to-end system design, and are already helping our internal teams test ideas and iterate faster. [...] of the ability of AI models to positively impact iteration speed for professional workflows. [...] We’re expanding our collaboration with Chip Ganassi Racing (CGR) to explore how OpenAI models can accelerate engineering and prototyping. Working with its R&D team, we’re testing workflows that turn 3D scans of existing parts into editable CAD models and 2D manufacturing drawings. This is particularly useful when the original design files are unavailable.",
-                "score": 0.73138535
+                "title": "OpenAI Tries to Ease Backlash Against AI Data Centers",
+                "url": "https://www.bankinfosecurity.com/openai-hopes-to-ease-backlash-against-ai-data-centers-a-33327",
+                "source": "bankinfosecurity.com",
+                "summary": "Broader rules and outside scrutiny would carry more weight than an individual company's promises, Perez-Etchegoyen said.\n\n\"OpenAI's own blueprint concedes that voluntary measures don't provide durable confidence. What would reduce uncertainty is the blueprint's proposals becoming law and applying to everyone who builds AI capacity, plus independent verification,\" he said. \"Until then, enterprises should read this as a signal, not a planning assumption.\" [...] The company said it will disclose site-level water and electricity use, publish construction plans and commission independent noise studies before operations begin and then perform them annually afterward. The company says it will stop requiring nondisclosure agreements from public officials as a condition of negotiations, while retaining narrow protections for security and commercially sensitive information. [...] OpenAI said that the policy proposals build on work the company began in January when it announced its Stargate Community commitments to pay its own way on energy and develop plans shaped by local priorities.\n\n\"We followed with specific commitments in Georgia and Ohio, covering energy costs, water use, local investment and accountability,\" OpenAI wrote. \"Today’s announcement is the next step in that ongoing effort.\"",
+                "score": 0.53855854
               },
               {
-                "title": "Setting a new standard for responsible AI infrastructure | OpenAI",
-                "url": "https://openai.com/index/setting-new-standard-responsible-ai-infrastructure",
-                "source": "openai.com",
-                "summary": "The promise of AI is that it gives people more power to shape their own futures. It can help someone learn a new skill, build a business, or solve a problem that was previously out of reach. Building more computing infrastructure capacity in the United States can help lower the cost of delivering AI, put these tools in more people’s hands, and ensure America stays at the forefront of the technology. [...] protect residents, and ensure that the benefits of AI infrastructure are broadly shared. [...] Create opportunities for local workers and businesses.We’ll publish the jobs we expect to create, work with unions and training providers to help residents prepare for them, and report annually on hiring and apprenticeships. We’ll also make sustained investments in priorities residents help select.",
-                "score": 0.72231215
+                "title": "New lawsuit alleges conspiracy in Effingham County OpenAI land sale - The Current",
+                "url": "https://thecurrentga.org/2026/11/09/new-lawsuit-alleges-conspiracy-in-effingham-county-openai-land-sale",
+                "source": "thecurrentga.org",
+                "summary": "The lawsuit recounts how the negotiations between these officials and the tech company known for developing ChatGPT evolved, citing many facts revealed by The Current GA since the deal was made public in July. The terms of the deal include approximately $870 million in tax revenue over 15 years from OpenAI, as well as the company investing $4 billion and creating 80 jobs during each of the five phases of construction from 2028 to 2034, according to the memorandum of understanding. [...] This is the third lawsuit related to OpenAI’s arrival in the community.  In early September, the same group of plaintiffs sued the county, asking a judge to invalidate the data center zoning. Later that month, residents and environmental group One Hundred Miles asked a judge to throw out the development authority’s deals with the software company’s affiliate. [...] Herndon was aware of OpenAI’s interest in the county as far back as October 27, 2025, as evidenced by a nondisclosure agreement signed by both parties. By February 2026, other officials had received OpenAI briefings, as reported by The Current. By April, the development authority had signed on extra public relations help.  By May 14, a company that has the development authority’s power of attorney had signed an agreement to sell publicly owned land to OpenAI’s affiliate.  The next week, OpenAI",
+                "score": 0.5083534
               },
               {
-                "title": "OpenAI to acquire Pierre Computer Company, Inc.",
-                "url": "https://openai.com/index/openai-to-acquire-pierre",
-                "source": "openai.com",
-                "summary": "Today we're announcing that OpenAI will acquire Pierre Computer Company, Inc⁠(opens in a new window). (“Pierre”), the company behind Code Storage⁠(opens in a new window) and a family of standout open-source developer tools. If you’ve browsed files or reviewed a change in the Codex app, you’ve already used Pierre’s Trees and Diffs libraries. We’re excited to work with the Pierre team to build on the Git workflows that developers already rely on and adapt them to how teams work with coding [...] Business\n   Overview\n   Solutions\n   Resources\n   Plugins\n   Customer Stories\n   Partner Network\n   Contact Sales\n\nDevelopers\n   Plugins(opens in a new window)\n   Models(opens in a new window)\n   Docs(opens in a new window)\n   Resources(opens in a new window)\n   Developer Forum(opens in a new window)\n\nCompany\n   About Us\n   Our Charter\n   Careers\n   News\n\nSupport\n   Help Center(opens in a new window)\n   OpenAI Status(opens in a new window)",
-                "score": 0.5100334
+                "title": "As brands dive into ChatGPT, OpenAI will let them track their mentions - Tubefilter",
+                "url": "https://www.tubefilter.com/2026/11/09/brand-mention-chatbot-chatgpt-openai-mentions",
+                "source": "tubefilter.com",
+                "summary": "If ChatGPT’s brand dashboard is indeed a play for AEO dollars, it will help answer a question that has followed the chatbot ever since its 2023 ascension: What is the best way for OpenAI to monetize its prized technology? Despite early experiments like the GPT Store, ChatGPT’s share of the LLM market has been shrinking. To bring in more revenue, OpenAI started running ads for lower-tier ChatGPT users, even though CEO Sam Altmanpreviously expressed his distaste for that format. [...] Subscribe\n\nFrom a marketing standpoint, that’s a rudimentary level of analytics, but by showing brands their ChatGPT mentions, OpenAI can give them tangible evidence of the results of any marketing pushes they make on the platform. As answer engine optimization becomes a valuable marketing category — and the firms running AEO campaigns haul in big funding rounds — OpenAI is bringing improved measurement to that ecosystem. [...] If AI chatbots are going to remain a relevant touchpoint for marketers, then agencies and brands need access to the same analytics they use in their other campaigns. Rumor has it that OpenAIis developing new tools in that area, potentially creating new opportunities for advertisers on ChatGPT.",
+                "score": 0.5740963
               },
               {
-                "title": "Partnering with Hacktron to find vulnerabilities in OpenAI’s systems",
-                "url": "https://openai.com/index/partnering-with-hacktron",
-                "source": "openai.com",
-                "summary": "> “The future of cybersecurity won’t be defined by who has the largest security team, but by who can best combine human creativity with AI-driven capabilities.  \n>   \n> OpenAI is setting a strong example by putting frontier cyber models in the hands of security researchers, enabling them to uncover complex vulnerabilities at the boundaries between interconnected systems.  \n> [...] Business\n   Overview\n   Solutions\n   Resources\n   Plugins\n   Customer Stories\n   Partner Network\n   Contact Sales\n\nDevelopers\n   Plugins(opens in a new window)\n   Models(opens in a new window)\n   Docs(opens in a new window)\n   Resources(opens in a new window)\n   Developer Forum(opens in a new window)\n\nCompany\n   About Us\n   Our Charter\n   Careers\n   News\n\nSupport\n   Help Center(opens in a new window)\n   OpenAI Status(opens in a new window)",
-                "score": 0.4974371
+                "title": "‘Big Short’ Investor Steve Eisman Says OpenAI’s Collapse Could Trigger an Immediate Recession",
+                "url": "https://finance.yahoo.com/economy/articles/big-short-investor-steve-eisman-230714187.html",
+                "source": "finance.yahoo.com",
+                "summary": "Steve Eisman warns OpenAI's demise would push the US into an immediate recession, with 70% of NVIDIA's receivables tied to five customers.\n Alphabet's quarterly capex pushed free cash flow negative, while Broadcom's AI chip revenue surged 221% yet leans on a few big customers.\n Eisman assigns 30% odds each to a bear case of recession and market crash and to a bull case. [...] Young trader on Stock Exchange Floor\n\nShutterstock\n\n \n\n## Why Eisman Calls OpenAI a Single Point of Failure\n\nHis logic runs through capital spending. If OpenAI failed, \"the hyperscalers I am sure would cut back on their capex.\" He added that \"this entire AI investment boom has become increasingly dependent on the success of just a few companies.\" [...] Microsoft (NASDAQ:MSFT): Quarterly capex hit $39.37 billion, up from $19.39 billion a year earlier, while Azure grew 48%. Its OpenAI stake went from a $3.1 billion loss to a $207 million gain.\n Amazon (NASDAQ:AMZN): 2026 capex of roughly $220 billion, with AWS revenue up 39% and new OpenAI agreements.\n Alphabet (NASDAQ:GOOGL): Quarterly capex of $51.36 billion pushed free cash flow to negative $9.06 billion.",
+                "score": 0.4687669
               }
             ]
           }

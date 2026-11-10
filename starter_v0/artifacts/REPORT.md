@@ -55,9 +55,9 @@ Fill from `artifacts/version_log.csv` and `runs/*.json`.
 | Version | Changed Artifact | Hypothesis | Metric Before | Metric After | Run File |
 |---|---|---|---:|---:|---|
 | v0 | baseline |  |  |  |  |
-| v1 |  |  |  |  |  |
-| v2 |  |  |  |  |  |
-| v3 |  |  |  |  |  |
+| phase1 |  |  |  |  |  |
+| phase2 |  |  |  |  |  |
+| phase3 |  |  |  |  |  |
 
 ## B2. Failure Analysis
 
@@ -109,7 +109,7 @@ Only fill if your team did the local model challenge.
 
 | Version | Model (provider) | Prompt/Tools | case_accuracy | tool_routing | argument | multiturn | Run File |
 |---|---|---|---|---|---|---|---|
-| v3 | (cloud) | v3 |  |  |  |  |  |
+| phase3 | (cloud) | v3 |  |  |  |  |  |
 | v3-... | (ollama) | v3 |  |  |  |  |  |
 | v3-... | (ollama) | v3 |  |  |  |  |  |
 | v4-local |  |  |  |  |  |  |  |

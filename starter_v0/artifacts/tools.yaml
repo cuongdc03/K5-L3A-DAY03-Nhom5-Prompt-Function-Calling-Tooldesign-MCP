@@ -123,3 +123,12 @@ tools:
         max_pages: {type: integer, default: 5, description: "Số trang"}
         max_chars: {type: integer, default: 8000, description: "Số ký tự"}
       required: [arxiv_url]
+
+  # ---------------- Team tools ----------------
+  - name: datetime_now
+    description: "Cho biết ngày/giờ hiện tại (kèm thứ và ranh giới tuần Thứ Hai–Chủ Nhật) theo múi giờ IANA. Dùng khi câu trả lời phụ thuộc vào 'bây giờ': hôm nay là ngày/thứ mấy, mấy giờ ở một thành phố, hoặc cần đổi 'tuần này' thành ngày cụ thể. KHÔNG dùng để tìm nội dung tin tức (dùng lookup) và không cần gọi nếu người dùng đã nêu ngày cụ thể."
+    parameters:
+      type: object
+      properties:
+        timezone: {type: string, default: "Asia/Ho_Chi_Minh", description: "Tên múi giờ IANA, ví dụ Asia/Ho_Chi_Minh, Asia/Tokyo, America/New_York. Bỏ trống nếu người dùng không nói múi giờ (mặc định giờ Việt Nam)."}
+      required: []

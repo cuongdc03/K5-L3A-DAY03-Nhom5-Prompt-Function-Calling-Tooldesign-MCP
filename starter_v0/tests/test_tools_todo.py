@@ -105,18 +105,59 @@ def test_policy_instruction_like_lines_go_to_untrusted_text() -> None:
 
 
 # ---------------- YOUR NEW TOOL(S) ----------------
-# Write at least 3 tests per tool your team adds:
+# Write at least 3 tests per tool your team adds (datetime_now below has 4 test functions):
 #   1. happy path (mocked if it calls an API)
 #   2. bad / missing input from the model (empty string, wrong type, out-of-enum value)
 #   3. failure path (missing key, HTTP error, timeout) -> returns error dict, does not raise
 
-def test_my_new_tool_happy_path() -> None:
-    pytest.skip(TODO)
+# ---- datetime_now (team tool) ----
+# Time is frozen by patching the tool's single clock function `_now`.
+
+from datetime import datetime  # noqa: E402
+
+import tools.datetime_now.tool as datetime_tool  # noqa: E402
 
 
-def test_my_new_tool_bad_input_from_model() -> None:
-    pytest.skip(TODO)
+@pytest.fixture
+def frozen_now(monkeypatch: pytest.MonkeyPatch):
+    """Freeze the clock at 2026-11-10 (a Tuesday) 03:30 UTC."""
+    from datetime import timezone as dt_timezone
+
+    fixed_utc = datetime(2026, 11, 10, 3, 30, 0, tzinfo=dt_timezone.utc)
+    monkeypatch.setattr(datetime_tool, "_now", lambda tz: fixed_utc.astimezone(tz))
 
 
-def test_my_new_tool_failure_returns_error_dict() -> None:
-    pytest.skip(TODO)
+def test_datetime_now_defaults_to_vietnam_time_with_week_bounds(frozen_now) -> None:
+    result = TOOL_FUNCTIONS["datetime_now"]()
+
+    assert result["timezone"] == "Asia/Ho_Chi_Minh"
+    assert result["iso"] == "2026-11-10T10:30:00+07:00"
+    assert result["weekday"] == "Tuesday" and result["weekday_vi"] == "Thứ Ba"
+    assert result["utc_offset"] == "+07:00"
+    assert (result["week_start"], result["week_end"]) == ("2026-11-09", "2026-11-15")
+
+
+def test_datetime_now_converts_to_requested_timezone(frozen_now) -> None:
+    result = TOOL_FUNCTIONS["datetime_now"](timezone="America/New_York")
+
+    assert result["timezone"] == "America/New_York"
+    assert result["date"] == "2026-11-09"          # still Monday evening in New York
+    assert result["time"] == "22:30:00"
+    assert result["weekday"] == "Monday"
+
+
+@pytest.mark.parametrize("bad", ["", "   ", None, 42])
+def test_datetime_now_bad_input_falls_back_to_default(frozen_now, bad) -> None:
+    result = TOOL_FUNCTIONS["datetime_now"](timezone=bad)
+
+    assert "error" not in result
+    assert result["timezone"] == "Asia/Ho_Chi_Minh"
+
+
+@pytest.mark.parametrize("bad", ["Mars/Base", "GMT+7", "../etc/passwd"])
+def test_datetime_now_unknown_timezone_returns_error_dict_not_exception(bad) -> None:
+    result = TOOL_FUNCTIONS["datetime_now"](timezone=bad)
+
+    assert result["error"]
+    assert bad in result["message"] and "IANA" in result["message"]
+    assert "iso" not in result

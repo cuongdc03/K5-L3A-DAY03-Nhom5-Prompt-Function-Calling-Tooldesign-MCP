@@ -2,6 +2,76 @@
   "dataset_id": "day04_v2_research_group",
   "dataset_role": "group",
   "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
-  "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "allowed_failure_types": [
+    "wrong_tool",
+    "wrong_arg_value",
+    "wrong_boundary",
+    "unnecessary_tool",
+    "out_of_scope",
+    "missing_info"
+  ],
+  "cases": [
+    {
+      "id": "G01_current_date_routing",
+      "phase": "B",
+      "query": "Hôm nay là ngày mấy, thứ mấy vậy?",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "datetime_now",
+            "args": {}
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "datetime_now",
+        "difficulty": "easy",
+        "what_it_tests": "Câu hỏi về ngày/thứ hiện tại → datetime_now (model không tự biết 'hôm nay'), không dùng lookup."
+      }
+    },
+    {
+      "id": "G02_timezone_arg",
+      "phase": "B",
+      "query": "Bây giờ là mấy giờ ở Tokyo?",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "datetime_now",
+            "args": {
+              "timezone": "Asia/Tokyo"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "datetime_now",
+        "difficulty": "medium",
+        "what_it_tests": "Tên thành phố phải được đổi thành tên múi giờ IANA (Asia/Tokyo), không để mặc định."
+      }
+    },
+    {
+      "id": "G03_news_not_datetime",
+      "phase": "B",
+      "query": "Tin tức AI nổi bật tuần này là gì?",
+      "failure_type": "unnecessary_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "topic": "news",
+              "timeframe": "week"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "datetime_now",
+        "difficulty": "medium",
+        "what_it_tests": "Boundary: có chữ 'tuần này' nhưng đây là tin tức → lookup(timeframe=week), không gọi datetime_now."
+      }
+    }
+  ]
 }
