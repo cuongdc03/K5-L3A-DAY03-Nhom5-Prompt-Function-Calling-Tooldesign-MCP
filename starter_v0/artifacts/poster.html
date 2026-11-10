@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research Agent — Nhóm 5</title>
+<!-- Poster Phần A. Số liệu lấy từ artifacts/REPORT.md (runs/*.json). Sửa link dùng thử ở phần id="demo-link". -->
+<style>
+  :root {
+    --bg: #f4f1ea; --card: #ffffff; --ink: #1d2433; --muted: #5a6275; --line: #d9d4c7;
+    --brand: #1f4fd8; --brand-soft: #e6edff; --good: #0e7a4b; --good-soft: #def4e8;
+    --warn: #a45a00; --warn-soft: #fff0d6; --bad: #b3261e; --bad-soft: #fde4e1;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  .poster { max-width: 1180px; margin: 0 auto; padding: 28px 16px 36px; }
+  h1, h2, h3 { margin: 0; line-height: 1.2; }
+  h2 { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+
+  /* header */
+  header { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: end; margin-bottom: 18px; }
+  .kicker { font-size: 13px; font-weight: 600; color: var(--brand); letter-spacing: .06em; text-transform: uppercase; }
+  h1 { font-size: clamp(30px, 5vw, 46px); margin: 6px 0 8px; letter-spacing: -.02em; }
+  .tagline { font-size: 17px; color: var(--muted); max-width: 62ch; margin: 0; }
+  .stamp { text-align: right; font-size: 13px; color: var(--muted); }
+  .stamp b { display: block; font-size: 15px; color: var(--ink); }
+
+  .grid { display: grid; gap: 16px; }
+  .row-flow { grid-template-columns: 1fr; margin-bottom: 16px; }
+  .row-main { grid-template-columns: 1.25fr 1fr; margin-bottom: 16px; }
+  .row-bottom { grid-template-columns: 1fr 1fr; }
+
+  /* flow */
+  .flow { display: grid; grid-template-columns: 1fr 28px 1.5fr 28px 1fr 28px 1fr; align-items: stretch; gap: 8px; }
+  .step { border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: #fbfaf6; }
+  .step.core { background: var(--brand-soft); border-color: #b7c8f5; }
+  .step b { display: block; font-size: 14px; margin-bottom: 2px; }
+  .step span { font-size: 13px; color: var(--muted); }
+  .arrow { align-self: center; text-align: center; font-size: 20px; color: var(--muted); }
+  .guard { margin-top: 12px; padding: 10px 14px; border-radius: 10px; background: var(--warn-soft); color: #5e3500; font-size: 14px; }
+  .guard b { color: var(--warn); }
+
+  /* tools */
+  .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tool { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; background: #fbfaf6; }
+  .tool code { font: 600 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--brand); }
+  .tool span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.35; margin-top: 2px; }
+  .tool.new { background: var(--good-soft); border-color: #9fd6b8; }
+  .tool.new code { color: var(--good); }
+  .tool .badge { display: inline-block; margin: 0 0 0 6px; padding: 0 7px; font: 700 10px/16px system-ui, sans-serif; border-radius: 8px; background: var(--good); color: #fff; vertical-align: 1px; }
+
+  /* results */
+  .bars { display: grid; gap: 10px; margin: 4px 0 14px; }
+  .bar-row { display: grid; grid-template-columns: 74px 1fr 52px; align-items: center; gap: 10px; font-size: 14px; }
+  .track { height: 22px; background: #ece8dc; border-radius: 6px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 6px; }
+  .fill.v0 { background: var(--bad); }
+  .fill.v1, .fill.v2 { background: var(--good); }
+  .bar-row .val { font-weight: 700; text-align: right; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .stat { border-radius: 10px; padding: 10px; background: #fbfaf6; border: 1px solid var(--line); text-align: center; }
+  .stat b { display: block; font-size: 22px; letter-spacing: -.01em; }
+  .stat span { font-size: 12px; color: var(--muted); }
+  .note { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+
+  /* lists */
+  ol.q { margin: 0; padding-left: 20px; }
+  ol.q li { margin-bottom: 8px; }
+  ol.q small { display: block; color: var(--muted); font-size: 12.5px; }
+  ul.lessons { margin: 0; padding-left: 18px; }
+  ul.lessons li { margin-bottom: 8px; }
+
+  footer { margin-top: 16px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; }
+  .team { font-size: 14px; color: var(--muted); }
+  .team b { color: var(--ink); }
+  #demo-link { display: inline-block; padding: 10px 16px; text-decoration: none; border: 2px solid var(--brand); border-radius: 10px; font-weight: 600; color: var(--brand); background: var(--brand-soft); }
+
+  @media (max-width: 860px) {
+    header, footer { grid-template-columns: 1fr; }
+    .stamp { text-align: left; }
+    .row-main, .row-bottom { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: 1fr; }
+    .arrow { transform: rotate(90deg); }
+    .tools { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media print {
+    @page { size: A3 portrait; margin: 8mm; }
+    body { background: #fff; }
+    .poster { max-width: none; padding: 0; }
+    .flow { grid-template-columns: 1fr 28px 1.5fr 28px 1fr 28px 1fr; }
+    .row-main { grid-template-columns: 1.25fr 1fr; }
+    .row-bottom { grid-template-columns: 1fr 1fr; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<main class="poster">
+
+  <header>
+    <div>
+      <div class="kicker">Day 03 · Prompt, Function Calling &amp; Tool Design</div>
+      <h1>Research Agent</h1>
+      <p class="tagline">Trợ lý nghiên cứu tiếng Việt: tìm tin, đọc nguồn, tổng hợp digest — <strong>hỏi lại khi thiếu thông tin</strong> và <strong>chỉ gửi Telegram sau khi bạn xác nhận</strong>.</p>
+    </div>
+    <div class="stamp"><b>Nhóm 5</b>OpenRouter · gpt-4o-mini</div>
+  </header>
+
+  <!-- Luồng xử lý -->
+  <section class="card row-flow" aria-label="Luồng xử lý">
+    <h2>Agent hoạt động thế nào</h2>
+    <div class="flow">
+      <div class="step"><b>Người dùng</b><span>Hỏi bằng tiếng Việt, nhiều lượt</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step core"><b>Model chọn tool + tham số</b><span><code>system_prompt.md</code> (luật scope, clarify, xác nhận) + <code>tools.yaml</code> (khi nào dùng, quy ước tham số)</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>11 tool chạy thật</b><span>Tavily, Firecrawl, X API, arXiv, Hacker News, policy…</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Trả lời có nguồn</b><span>Chỉ dùng kết quả tool, kèm link</span></div>
+    </div>
+    <div class="guard"><b>3 guardrail:</b> ① không đoán — thiếu tài khoản/URL thì <code>clarify</code> &nbsp;② gửi Telegram phải hỏi <code>yes/no</code> trước (UI còn ép nút Gửi/Hủy) &nbsp;③ từ chối việc ngoài phạm vi (toán, code, thơ) mà không gọi tool</div>
+  </section>
+
+  <div class="grid row-main">
+    <!-- Tools -->
+    <section class="card" aria-label="Các tool">
+      <h2>11 tool</h2>
+      <div class="tools">
+        <div class="tool"><code>clarify</code><span>Hỏi lại / xin xác nhận</span></div>
+        <div class="tool"><code>timeline</code><span>Bài đăng gần đây của 1 tài khoản X</span></div>
+        <div class="tool"><code>social_search</code><span>Tìm bài đăng X theo từ khóa (Top / Latest)</span></div>
+        <div class="tool"><code>lookup</code><span>Tìm web &amp; tin tức (day / week / month / year)</span></div>
+        <div class="tool"><code>fetch</code><span>Đọc nội dung một URL</span></div>
+        <div class="tool"><code>format</code><span>Đóng gói digest markdown</span></div>
+        <div class="tool"><code>send</code><span>Đăng Telegram, chỉ khi <code>confirmed=true</code></span></div>
+        <div class="tool"><code>policy</code><span>Tra chính sách nội bộ, tách nội dung không tin cậy</span></div>
+        <div class="tool"><code>papers</code><span>Tìm paper trên arXiv</span></div>
+        <div class="tool"><code>paper_text</code><span>Trích text paper arXiv</span></div>
+        <div class="tool new"><code>hackernews</code><span>Thảo luận công nghệ trên Hacker News <span class="badge">TOOL MỚI</span></span></div>
+      </div>
+    </section>
+
+    <!-- Kết quả -->
+    <section class="card" aria-label="Kết quả đánh giá">
+      <h2>Kết quả — base eval (20 case)</h2>
+      <div class="bars" role="img" aria-label="case_accuracy: v0 65 phần trăm, v1 100 phần trăm, v2 100 phần trăm">
+        <div class="bar-row"><span>v0 gốc</span><div class="track"><div class="fill v0" style="width:65%"></div></div><span class="val">65%</span></div>
+        <div class="bar-row"><span>v1 prompt</span><div class="track"><div class="fill v1" style="width:100%"></div></div><span class="val">100%</span></div>
+        <div class="bar-row"><span>v2 tools</span><div class="track"><div class="fill v2" style="width:100%"></div></div><span class="val">100%</span></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>10/10</b><span>team case (5 đơn + 5 đa lượt)</span></div>
+        <div class="stat"><b>84</b><span>unit test pass, 0 skip</span></div>
+        <div class="stat"><b>7→0</b><span>case lỗi ở v0 → v1</span></div>
+      </div>
+      <p class="note">Lỗi v0: 5/7 do chỉ dẫn xấu của starter (đoán mò, gửi không hỏi, ép một bước); 2/7 do <code>query</code> của <code>lookup</code> thừa chữ "news". Nguồn: <code>runs/*.json</code>.</p>
+    </section>
+  </div>
+
+  <div class="grid row-bottom">
+    <section class="card" aria-label="Câu hỏi mẫu">
+      <h2>Thử ngay</h2>
+      <ol class="q">
+        <li>Tin mới nhất về OpenAI trong tuần này?<small>→ lookup (news, week)</small></li>
+        <li>Lấy 4 tweet gần đây của Andrej Karpathy<small>→ timeline (karpathy, limit 4)</small></li>
+        <li>Tóm tắt 5 tweet mới nhất giúp mình<small>→ hỏi lại: tài khoản nào?</small></li>
+        <li>Trên Hacker News đang có thảo luận gì nổi bật về Rust?<small>→ hackernews</small></li>
+        <li>Đăng bản tin này lên Telegram giúp mình<small>→ hỏi xác nhận yes/no, chưa gửi</small></li>
+      </ol>
+    </section>
+
+    <section class="card" aria-label="Bài học">
+      <h2>Bài học từ log</h2>
+      <ul class="lessons">
+        <li><strong>Đọc log trước khi sửa:</strong> mỗi lỗi gắn một nguyên nhân (prompt hay khai báo tool) rồi mới đổi.</li>
+        <li><strong>Eval đã bão hòa:</strong> 100% ở v1 nên v2 không còn đo được đóng góp riêng — cần case khó hơn.</li>
+        <li><strong>Chấm khớp chuỗi quá chặt:</strong> <code>"AI news"</code> vs <code>"AI"</code> bị tính sai dù nghĩa gần như nhau.</li>
+        <li><strong>Chưa làm:</strong> vòng v3 và model local. Link dùng thử chỉ sống khi tunnel còn chạy.</li>
+      </ul>
+    </section>
+  </div>
+
+  <footer>
+    <div class="team"><b>Nhóm 5:</b> Đỗ Cao Cường · Nguyễn Viết Mạnh Khải · Đỗ Duy Bộ · Vũ Đức Anh · Đỗ Hoàng Phúc</div>
+    <a id="demo-link" href="https://alternative-tumor-expanded-alan.trycloudflare.com">Dùng thử: alternative-tumor-expanded-alan.trycloudflare.com</a>
+  </footer>
+
+</main>
+</body>
+</html>
