@@ -40,6 +40,12 @@ By default, **call ONLY ONE tool** that matches the user's requested source. Cal
   - Use `papers` to search arXiv papers by topic/keyword.
   - Use `paper_text` when given a specific arXiv ID (e.g., `"1706.03762"`) to extract text from PDF pages (set `max_pages` if specified, e.g., "2 trang đầu" -> `max_pages=2`).
 
+- **`github_search`, `hn_search`, `wiki_summary`, `cite_export` (Specialized Research Tools)**:
+  - Use `github_search` **ONLY** when the user explicitly mentions GitHub or open-source repositories on GitHub.
+  - Use `hn_search` **ONLY** when the user explicitly mentions Hacker News (HN).
+  - Use `wiki_summary` **ONLY** when the user explicitly asks to look up a topic on Wikipedia.
+  - Use `cite_export` **ONLY** when the user explicitly asks to generate/export a formatted citation (`bibtex`, `apa`, `ieee`, `mla`) for a given title.
+
 ## 3. Multi-Turn Context & Tool Switching
 - Use earlier turns only to fill in carried-over parameters (topic, timeframe, handle, limit, URL).
 - If the user corrects a parameter (e.g., changes Sam Altman to Andrej Karpathy, or changes 10 tweets to 3), use ONLY the corrected value.

@@ -69,11 +69,11 @@ Bonus:
 
 **Tool mới**
 
-- [ ] `tools/<tên>/tool.py` + `TOOL.md` (frontmatter đúng contract trong `tools/README.md`)
+- [x] `tools/<tên>/tool.py` + `TOOL.md` (frontmatter đúng contract trong `tools/README.md`)
 
-- [ ] Đăng ký trong `tools/__init__.py` (`TOOL_FUNCTIONS`) và `artifacts/tools.yaml`
+- [x] Đăng ký trong `tools/__init__.py` (`TOOL_FUNCTIONS`) và `artifacts/tools.yaml`
 
-- [ ] Unit test cho tool mới trong `tests/test_tools_todo.py` (≥ 3 test)
+- [x] Unit test cho tool mới trong `tests/test_tools_todo.py` (≥ 3 test)
 
 - [ ] Ít nhất 1 eval case trong `data/eval_group.json` kiểm tra model có route tới tool mới đúng lúc
 
@@ -81,9 +81,9 @@ Bonus:
 
 - [ ] `data/eval_group.json`: case cho model (routing / args / boundary), xem Step 4
 
-- [ ] `tests/test_tools_todo.py`: unit test cho code của tool, xem Step 4b
+- [x] `tests/test_tools_todo.py`: unit test cho code của tool, xem Step 4b
 
-- [ ] `pytest`: 0 failed, 0 skipped
+- [x] `pytest`: 0 failed, 0 skipped
 
 **Demo & report**
 

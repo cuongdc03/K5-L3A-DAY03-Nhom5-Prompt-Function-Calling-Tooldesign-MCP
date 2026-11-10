@@ -15,9 +15,9 @@ def err(tool: str, exc: Exception) -> dict[str, Any]:
     return {"tool": tool, "error": type(exc).__name__, "message": str(exc)}
 
 
-def domain(url: str) -> str:
+def domain(url: str | None) -> str:
     try:
-        return urlparse(url).netloc.replace("www.", "")
+        return urlparse(str(url or "")).netloc.replace("www.", "")
     except Exception:
         return ""
 

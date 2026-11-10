@@ -274,3 +274,113 @@ tools:
           default: 8000
           description: "Maximum characters of extracted text to return."
       required: [arxiv_url]
+
+  # ---------------- Custom team tools ----------------
+  - name: github_search
+    description: >
+      Search open-source GitHub repositories via the GitHub REST API.
+      WHEN TO USE: ONLY when the user explicitly asks to search for repositories/projects on GitHub
+      (e.g., "Tìm repo GitHub về AI agent", "Tìm trên GitHub các project Python về RAG nhiều sao nhất").
+      WHEN NOT TO USE: Do NOT use for general web news (use `lookup`), X/Twitter posts (use `social_search`),
+      or arXiv papers (use `papers`).
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          default: ""
+          description: "Repository search keyword or topic (e.g., 'AI agent', 'RAG', 'vllm')."
+        language:
+          type: string
+          default: ""
+          description: "Optional programming language filter in lowercase (e.g., 'python', 'typescript', 'rust')."
+        sort:
+          type: string
+          enum: [stars, forks, updated, best-match]
+          default: "stars"
+          description: "Sort order: 'stars' (default, most popular), 'forks', 'updated' (recently updated), or 'best-match'."
+        max_results:
+          type: integer
+          default: 5
+          description: "Maximum number of repositories to return."
+      required: [query]
+
+  - name: hn_search
+    description: >
+      Search technical stories and discussions on Hacker News (Y Combinator) via the Algolia HN API.
+      WHEN TO USE: ONLY when the user explicitly asks what people are discussing on Hacker News / HN
+      (e.g., "Trên Hacker News đang bàn gì về Claude?", "Tìm các bài story trên Hacker News về LLM").
+      WHEN NOT TO USE: Do NOT use when the user asks about Twitter/X (use `social_search`) or general web news (use `lookup`).
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          default: ""
+          description: "Core topic or keyword to search on Hacker News (e.g., 'Claude', 'LLM', 'OpenAI')."
+        tags:
+          type: string
+          enum: [story, comment, ask_hn, show_hn]
+          default: "story"
+          description: "HN item type filter: 'story' (default), 'comment', 'ask_hn', or 'show_hn'."
+        max_results:
+          type: integer
+          default: 5
+          description: "Maximum number of Hacker News items to return."
+      required: [query]
+
+  - name: wiki_summary
+    description: >
+      Fetch an encyclopedic summary for a concept, entity, or person from Wikipedia REST API.
+      WHEN TO USE: ONLY when the user explicitly asks to look up a concept or biography on Wikipedia
+      (e.g., "Tra Wikipedia tiếng Việt về Trí tuệ nhân tạo", "Tóm tắt trang Wikipedia về Transformer").
+      WHEN NOT TO USE: Do NOT use for breaking news (use `lookup`) or academic paper search (use `papers`).
+    parameters:
+      type: object
+      properties:
+        title:
+          type: string
+          default: ""
+          description: "Exact article title or entity name to look up on Wikipedia (e.g., 'Artificial intelligence', 'Trí tuệ nhân tạo')."
+        lang:
+          type: string
+          enum: [en, vi, fr, de, ja, zh]
+          default: "en"
+          description: "Wikipedia language edition code: 'vi' for Vietnamese Wikipedia, 'en' for English Wikipedia."
+      required: [title]
+
+  - name: cite_export
+    description: >
+      Generate a standardized academic citation (`bibtex`, `apa`, `ieee`, `mla`) locally from paper/article metadata.
+      WHEN TO USE: ONLY when the user explicitly asks to format or export a citation/reference (e.g., "Xuất trích dẫn BibTeX cho bài báo Attention Is All You Need", "Tạo trích dẫn chuẩn APA").
+      WHEN NOT TO USE: Do NOT use to search for papers on arXiv (use `papers`) or check company citation rules (use `policy`).
+    parameters:
+      type: object
+      properties:
+        title:
+          type: string
+          default: ""
+          description: "Title of the paper or article to cite."
+        authors:
+          type: array
+          default: []
+          items: {type: string}
+          description: "List of author names (e.g., ['Ashish Vaswani', 'Noam Shazeer'])."
+        year:
+          type: integer
+          default: 2026
+          description: "Publication year (e.g., 2017, 2024, 2026)."
+        url:
+          type: string
+          default: ""
+          description: "Optional URL of the paper or article."
+        arxiv_id:
+          type: string
+          default: ""
+          description: "Optional arXiv identifier (e.g., '1706.03762')."
+        style:
+          type: string
+          enum: [bibtex, apa, ieee, mla]
+          default: "bibtex"
+          description: "Citation format style: 'bibtex', 'apa', 'ieee', or 'mla'."
+      required: [title, style]
