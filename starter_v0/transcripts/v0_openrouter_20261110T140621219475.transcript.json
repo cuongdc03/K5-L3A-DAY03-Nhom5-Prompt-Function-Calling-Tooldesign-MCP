@@ -1,0 +1,80 @@
+{
+  "transcript_id": "v0_openrouter_20261110T140621219475",
+  "version": "v0",
+  "artifact_version": "v0+pacade0f2c59c+t99d9cbd3f86a",
+  "prompt_hash": "acade0f2c59c5c127a88a8237e3ff6d0a943467a4e5eb7af08dc281a5eb73df3",
+  "tools_hash": "99d9cbd3f86a3b49aa64fbb332034e2e784f3bab757b790ea0736dbfd5ffd609",
+  "provider": "openrouter",
+  "model": null,
+  "system_prompt": "D:\\workspace\\VinAI\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\workspace\\VinAI\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\tools.yaml",
+  "interface": "streamlit",
+  "created_at": "2026-11-10T14:06:21",
+  "updated_at": "2026-11-10T14:06:35",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-10T14:06:31",
+      "user": "hôm nay là ngày bao nhiêu",
+      "status": "answered",
+      "assistant_text": "Hôm nay là thứ Ba, ngày 10 tháng 11 năm 2026.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "current_time",
+              "args": {}
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "current_time",
+              "args": {},
+              "result": {
+                "tool": "get_current_time",
+                "timezone": "Asia/Ho_Chi_Minh",
+                "iso": "2026-11-10T14:06:34+07:00",
+                "date": "2026-11-10",
+                "time": "14:06:34",
+                "year": 2026,
+                "month": 11,
+                "day": 10,
+                "weekday": "Tuesday",
+                "weekday_vi": "Thứ Ba",
+                "formatted": "Thứ Ba, ngày 10 tháng 11 năm 2026, 14:06:34 (Asia/Ho_Chi_Minh)"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Hôm nay là thứ Ba, ngày 10 tháng 11 năm 2026.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "current_time",
+          "args": {},
+          "result": {
+            "tool": "get_current_time",
+            "timezone": "Asia/Ho_Chi_Minh",
+            "iso": "2026-11-10T14:06:34+07:00",
+            "date": "2026-11-10",
+            "time": "14:06:34",
+            "year": 2026,
+            "month": 11,
+            "day": 10,
+            "weekday": "Tuesday",
+            "weekday_vi": "Thứ Ba",
+            "formatted": "Thứ Ba, ngày 10 tháng 11 năm 2026, 14:06:34 (Asia/Ho_Chi_Minh)"
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T14:06:35"
+    }
+  ]
+}

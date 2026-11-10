@@ -1,0 +1,27 @@
+{
+  "transcript_id": "v0_openrouter_20261110T140445369158",
+  "version": "v0",
+  "artifact_version": "v0+pacade0f2c59c+t99d9cbd3f86a",
+  "prompt_hash": "acade0f2c59c5c127a88a8237e3ff6d0a943467a4e5eb7af08dc281a5eb73df3",
+  "tools_hash": "99d9cbd3f86a3b49aa64fbb332034e2e784f3bab757b790ea0736dbfd5ffd609",
+  "provider": "openrouter",
+  "model": null,
+  "system_prompt": "D:\\workspace\\VinAI\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\workspace\\VinAI\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\tools.yaml",
+  "interface": "streamlit",
+  "created_at": "2026-11-10T14:04:45",
+  "updated_at": "2026-11-10T14:05:00",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-10T14:04:57",
+      "user": "hôm nay là ngày bao nhiêu",
+      "status": "provider_error",
+      "assistant_text": null,
+      "rounds": [],
+      "tool_events": [],
+      "error": "AuthenticationError: Error code: 401 - API key expired.",
+      "ended_at": "2026-11-10T14:05:00"
+    }
+  ]
+}
