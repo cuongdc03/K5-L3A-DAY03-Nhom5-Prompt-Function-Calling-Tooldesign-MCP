@@ -84,7 +84,10 @@ def run_model_tool_loop(
     tools: list[dict[str, Any]],
     model: str | None,
     max_tool_rounds: int,
+    tool_executor: Any = None,
 ) -> dict[str, Any]:
+    # `tool_executor` lets a UI intercept tool calls (e.g. require approval for `send`).
+    run_tool = tool_executor or execute_tool_call
     working_messages = list(messages)
     rounds: list[dict[str, Any]] = []
     all_tool_events: list[dict[str, Any]] = []
@@ -113,7 +116,7 @@ def run_model_tool_loop(
 
         for call in calls:
             print(f"🔧 {call.name}({json.dumps(call.args, ensure_ascii=False, sort_keys=True)})")
-            event = execute_tool_call(call)
+            event = run_tool(call)
             round_record["tool_results"].append(event)
             all_tool_events.append(event)
 
