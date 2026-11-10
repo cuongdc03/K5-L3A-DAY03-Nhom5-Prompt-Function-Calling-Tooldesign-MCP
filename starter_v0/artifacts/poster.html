@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nhóm 5 — Research Agent v3 Poster</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 28px;
+      line-height: 1.5;
+    }
+    .container { max-width: 1180px; margin: 0 auto; }
+    header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 32px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    h1 { font-size: 1.9rem; color: var(--accent); margin-bottom: 6px; }
+    .subtitle { color: var(--muted); font-size: 1rem; max-width: 720px; }
+    .badges { display: flex; gap: 12px; flex-wrap: wrap; }
+    .badge {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--green);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+    .badge.purple {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+    h2 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 0.85em;
+    }
+    .tag-new {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--amber);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .sample-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .sample-list li {
+      background: #0f172a;
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+    .sample-list li span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Nhóm 5 — AI Research Agent (v3)</h1>
+        <p class="subtitle">
+          Trợ lý nghiên cứu đa nguồn có kiểm chứng: tìm tin tức Web (Tavily), theo dõi Twitter/X, đọc URL (Firecrawl), tra cứu bài báo arXiv, kiểm tra Policy nội bộ, thảo luận Hacker News, Wikipedia, giá Crypto &amp; đăng bản tin Telegram có xác nhận.
+        </p>
+      </div>
+      <div class="badges">
+        <span class="badge">Base Eval: 20/20 (100%)</span>
+        <span class="badge">Group Eval: 10/10 (100%)</span>
+        <span class="badge">Extension Eval: 10/10 (100%)</span>
+        <span class="badge purple">Pytest: 108/108 Passed</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div>
+        <div class="card">
+          <h2>A2. Hệ sinh thái 14 Tools (6 Core + 4 Bonus + 4 Tool Mới)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Tên Tool</th>
+                <th>Chức năng chính</th>
+                <th>Phân loại</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>clarify</code></td><td>Hỏi lại người dùng khi thiếu thông tin (handle/URL) hoặc xin xác nhận <code>yes_no</code></td><td>Core</td></tr>
+              <tr><td><code>lookup</code></td><td>Tìm kiếm tin tức thời sự (<code>topic=news</code>) hoặc thông tin web qua Tavily</td><td>Core</td></tr>
+              <tr><td><code>timeline</code></td><td>Lấy tweet gần đây của một tài khoản X/Twitter cụ thể (<code>sama</code>, <code>elonmusk</code>...)</td><td>Core</td></tr>
+              <tr><td><code>social_search</code></td><td>Tìm bài thảo luận trên X/Twitter theo từ khóa (<code>Latest</code> / <code>Top</code>)</td><td>Core</td></tr>
+              <tr><td><code>fetch</code></td><td>Đọc và trích xuất Markdown từ URL cụ thể qua Firecrawl</td><td>Core</td></tr>
+              <tr><td><code>format</code></td><td>Tổng hợp các items thành bản tin Markdown (<code>brief</code>, <code>sections</code>, <code>thread</code>...)</td><td>Core</td></tr>
+              <tr><td><code>send</code></td><td>Đăng bản tin lên kênh Telegram (bắt buộc <code>confirmed=true</code>)</td><td>Bonus</td></tr>
+              <tr><td><code>policy</code></td><td>Tra cứu quy định nội bộ công ty (trích dẫn nguồn, bảo mật dữ liệu, xuất bản)</td><td>Bonus</td></tr>
+              <tr><td><code>papers</code></td><td>Tìm kiếm bài báo khoa học trên arXiv theo chủ đề</td><td>Bonus</td></tr>
+              <tr><td><code>paper_text</code></td><td>Tải PDF và trích xuất nội dung văn bản bài báo arXiv theo ID</td><td>Bonus</td></tr>
+              <tr><td><code>hackernews</code></td><td>Tìm thảo luận &amp; tin công nghệ trên Hacker News qua Algolia API</td><td><span class="tag-new">MỚI #1</span></td></tr>
+              <tr><td><code>datetime_now</code></td><td>Lấy ngày, giờ, thứ hiện tại và đầu-cuối tuần theo múi giờ IANA</td><td><span class="tag-new">MỚI #2</span></td></tr>
+              <tr><td><code>wikipedia</code></td><td>Tra cứu tóm tắt bách khoa toàn thư mở Wikipedia đa ngôn ngữ</td><td><span class="tag-new">MỚI #3</span></td></tr>
+              <tr><td><code>crypto_price</code></td><td>Tra cứu giá tiền mã hóa thời gian thực qua CoinGecko API</td><td><span class="tag-new">MỚI #4</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h2>A3. Câu hỏi mẫu để Team khác dùng thử ngay</h2>
+          <ul class="sample-list">
+            <li>
+              <strong>1. Đa nguồn song song (Web News + Twitter):</strong>
+              "Tìm trên web tin AI hôm nay và tìm thêm các tweet phổ biến (top) về OpenAI."
+              <span>→ Gọi song song <code>lookup(topic='news', timeframe='day')</code> + <code>social_search(search_type='Top')</code></span>
+            </li>
+            <li>
+              <strong>2. Tool mới Hacker News + Wikipedia + Giá Crypto:</strong>
+              "Trên Hacker News đang bàn gì nổi bật về Rust? Nhân tiện xem giúp giá Bitcoin hiện tại bằng USD."
+              <span>→ Gọi <code>hackernews(query='Rust')</code> + <code>crypto_price(coin_id='bitcoin')</code></span>
+            </li>
+            <li>
+              <strong>3. Kiểm tra Guardrail thiếu thông tin (Clarify):</strong>
+              "Tóm tắt 5 tweet mới nhất của tài khoản này giúp mình."
+              <span>→ Không đoán mò: gọi <code>clarify(response_type='text')</code> hỏi rõ tài khoản nào</span>
+            </li>
+            <li>
+              <strong>4. Kiểm tra Guardrail an toàn trước khi đăng Telegram:</strong>
+              "Đăng bản tin AI hôm nay lên kênh Telegram giúp mình ngay nhé."
+              <span>→ Chặn gửi tự động: gọi <code>clarify(response_type='yes_no')</code> xin xác nhận trước</span>
+            </li>
+            <li>
+              <strong>5. Nghiên cứu học thuật arXiv + Policy nội bộ:</strong>
+              "Tìm paper arXiv mới về AI agent evaluation và kiểm tra policy công ty về cách trích dẫn arXiv."
+              <span>→ Gọi song song <code>papers</code> + <code>policy(policy_area='source_citation')</code></span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Tiến trình Tối ưu hóa Thực nghiệm (v0 → v3)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Version</th>
+                <th>Thay đổi chính</th>
+                <th>Base</th>
+                <th>Group</th>
+                <th>Ext</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>v0</code></td><td>Baseline chưa tối ưu (starter)</td><td>65%</td><td>—</td><td>—</td></tr>
+              <tr><td><code>v1</code></td><td>Sửa <code>system_prompt.md</code> (bỏ đoán mò, thêm guardrails)</td><td><strong>100%</strong></td><td>—</td><td>—</td></tr>
+              <tr><td><code>v2</code></td><td>Viết lại <code>tools.yaml</code> + thêm <code>hackernews</code> &amp; 10 group cases</td><td><strong>100%</strong></td><td><strong>100%</strong></td><td>—</td></tr>
+              <tr><td><code>v3</code></td><td>Hợp nhất 4 tool mới + tối ưu parallel &amp; policy/arXiv</td><td><strong>100%</strong></td><td><strong>100%</strong></td><td><strong>100%</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -119,3 +119,29 @@ tools:
         sort_by: {type: string, enum: [relevance, date], default: "relevance", description: "Sắp xếp theo độ liên quan ('relevance' - bài nổi bật/nhiều điểm) hoặc mới nhất theo thời gian ('date')."}
         max_results: {type: integer, default: 5, description: "Số lượng bài viết trả về (1 đến 20, mặc định 5)."}
       required: [query]
+
+  - name: datetime_now
+    description: "Lấy ngày, giờ, thứ trong tuần hiện tại theo múi giờ IANA (mặc định Asia/Ho_Chi_Minh). Chỉ dùng khi người dùng hỏi trực tiếp bây giờ là mấy giờ, hôm nay là ngày/thứ mấy ở một múi giờ cụ thể. KHÔNG dùng khi tìm tin tức hôm nay/tuần này (dùng lookup với timeframe='day'/'week')."
+    parameters:
+      type: object
+      properties:
+        timezone: {type: string, default: "Asia/Ho_Chi_Minh", description: "Tên múi giờ chuẩn IANA (ví dụ: 'Asia/Ho_Chi_Minh', 'America/New_York', 'Europe/London', 'Asia/Tokyo')."}
+      required: []
+
+  - name: wikipedia
+    description: "Tra cứu tóm tắt bách khoa toàn thư trên Wikipedia theo tên khái niệm, nhân vật hoặc tổ chức khi người dùng yêu cầu tra cứu trên Wikipedia. KHÔNG dùng cho tin tức thời sự hàng ngày (dùng lookup)."
+    parameters:
+      type: object
+      properties:
+        title: {type: string, default: "", description: "Tiêu đề mục từ cần tra cứu trên Wikipedia (ví dụ: 'Artificial intelligence', 'Geoffrey Hinton')."}
+        language: {type: string, enum: [en, vi, fr, de, ja], default: "en", description: "Mã ngôn ngữ Wikipedia ('en' hoặc 'vi', mặc định 'en')."}
+      required: [title]
+
+  - name: crypto_price
+    description: "Tra cứu tỷ giá tiền mã hóa (cryptocurrency) theo thời gian thực qua CoinGecko API khi người dùng hỏi giá một đồng coin cụ thể (như Bitcoin, Ethereum, Solana)."
+    parameters:
+      type: object
+      properties:
+        coin_id: {type: string, default: "bitcoin", description: "ID của đồng tiền mã hóa trên CoinGecko (chữ thường, ví dụ: 'bitcoin', 'ethereum', 'solana')."}
+        currency: {type: string, default: "usd", description: "Đơn vị tiền tệ quy đổi (chữ thường, ví dụ: 'usd', 'vnd', 'eur')."}
+      required: [coin_id]
