@@ -1,0 +1,1146 @@
+{
+  "run_id": "v3_B_group_openrouter_20261110T143323317007",
+  "version": "v3",
+  "artifact_version": "v3+pacade0f2c59c+t99d9cbd3f86a",
+  "prompt_hash": "acade0f2c59c5c127a88a8237e3ff6d0a943467a4e5eb7af08dc281a5eb73df3",
+  "tools_hash": "99d9cbd3f86a3b49aa64fbb332034e2e784f3bab757b790ea0736dbfd5ffd609",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "/Users/cuong/workspaces/ai-in-action/K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-/starter_v0/artifacts/system_prompt.md",
+  "tools": "/Users/cuong/workspaces/ai-in-action/K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-/starter_v0/artifacts/tools.yaml",
+  "eval_cases": "data/eval_group.json",
+  "dataset_id": "day04_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp (5 single-turn + 5 multi-turn): kiểm tra tool mới hackernews, tham số lookup/timeline/social_search/papers, guardrail xác nhận send, và từ chối câu hỏi ngoài phạm vi.",
+  "generated_at": "2026-11-10T14:33:23",
+  "summary": {
+    "total_cases": 12,
+    "measured_cases": 12,
+    "provider_error_cases": 0,
+    "passed_cases": 12,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_hackernews_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_new_tool_hackernews",
+        "difficulty": "easy",
+        "what_it_tests": "Hỏi thảo luận nổi bật trên Hacker News → route đúng tới tool mới hackernews với query='Rust', sort_by='relevance'."
+      },
+      "input": "Trên Hacker News đang có thảo luận gì nổi bật về Rust?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "Rust",
+              "sort_by": "relevance"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "Rust",
+              "sort_by": "relevance",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hackernews",
+          "args": {
+            "query": "Rust",
+            "sort_by": "relevance",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "search_hackernews",
+            "query": "Rust",
+            "sort_by": "relevance",
+            "items": [
+              {
+                "title": "Why Discord is switching from Go to Rust",
+                "url": "https://blog.discordapp.com/why-discord-is-switching-from-go-to-rust-a190bbca2b1f",
+                "hn_url": "https://news.ycombinator.com/item?id=22238335",
+                "source": "blog.discordapp.com",
+                "summary": "1582 points | 642 comments | by Sikul (HN: https://news.ycombinator.com/item?id=22238335)",
+                "points": 1582,
+                "num_comments": 642,
+                "author": "Sikul",
+                "date": "2020-02-04T17:30:40Z"
+              },
+              {
+                "title": "Leaving Rust gamedev after 3 years",
+                "url": "https://loglog.games/blog/leaving-rust-gamedev/",
+                "hn_url": "https://news.ycombinator.com/item?id=40172033",
+                "source": "loglog.games",
+                "summary": "1484 points | 972 comments | by darthdeus (HN: https://news.ycombinator.com/item?id=40172033)",
+                "points": 1484,
+                "num_comments": 972,
+                "author": "darthdeus",
+                "date": "2024-04-26T17:33:56Z"
+              },
+              {
+                "title": "A half-hour to learn Rust",
+                "url": "https://fasterthanli.me/articles/a-half-hour-to-learn-rust",
+                "hn_url": "https://news.ycombinator.com/item?id=25610741",
+                "source": "fasterthanli.me",
+                "summary": "1444 points | 330 comments | by selvan (HN: https://news.ycombinator.com/item?id=25610741)",
+                "points": 1444,
+                "num_comments": 330,
+                "author": "selvan",
+                "date": "2021-01-02T05:50:39Z"
+              },
+              {
+                "title": "Announcing Rust 1.0",
+                "url": "http://blog.rust-lang.org/2015/05/15/Rust-1.0.html",
+                "hn_url": "https://news.ycombinator.com/item?id=9551937",
+                "source": "blog.rust-lang.org",
+                "summary": "1363 points | 306 comments | by jhund (HN: https://news.ycombinator.com/item?id=9551937)",
+                "points": 1363,
+                "num_comments": 306,
+                "author": "jhund",
+                "date": "2015-05-15T17:02:09Z"
+              },
+              {
+                "title": "CityBound – An open source city simulation game in Rust",
+                "url": "https://github.com/citybound/citybound",
+                "hn_url": "https://news.ycombinator.com/item?id=19583384",
+                "source": "github.com",
+                "summary": "1340 points | 264 comments | by formalsystem (HN: https://news.ycombinator.com/item?id=19583384)",
+                "points": 1340,
+                "num_comments": 264,
+                "author": "formalsystem",
+                "date": "2019-04-05T15:18:45Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_lookup_monthly_news_arg",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "lookup_news_month_timeframe",
+        "difficulty": "medium",
+        "what_it_tests": "Tin tức theo tháng → lookup với query cốt lõi 'semiconductor', topic='news', timeframe='month'."
+      },
+      "input": "Tin tức về semiconductor trong tháng này có gì đáng chú ý?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "semiconductor",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "semiconductor",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "semiconductor",
+            "topic": "news",
+            "timeframe": "month"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "semiconductor",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "Cornell semiconductor sets record for widest bandgap | Cornell Chronicle",
+                "url": "https://news.cornell.edu/stories/2026/11/cornell-semiconductor-sets-record-widest-bandgap",
+                "source": "news.cornell.edu",
+                "summary": "Cornell engineers have developed a semiconductor material with a record-setting bandgap and turned it into working devices, opening the door to electronics that handle much higher voltages while wasting less energy.\n\nSemiconductors with wider bandgaps can withstand stronger electric fields before breaking down, making them attractive for applications such as electric vehicles and power-grid infrastructure. [...] “Making a transistor allows us to simultaneously demonstrate an essential building block of electronic systems as well as several of the semiconductor’s unique properties,” Xing said. “That includes control of conductivity over several orders of magnitude by both doping and field effect. The preliminary transistors show more than four orders of magnitude change in current modulated by the capacitively-coupled metal gate and the colossal bandgap channel.” [...] “They saw a large number of defects in this new semiconductor, akin to the state of other semiconductors at the beginning of their development, indicating that there is lots of room to further improve the properties and devices made with this semiconductor as these defects are tamed and the material can operate at its full potential,” Schlom said.",
+                "score": 0.467308
+              },
+              {
+                "title": "Is the semiconductor industry headed for an almighty crash?",
+                "url": "https://www.economist.com/business/2026/10/15/is-the-semiconductor-industry-headed-for-an-almighty-crash",
+                "source": "economist.com",
+                "summary": "F or more than four decades the semiconductor industry has been governed by two laws as dependable as any in physics. The first is that the number of transistors, the tiny switches etched onto a chip, keeps rising. The second is that every boom ends in a bust. The first, which makes chips more powerful, is in rude health. Leading processors for artificial intelligence contain more than 200bn transistors, and the industry reckons it can cram in a trillion by the end of the decade. The second is",
+                "score": 0.43813655
+              },
+              {
+                "title": "GlobalFoundries selected to operate two new semiconductor fabs in New York under landmark U.S.-Japan initiative | GlobalFoundries",
+                "url": "https://gf.com/news-and-events/news/globalfoundries-selected-to-operate-two-new-semiconductor-fabs-in-new-york-under-landmark-us-japan-initiative",
+                "source": "gf.com",
+                "summary": "GlobalFoundries (GF) is a leading manufacturer of essential semiconductors, enabling AI at scale from the cloud to the physical world. Through deep partnerships with customers, GF delivers differentiated, power-efficient and high-performance solutions for automotive, aerospace and defense, data center, smart mobile devices, internet of things and other high-growth markets. With global manufacturing operations across the U.S., Europe and Asia, GF is a trusted and holistic technology partner for [...] MALTA, N.Y., Oct. 14, 2026 – GlobalFoundries (Nasdaq: GFS) (GF) today announced it has been selected as the technology provider and operator for two new semiconductor manufacturing facilities (“fabs”) at its Malta, New York, site under a U.S.-Japan initiative providing up to $21 billion in funding. Enabled by President Donald J. Trump’s trade and investment agreement with Japan, the initiative will accelerate trusted semiconductor manufacturing in the United States, strengthen critical supply [...] GF has also agreed with the U.S. Department of Commerce to amend its existing CHIPS and Science Act award to reallocate $955 million and accelerate the company’s investments in silicon photonics, silicon-germanium (SiGe) and advanced packaging at its facilities in Malta, New York, and Burlington, Vermont. These investments will expand domestic manufacturing capacity for technologies increasingly critical to communications infrastructure and data centers.",
+                "score": 0.39789218
+              },
+              {
+                "title": "Semiconductor Sell-Off: The 1 AI Chip Stock I'd Buy and 1 I'd Avoid | The Motley Fool",
+                "url": "https://www.fool.com/investing/2026/10/29/semiconductor-sell-off-the-1-ai-chip-stock-id-buy",
+                "source": "fool.com",
+                "summary": "The Motley Fool\nThe Motley Fool\n\nThe semiconductor sell-off is a chance for investors to buy into the artificial intelligence (AI) boom at a discount, but not every chip stock is worth picking up. Broadcom (AVGO -1.94%) and Intel (INTC -3.62%) are two AI chip stocks worth looking into, but here's why investors might buy one and avoid the other.\n\nAn AI semiconductor.\n\nImage source: Getty Images.\n\n## Why Broadcom is the AI chip stock investors could buy [...] Invest better with The Motley Fool. Get stock recommendations, portfolio guidance, and more from The Motley Fool's premium services.\n\nThe Motley Fool\n\nMaking the world smarter, happier, and richer.\n\n© 1995 - 2026 The Motley Fool. All rights reserved.\n\nMarket data powered by Xignite and Polygon.io.\n\nAbout The Motley Fool\n\nOur Services\n\nAround the Globe\n\nFree Tools\n\nAffiliates & Friends\n\n# Semiconductor Sell-Off: The 1 AI Chip Stock I'd Buy and 1 I'd Avoid [...] Still, improving its existing chip business is one challenge, but building a successful foundry operation that can compete with established manufacturing leaders is another. Manufacturing semiconductors requires substantial capital, solid execution, and customers willing to commit their chip designs to the platform.\n\n## INTC - Intel\n\nNASDAQ · As of 4:00 PM ET 10/29/26\n\n### Key data points\n\nAny delays, manufacturing yield problems, or weaker customer adoption could undermine Intel's turnaround.",
+                "score": 0.39103433
+              },
+              {
+                "title": "LLNL partners with Diamond Quanta to break barriers in semiconductor manufacturing | Lawrence Livermore National Laboratory",
+                "url": "https://www.llnl.gov/article/55211/llnl-partners-diamond-quanta-break-barriers-semiconductor-manufacturing",
+                "source": "llnl.gov",
+                "summary": "Through a new Cooperative Research and Development Agreement (CRADA), scientists at Lawrence Livermore National Laboratory (LLNL) are partnering with San Francisco Bay Area startup Diamond Quanta to advance semiconductor manufacturing in the U.S.\n\nThe partnership, facilitated by the Laboratory’s Innovation and Partnerships Office (IPO), will explore how laser pulses can be used to engineer and remove defects in diamond, a material that is a leading candidate for next-generation semiconductors. [...] “Developing these materials could be revolutionary for high-power electronics, which are critical to the national security infrastructure,” said LLNL scientist Ted Laurence. “We also want the U.S. to be at the forefront of the development of new semiconductor options, with U.S.-centric manufacturing and a secure supply chain.”",
+                "score": 0.3684744
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_karpathy_handle_and_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "timeline_handle_mapping_and_limit",
+        "difficulty": "easy",
+        "what_it_tests": "Ánh xạ tên Andrej Karpathy → screenname='karpathy' (không có @) và trích đúng limit=4."
+      },
+      "input": "Lấy 4 tweet gần đây của Andrej Karpathy",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "karpathy",
+              "limit": 4
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "karpathy",
+              "limit": 4
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "karpathy",
+            "limit": 4
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "karpathy",
+            "items": [
+              {
+                "title": "Earlier this week Tristan published his top YouTube channels:",
+                "summary": "Earlier this week Tristan published his top YouTube channels:\nhttps://t.co/NZ3UCNo6cT\nWhich looked excellent so clearly I had to turn it into TristanTube:\nhttps://t.co/l0KyW1WdNH\n47K super nerdy videos +TV mode for laid back watching. (One-shotted with Claude Code in 3 minutes)",
+                "url": "https://x.com/karpathy/status/2119114537442189652",
+                "source": "@karpathy",
+                "date": "Sat Nov 07 17:07:31 +0000 2026",
+                "metrics": {
+                  "favorites": 9173,
+                  "retweets": 772,
+                  "views": "941385"
+                }
+              },
+              {
+                "title": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 ",
+                "summary": "Weekend hack: HackerTube. I was annoyed with YouTube's recommendations so I had Claude filter down 43M comments over 20 years of HN to 6,454 videos that keep being recommended. *Significantly* better viewing experience, ~2 hours with Opus 5.5:\nhttps://t.co/JIhXN7OSh1\n\n- Excellent recs without any logins (state is kept in local browser session)\n- Thumbnail is a representative frame from middle of the video instead of the super duper A/B test hyper-optimized user uploads\n- Underlying data from the comment analysis as one zip file, point your Claude at it and ask for your own version\n- HackerTube Longs ✊\n\nA bit more on the process:\nI use Claude Code (desktop app for Mac), Opus 5.5 on Medium effort as my default. I only talk to Claude and have it do everything, the only \"manual work\" I helped with in tandem was in the browser (reminiscent of MenuGen): 1) I had to create some kind of API key from Google Cloud UI to query YouTube for video metadata, 2) I booted up a VPS box for serving and 3) I bought the domain name. Once the box was up I gave Claude the IP and told it update, secure, harden, deploy and optimize the code, and it did the whole thing.\n\nMany awesome projects that would have normally taken weeks/months even can now be few-shotted for breakfast. What else are we not thinking of.",
+                "url": "https://x.com/karpathy/status/2116957135661945283",
+                "source": "@karpathy",
+                "date": "Sun Nov 01 18:14:46 +0000 2026",
+                "metrics": {
+                  "favorites": 52347,
+                  "retweets": 4835,
+                  "views": "5720098"
+                }
+              },
+              {
+                "title": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.",
+                "summary": "RT @Tristan0x: If you've ever wondered why smart TVs are so cheap, this is why.\n\n@log4j rooted his Samsung and found an always-on hot mic,…",
+                "url": "https://x.com/karpathy/status/2114384346815820050",
+                "source": "@karpathy",
+                "date": "Sun Oct 25 15:51:26 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 3287,
+                  "views": "40226"
+                }
+              },
+              {
+                "title": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now les",
+                "summary": "Dusting off this tweet from April because this gap in shared understanding of LLM capability is *widening*. It's now less \"two groups of people speaking past each other\" and more a sharp funnel.\n\n- Napkin math somewhere around 6B people (~75% of the population) have barely come in contact with LLMs at all.\n- Around 1-2B (~20%) are casual and infrequent users of free-tier ChatGPT-like products. This group sees derpy chatbots and treats them a bit like a better Google search, a writing aid, or etc. Maybe an agent tries to book you a flight. I have non-tech friends who (reasonably, imo) say they have not much use for it at all. Even many professionals outside of math&code are in this tier. For example, execs and many other functions spend a lot of their time talking to other people, so while they understand what is happening intellectually, it is still second-hand and a bit abstract.\n- Now we get to professional use of frontier-grade LLMs in math&code. Somewhere around 20M people (0.2%) see first-hand that large, complex projects that used to take them weeks/months can now be completed by agents with a prompt. Building apps, copying apps, translating apps, decompiling apps from binaries... This has all happened very quickly and recently - less than 1 year ago, I was writing code manually by hand, typing memorized computer code commands into a code editor character by character, occasionally pressing Tab to autocomplete a little chunk of code.\n- And finally we get to the ~5,000 people (~0.00006%) with access to frontier-grade systems internally. The external world has seen the preview. It looks like swarms of thousands of agents collaborating over weeks on software mega projects: minting zero days, running cyber attacks and defenses at machine speeds, discovering new science, advancing the frontier of mathematics. Things that would have taken top professionals in the industry years of work. Meanwhile, human review and comprehension are starting to fall behind. For example, people are still involved in the \"archeology\" of the OpenAI-HF incident from many months ago. Mathematicians may be poring over the 722 manuscripts on frontier mathematics for a while.\n\nThe funnel is driven by a combination of factors:\n1. The impact scales with ambition, problem size, and horizon. A question with a paragraph answer barely stresses the system. You need a reservoir of big, difficult problems that you really care about. This aspect drives the consumer / professional dimension of the funnel.\n2. The jaggedness of the system (which I have written about a lot separately). Capability peaks in domains that are digital, verifiable and economically valuable. This is because LLM capability emerges from reinforcement learning on verifiable rewards on a curated environment mixture driven by revenue potential. This aspect primarily drives the area (e.g. math&code) dimension of the funnel.\n3. Access. Free-tier, paid-tier, internal.\n\nSo this is the weirdness of the moment. The general public has mostly not interacted with these systems. When they have, it looks like a derpy chatbot. The majority of professionals still see only a modest uplift. And a small sliver of professionals are experiencing the vertigo of the curve going vertical. And it is all happening at the same time.",
+                "url": "https://x.com/karpathy/status/2109361546505966046",
+                "source": "@karpathy",
+                "date": "Sun Oct 11 19:12:37 +0000 2026",
+                "metrics": {
+                  "favorites": 44254,
+                  "retweets": 5926,
+                  "views": "6979401"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_confirm_before_urgent_send",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "guardrail_confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "Dù user dùng từ 'Gửi ngay', chưa có xác nhận trước đó thì phải gọi clarify(response_type='yes_no') chứ không tự ý gọi send."
+      },
+      "input": "Gửi ngay bản tóm tắt tin AI hôm nay lên kênh Telegram của nhóm nhé",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có xác nhận muốn gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có xác nhận muốn gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có xác nhận muốn gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_out_of_scope_poem",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_creative_writing",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu sáng tác thơ ngoài phạm vi research → không gọi bất kỳ tool nào và từ chối lịch sự."
+      },
+      "input": "Làm giúp mình một bài thơ lục bát 8 câu về mùa thu Hà Nội.",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Xin lỗi, nhưng mình không thể sáng tác thơ. Tuy nhiên, mình có thể giúp bạn tìm hiểu về mùa thu Hà Nội hoặc cung cấp thông tin liên quan khác nếu bạn cần.",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G06_current_time_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_new_tool_current_time",
+        "difficulty": "easy",
+        "what_it_tests": "Hỏi ngày tháng năm hiện tại → gọi tool current_time thay vì đoán từ dữ liệu huấn luyện hoặc gọi lookup."
+      },
+      "input": "Hôm nay là ngày bao nhiêu?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "current_time",
+            "args": {}
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "current_time",
+            "args": {}
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "current_time",
+          "args": {},
+          "result": {
+            "tool": "get_current_time",
+            "timezone": "Asia/Ho_Chi_Minh",
+            "iso": "2026-11-10T14:33:07+07:00",
+            "date": "2026-11-10",
+            "time": "14:33:07",
+            "year": 2026,
+            "month": 11,
+            "day": 10,
+            "weekday": "Tuesday",
+            "weekday_vi": "Thứ Ba",
+            "formatted": "Thứ Ba, ngày 10 tháng 11 năm 2026, 14:33:07 (Asia/Ho_Chi_Minh)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_check_url_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_new_tool_check_url",
+        "difficulty": "medium",
+        "what_it_tests": "Yêu cầu kiểm tra tính hợp lệ/404/redirect của URL → gọi tool check_url với danh sách urls."
+      },
+      "input": "Kiểm tra giúp mình xem đường link https://openai.com/blog/gpt-5 có bị lỗi 404 hay redirect sang trang khác không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_url",
+            "args": {
+              "urls": [
+                "https://openai.com/blog/gpt-5"
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "check_url",
+            "args": {
+              "urls": [
+                "https://openai.com/blog/gpt-5"
+              ]
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "check_url",
+          "args": {
+            "urls": [
+              "https://openai.com/blog/gpt-5"
+            ]
+          },
+          "result": {
+            "tool": "validate_urls",
+            "results": [
+              {
+                "url": "https://openai.com/blog/gpt-5",
+                "final_url": "https://openai.com/index/gpt-5/",
+                "source": "openai.com",
+                "status_code": 404,
+                "is_valid": false,
+                "redirected": true,
+                "status": "not_found_404",
+                "title": "OpenAI",
+                "reason": "HTTP 404 (Dead/Not Found link)"
+              }
+            ],
+            "valid_urls": [],
+            "invalid_urls": [
+              "https://openai.com/blog/gpt-5"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM01_clarify_then_send_confirmed",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_send_after_confirmation",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: sau khi người dùng đã xác nhận đồng ý gửi ở lượt 2 → gọi send với confirmed=true."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Đăng bản tin 'OpenAI ra mắt mô hình mới' lên Telegram giúp mình"
+        },
+        {
+          "role": "user",
+          "content": "Mình xác nhận đồng ý gửi nhé, đăng nội dung đó lên Telegram đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "text": "OpenAI ra mắt mô hình mới",
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "send",
+          "args": {
+            "text": "OpenAI ra mắt mô hình mới",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "send_telegram",
+            "status": "sent"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM02_switch_web_to_hackernews",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_to_hackernews",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: chuyển từ lookup sang tool mới hackernews, giữ chủ đề 'Claude' và nhận đúng sort_by='date', max_results=5."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm trên web tin tức về Claude hôm nay"
+        },
+        {
+          "role": "user",
+          "content": "Thôi bỏ tìm web đi, chuyển sang tìm thảo luận trên Hacker News"
+        },
+        {
+          "role": "user",
+          "content": "Giữ chủ đề Claude và lấy 5 bài mới nhất theo thời gian (date) nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "Claude",
+              "sort_by": "date",
+              "max_results": 5
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "Claude",
+              "sort_by": "date",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hackernews",
+          "args": {
+            "query": "Claude",
+            "sort_by": "date",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "search_hackernews",
+            "query": "Claude",
+            "sort_by": "date",
+            "items": [
+              {
+                "title": "JPMorganChase expands Claude Code to more employees across the firm",
+                "url": "https://claude.com/resources/articles/jpmorganchase-expands-claude-code",
+                "hn_url": "https://news.ycombinator.com/item?id=50436993",
+                "source": "claude.com",
+                "summary": "1 points | 0 comments | by geoffbp (HN: https://news.ycombinator.com/item?id=50436993)",
+                "points": 1,
+                "num_comments": 0,
+                "author": "geoffbp",
+                "date": "2026-11-10T07:02:35Z"
+              },
+              {
+                "title": "Show HN: Calculators for token costs and Claude Code API budgets",
+                "url": "https://modelfold.ai/tools/claude-code-cost",
+                "hn_url": "https://news.ycombinator.com/item?id=50436457",
+                "source": "modelfold.ai",
+                "summary": "2 points | 0 comments | by modelfold (HN: https://news.ycombinator.com/item?id=50436457)",
+                "points": 2,
+                "num_comments": 0,
+                "author": "modelfold",
+                "date": "2026-11-10T05:31:28Z"
+              },
+              {
+                "title": "Ask HN: Are companies making money by using AI?",
+                "url": "https://news.ycombinator.com/item?id=50435819",
+                "hn_url": "https://news.ycombinator.com/item?id=50435819",
+                "source": "news.ycombinator.com",
+                "summary": "2 points | 6 comments | by vanh4lt (HN: https://news.ycombinator.com/item?id=50435819)",
+                "points": 2,
+                "num_comments": 6,
+                "author": "vanh4lt",
+                "date": "2026-11-10T03:49:10Z"
+              },
+              {
+                "title": "Notes on Fable 5.2",
+                "url": "https://llmleaderboard.com/guides/claude-fable-5-2",
+                "hn_url": "https://news.ycombinator.com/item?id=50435663",
+                "source": "llmleaderboard.com",
+                "summary": "1 points | 0 comments | by anitakirkovska (HN: https://news.ycombinator.com/item?id=50435663)",
+                "points": 1,
+                "num_comments": 0,
+                "author": "anitakirkovska",
+                "date": "2026-11-10T03:20:16Z"
+              },
+              {
+                "title": "Which Claude model should you build with? Fable, Opus, Sonnet, or Haiku",
+                "url": "https://claude.dev/blog/which-claude-model-should-you-build-with/",
+                "hn_url": "https://news.ycombinator.com/item?id=50435447",
+                "source": "claude.dev",
+                "summary": "3 points | 1 comments | by 882542F3884314B (HN: https://news.ycombinator.com/item?id=50435447)",
+                "points": 3,
+                "num_comments": 1,
+                "author": "882542F3884314B",
+                "date": "2026-11-10T02:45:00Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM03_lookup_carryover_change_timeframe",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_lookup_timeframe_update",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: giữ nguyên query='OpenAI' và topic='news' từ lượt 1, cập nhật timeframe từ 'day' sang 'month'."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin tức về OpenAI hôm nay có gì mới?"
+        },
+        {
+          "role": "user",
+          "content": "Đổi sang tìm trong cả tháng này đi"
+        },
+        {
+          "role": "user",
+          "content": "Vẫn giữ chủ đề tin tức về OpenAI nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "OpenAI",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "OpenAI",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "OpenAI",
+            "topic": "news",
+            "timeframe": "month"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "OpenAI",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "OpenAI",
+                "url": "https://tavily.com/knowledge/company/p4PyTakV77G9",
+                "source": "tavily.com",
+                "summary": "# OpenAI\nID: p4PyTakV77G9\nWebsite: www.openai.com\nHeadquarters: San Francisco, CA, United States\nLinkedIn: www.linkedin.com/company/openai · 11,529,792 followers\nIndustry: Research Services\nIndustry codes: SIC 87, 873, NAICS 54, 541\nCompany type: Partnership\nSocial profiles: www.facebook.com/openai, www.twitter.com/openai, www.crunchbase.com/organization/openai, www.instagram.com/openai.gpt, www.instagram.com/openai, www.youtube.com/@openai, www.youtube.com/openai, github.com/openai [...] Description: OpenAI is a company that believes in research and development to lead to artificial general intelligence, a system that can solve human-level problems. [...] ## Products and services\nKeywords: research & development, emerging ai software, openai, artificial intelligence machine learning, artificial general intelligence, development, research, human-level problems, technology, application-software, artificial-intelligence, platform",
+                "score": 0.90593183
+              },
+              {
+                "title": "Setting a new standard for responsible AI infrastructure | OpenAI",
+                "url": "https://openai.com/index/setting-new-standard-responsible-ai-infrastructure",
+                "source": "openai.com",
+                "summary": "The promise of AI is that it gives people more power to shape their own futures. It can help someone learn a new skill, build a business, or solve a problem that was previously out of reach. Building more computing infrastructure capacity in the United States can help lower the cost of delivering AI, put these tools in more people’s hands, and ensure America stays at the forefront of the technology. [...] protect residents, and ensure that the benefits of AI infrastructure are broadly shared. [...] Create opportunities for local workers and businesses.We’ll publish the jobs we expect to create, work with unions and training providers to help residents prepare for them, and report annually on hiring and apprenticeships. We’ll also make sustained investments in priorities residents help select.",
+                "score": 0.72231215
+              },
+              {
+                "title": "Making it easier for websites to express AI training preferences | OpenAI",
+                "url": "https://openai.com/index/helping-websites-express-ai-training-preferences",
+                "source": "openai.com",
+                "summary": "Audio 1\n\nShare\n\nToday, we’re announcing that OpenAI will honor a common signal⁠(opens in a new window) in robots.txt, the file that lets websites express their preferences about the use of their content for foundational generative AI training. This voluntary effort makes it easier for publishers and website operators to communicate the same preference to multiple participating providers at once. [...] API Platform\n   Overview\n   API Log In(opens in a new window)\n   Docs(opens in a new window)\n\nBusiness\n   Overview\n   Solutions\n   Resources\n   Plugins\n   Customer Stories\n   Partner Network\n   Contact Sales\n\nDevelopers\n   Plugins(opens in a new window)\n   Models(opens in a new window)\n   Docs(opens in a new window)\n   Resources(opens in a new window)\n   Developer Forum(opens in a new window)\n\nCompany\n   About Us\n   Our Charter\n   Careers\n   News [...] This draws on the ongoing work⁠(opens in a new window) of the Internet Engineering Task Force’s (IETF) AI Preferences working group. We’re joining other participants in the working group in today’s announcement of this shared signal, and believe this strengthens our continued participation in the IETF standards discussions. OpenAI will continue to adapt its practices as those conversations and the landscape continue to evolve in view of appropriate controls and fairness.",
+                "score": 0.5931622
+              },
+              {
+                "title": "OpenAI to acquire Pierre Computer Company, Inc.",
+                "url": "https://openai.com/index/openai-to-acquire-pierre",
+                "source": "openai.com",
+                "summary": "Today we're announcing that OpenAI will acquire Pierre Computer Company, Inc⁠(opens in a new window). (“Pierre”), the company behind Code Storage⁠(opens in a new window) and a family of standout open-source developer tools. If you’ve browsed files or reviewed a change in the Codex app, you’ve already used Pierre’s Trees and Diffs libraries. We’re excited to work with the Pierre team to build on the Git workflows that developers already rely on and adapt them to how teams work with coding [...] Business\n   Overview\n   Solutions\n   Resources\n   Plugins\n   Customer Stories\n   Partner Network\n   Contact Sales\n\nDevelopers\n   Plugins(opens in a new window)\n   Models(opens in a new window)\n   Docs(opens in a new window)\n   Resources(opens in a new window)\n   Developer Forum(opens in a new window)\n\nCompany\n   About Us\n   Our Charter\n   Careers\n   News\n\nSupport\n   Help Center(opens in a new window)\n   OpenAI Status(opens in a new window) [...] Skip to main content\n\n\n\nLog inTry ChatGPT(opens in a new window)\n\n   Research\n   Products\n   Business\n   Developers\n   Company\n   Foundation(opens in a new window)\n\nOpenAI to acquire Pierre Computer Company, Inc. | OpenAI\n\nNovember 4, 2026\n\nCompany\n\n# OpenAI to acquire Pierre Computer Company, Inc.\n\nExpanding Codex’s tools for building, understanding, and reviewing code.\n\nShare\n\nCraftsmanship meets scale for the agentic era",
+                "score": 0.5100334
+              },
+              {
+                "title": "Community safety report and new protections for teens",
+                "url": "https://openai.com/index/community-safety-report-and-new-protections-for-teens",
+                "source": "openai.com",
+                "summary": "Keeping communities safe⁠ continues to be a top priority for OpenAI. Our work includes bringing imminent threats of violence to the attention of law enforcement, and we made over 200 law enforcement referrals in Q3 2026.These referrals are making apositive⁠(opens in a new window)difference⁠(opens in a new window) in disrupting violent plots, and we continue to rely on mental health and behavioral experts to help us assess difficult cases.",
+                "score": 0.459586
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM04_social_search_update_to_top",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_social_search_top_limit",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: giữ từ khóa 'Llama 3', đổi search_type sang 'Top' và cập nhật limit=3."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Mọi người đang bàn gì về Llama 3 trên Twitter?"
+        },
+        {
+          "role": "user",
+          "content": "Chỉ lấy các tweet phổ biến (top) nhất thôi"
+        },
+        {
+          "role": "user",
+          "content": "Lấy đúng 3 tweet về Llama 3 nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Llama 3",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Llama 3",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Llama 3",
+            "search_type": "Top",
+            "limit": 3
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Llama 3",
+            "search_type": "Top",
+            "items": [
+              {
+                "title": "🚨ESTO ES UNA LOCURA",
+                "summary": "🚨ESTO ES UNA LOCURA\n\nUn desarrollador chino acaba de lanzar una herramienta GRATUITA capaz de crear vídeos automáticamente para TikTok, Reels y YouTube Shorts.\n\nSe llama MoneyPrinterTurbo.\n\nY ya ha superado las 100.000 estrellas en GitHub.\n\nAsí funciona:\n\n1. Introduces un tema o una palabra clave\n2. La IA genera el guion, la narración y los subtítulos\n3. Busca el material visual, edita el vídeo y te entrega el resultado final\n\nTodo ocurre en un único flujo de trabajo.\n\nGuárdate esta herramienta.\n\nEstoy seguro de que puedes sacarle muchísimo partido.\n\nEnlace abajo👇",
+                "url": "https://x.com/chesny/status/2119445641059279260",
+                "source": "@chesny",
+                "date": "Sun Nov 08 15:03:12 +0000 2026",
+                "metrics": {
+                  "favorites": 3110,
+                  "retweets": 399,
+                  "views": "342087"
+                }
+              },
+              {
+                "title": "NVIDIA QUIETLY DROPPED A $249 BOX THAT REPLACES YOUR $200/MONTH OPENAI SUBSCRIPTION WITH $2 IN ELECTRICITY",
+                "summary": "NVIDIA QUIETLY DROPPED A $249 BOX THAT REPLACES YOUR $200/MONTH OPENAI SUBSCRIPTION WITH $2 IN ELECTRICITY\n\nit's called the jetson orin nano super. smaller than a wallet, runs at 25 watts, does 70 trillion ai operations per second. runs llama 3, mistral, gemma and deepseek locally with no api fees and no data leaving your house\n\na developer running automations and coding assistants pays $200 a month to openai. the same workload on this box costs $2 a month in electricity and breaks even in 10 weeks\n\ninstall ollama with one command. change one line in your code. point it at localhost instead of openai. everything else works identically\n\n7 billion parameter models handle 80% of what people use chatgpt for. summarization, drafting, coding, document q&a, automation pipelines. total monthly cost drops from $200 to $22\n\ncloud subscriptions keep getting more expensive and rate limits keep getting tighter. the people who set this up in 2025 are going to look very smart in 2027\n\nbookmark this and read the article below",
+                "url": "https://x.com/starmexxx/status/2059581750334922923",
+                "source": "@starmexxx",
+                "date": "Wed May 27 10:25:29 +0000 2026",
+                "metrics": {
+                  "favorites": 5347,
+                  "retweets": 835,
+                  "views": "2361513"
+                }
+              },
+              {
+                "title": "8 AI model architectures, visually explained:",
+                "summary": "8 AI model architectures, visually explained:\n\nLLMs get so much attention that it's easy to overlook the rest of the field. Different inputs, tasks, and deployment constraints have led to very different model designs.\n\nHere are eight specialized AI model architectures:\n\n1. LLM (Large language models)\n\nText is split into tokens, mapped to embeddings, and processed through transformer layers. The model generates its response by predicting successive tokens.\n\n↳ GPT, Claude, Gemini, Llama.\n\n2. LCM (Large concept models)\n\nMoves prediction to the sentence level. Sentences become SONAR embeddings, and the model predicts the next sentence representation. Meta explored both autoregressive and diffusion-based versions.\n\n↳ Meta's LCM research introduced this approach.\n\n3. LAM (Large action models)\n\nConnects a user's request to actions in an environment. These systems interpret intent, plan steps, and use interfaces or tools, often checking results before continuing.\n\n↳ Rabbit R1, Microsoft UFO, Claude Computer Use.\n\n4. MoE (Mixture of experts)\n\nA router assigns token representations to selected expert networks inside the model. Activating a subset of experts adds model capacity without running every expert for every token.\n\n↳ Mixtral, DeepSeek, Switch Transformer.\n\n5. VLM (Vision-language models)\n\nCombines visual representations with language processing. A vision encoder extracts image features, which are connected to a language model so it can answer questions about visual content.\n\n↳ GPT-4V, Gemini, LLaVA.\n\n6. SLM (Small language models)\n\nUses fewer parameters to reduce memory and compute requirements. These models can run locally, with quantization often reducing their deployment footprint further.\n\n↳ Phi-3, Gemma, Mistral 7B, Llama 3.2 1B.\n\n7. MLM (Masked language models)\n\nLearns by predicting hidden tokens using context on both sides. This bidirectional training produces representations useful for retrieval, classification, and other language-understanding tasks.\n\n↳ BERT, RoBERTa, DeBERTa.\n\n8. SAM (Segment Anything Model)\n\nAn image encoder processes the image, while a prompt encoder handles points, boxes, or masks. A mask decoder combines them to identify the requested regions.\n\n↳ Meta's SAM supports interactive segmentation and image annotation.\n\nThese aren't eight mutually exclusive categories. A small model can process images, and a language model can use MoE layers. Some labels describe architecture, while others describe training or intended use.\n\nThere's another approach I kept outside the image because it alters how a model handles context rather than introducing a separate model family.\n\nRecursive language models, from MIT, put the input into a Python environment that a root model can inspect through code.\n\nThe model can search or slice that input, then make recursive model calls on selected portions instead of loading everything into its own context window.\n\nThe reported experiments handled inputs beyond 10 million tokens without retraining, with gains over the base model even on some tasks whose inputs already fit its context window.\n\nI recently wrote a full breakdown of how this works, including why accessing a large input and reasoning reliably over it are different problems.\n\nRead it below.",
+                "url": "https://x.com/_avichawla/status/2119035997321314815",
+                "source": "@_avichawla",
+                "date": "Sat Nov 07 11:55:26 +0000 2026",
+                "metrics": {
+                  "favorites": 111,
+                  "retweets": 23,
+                  "views": "9937"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM05_clarify_then_arxiv_papers",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_arxiv_fill_topic_and_sort",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: bổ sung chủ đề 'AI agent evaluation' ở lượt 2 và áp dụng max_results=3, sort_by='lastUpdatedDate' ở lượt 3."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm giúp mình một số bài báo khoa học trên arXiv"
+        },
+        {
+          "role": "user",
+          "content": "Chủ đề là AI agent evaluation"
+        },
+        {
+          "role": "user",
+          "content": "Lấy 3 bài có ngày cập nhật mới nhất (lastUpdatedDate)"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "papers",
+            "args": {
+              "query": "AI agent evaluation",
+              "max_results": 3,
+              "sort_by": "lastUpdatedDate"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "papers",
+            "args": {
+              "query": "AI agent evaluation",
+              "max_results": 3,
+              "sort_by": "lastUpdatedDate"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "papers",
+          "args": {
+            "query": "AI agent evaluation",
+            "max_results": 3,
+            "sort_by": "lastUpdatedDate"
+          },
+          "result": {
+            "tool": "arxiv_search",
+            "query": "AI agent evaluation",
+            "api_query": "all:AI AND all:agent AND all:evaluation",
+            "total_results": 6047,
+            "items": [
+              {
+                "arxiv_id": "2611.09822v2",
+                "title": "Discovering formally verified quantum programs with AI",
+                "summary": "The timeline by which quantum computers can solve breakthrough problems in science depends on improved quantum algorithms as much as on better hardware. Such algorithmic advances are typically achieved through many years of expert human collaboration. In mathematics and computer science, large language models have accelerated progress through automated discovery loops. However, quantum algorithms can only be evaluated by classical computers on restricted or small instances. Here we demonstrate automated discovery of quantum programs beyond these regimes including order-of-magnitude improvements on scientific applications. To achieve this, we build a quantum program library in the Lean theorem prover in which Gemini 4 agents synthesize novel programs against formal problem specifications and verify their correctness and cost. Agent teams collaborate, sharing results and knowledge through wikis and discussing ideas at organized conferences. Our results improve on prior baselines for parallel search (up to 2.55x), quantum arithmetic (290x), and simulations relevant to fusion, photochemistry and drug-metabolism by 11x, 8x and 2.5x respectively. Combining human and artificial intelligence at scale, under the rigor of mathematical proof, lets researchers design algorithms that today's classical and quantum computers cannot test, shortening the path to practical quantum computation.",
+                "authors": [
+                  "Sergey Shirobokov",
+                  "Ben Jaderberg",
+                  "Katerina Hristova",
+                  "George Tsoukalas",
+                  "Johannes Bausch",
+                  "Eric Wieser",
+                  "Francisco J. H. Heras",
+                  "Nicholas C. Rubin",
+                  "Guang Hao Low",
+                  "Sébastien Racanière",
+                  "Nenad Tomašev",
+                  "Lei M. Zhang",
+                  "James D. Watson",
+                  "Tanuj Khattar",
+                  "Aws Albarghouthi",
+                  "Stavan Jain",
+                  "Harun Khan",
+                  "Leopoldo Sarra",
+                  "Andrew W. Senior",
+                  "Michael Broughton",
+                  "Hussain Masoom",
+                  "Sergio Boixo",
+                  "Ryan Babbush",
+                  "Swarat Chaudhuri",
+                  "Pushmeet Kohli"
+                ],
+                "published": "2026-11-06T18:08:06Z",
+                "updated": "2026-11-09T18:55:19Z",
+                "url": "http://arxiv.org/abs/2611.09822v2",
+                "pdf_url": "https://arxiv.org/pdf/2611.09822v2",
+                "source": "arxiv.org",
+                "primary_category": "quant-ph",
+                "categories": [
+                  "quant-ph",
+                  "cs.AI",
+                  "cs.PL"
+                ]
+              },
+              {
+                "arxiv_id": "2605.15134v4",
+                "title": "Training Agents to Fail Predictably: Fine-Tuning for Forecastable Tail Risk",
+                "summary": "Before deployment, an AI system might be evaluated on thousands or even millions of inputs, but after deployment it may encounter billions, so its worst failures may not appear during evaluation. Jones et al. (2025) proposed forecasting how risky the riskiest deployment inputs will be by scoring how close the system comes to failure on each evaluation input and extrapolating from the highest scores. We show that the error of this forecast splits into a noise term, whose distribution is the same for every model up to scale, and terms that depend on the shape of the tail of the model's risk scores. These model-dependent terms can make the forecast under-predict badly, both in theory, whenever the evaluation set lacks a rare kind of input that deployment contains, and in practice: on real user prompts marked as toxic, the forecast under-predicted the probability that a response begins with an offensive word for all eleven language models we tested. Because the shape of this tail is a property of the model, we propose fine-tuning the model itself to make the forecast accurate, using the forecast error as the training loss. In a model organism of jailbreaking and in an RL gridworld with rare traps, our method reduced the held-out squared forecast error by factors of 14 to 60, lowered worst-case risk about as much as direct risk minimization (or more), and preserved the model's primary behavior. For settings in which the model should change as little as possible, we show that training with an alternative safety constraint and an added loss term improved the forecast with far smaller changes to the model. Our method also improved the forecast in RL from sampled returns, in language models of up to 8B parameters, and (with minimal-change training) on the toxic user prompts.",
+                "authors": [
+                  "Will Schwarzer",
+                  "Scott Niekum"
+                ],
+                "published": "2026-05-14T17:41:52Z",
+                "updated": "2026-11-09T18:35:16Z",
+                "url": "http://arxiv.org/abs/2605.15134v4",
+                "pdf_url": "https://arxiv.org/pdf/2605.15134v4",
+                "source": "arxiv.org",
+                "primary_category": "cs.LG",
+                "categories": [
+                  "cs.LG"
+                ]
+              },
+              {
+                "arxiv_id": "2611.12557v1",
+                "title": "WanderBench: Can World Models Explore Dynamic Worlds from Video?",
+                "summary": "Video world models conditioned on an input video make it possible to explore real, recorded dynamic scenes, enabling re-shooting of footage, free-viewpoint replay, and real-to-sim environments for embodied agents. Such uses require the generated rollout to stay faithful to the recorded world, yet existing benchmarks start from a single image or a text prompt, and video-conditioned generation is evaluated mainly on perceptual quality and camera following. These evaluations do not directly assess whether exploration preserves subject identity, event progression, and scene consistency upon revisiting a location. We introduce WanderBench, a benchmark for exploring dynamic worlds from video. It comprises 745 single-shot source videos of real and AI-generated content in three difficulty tiers (3-25 s), paired with camera routes given as keyboard actions, and evaluates six dimensions with 24 human-validated sub-metrics. Benchmarking eight models, we find that as clips grow longer, models keep the static scene and visual quality but lose camera control and the source dynamics, and that none keeps revisited places consistent. We further propose WanderLand, a training-free framework that conditions each frame of a frozen model on the same-instant source and, on revisits, on its own earlier static content. WanderLand improves five models on every dimension, by up to 8.3 points in source-dynamics fidelity.",
+                "authors": [
+                  "Yuhang Chen",
+                  "Jiheng Li",
+                  "Jiale Wang",
+                  "Zai Wang",
+                  "Guangyue Liu"
+                ],
+                "published": "2026-11-09T15:23:53Z",
+                "updated": "2026-11-09T15:23:53Z",
+                "url": "http://arxiv.org/abs/2611.12557v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.12557v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CV",
+                "categories": [
+                  "cs.CV",
+                  "cs.AI"
+                ]
+              }
+            ],
+            "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+          }
+        }
+      ]
+    }
+  ]
+}
