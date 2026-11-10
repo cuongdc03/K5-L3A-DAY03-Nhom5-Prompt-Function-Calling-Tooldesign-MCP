@@ -31,7 +31,7 @@ tools:
       required: [query]
 
   - name: lookup
-    description: "Tìm kiếm thông tin chung hoặc tin tức thời sự trên web qua Tavily. Dùng khi cần tra cứu tin tức mới (topic='news') hoặc kiến thức trên internet (topic='general'). KHÔNG dùng khi đã có URL cụ thể (dùng fetch), khi tìm tweet trên X/Twitter (dùng social_search hoặc timeline), hoặc khi tìm thảo luận trên Hacker News (dùng hackernews)."
+    description: "Tìm kiếm thông tin chung hoặc tin tức thời sự trên web qua Tavily. Dùng khi cần tra cứu tin tức mới (topic='news') hoặc kiến thức trên internet (topic='general'). KHÔNG dùng để kiểm tra ngày/tháng/năm/giờ hiện tại (phải dùng current_time), KHÔNG dùng khi đã có URL cụ thể cần đọc nội dung (dùng fetch) hoặc cần kiểm tra link lỗi 404/redirect (dùng check_url), KHÔNG dùng khi tìm tweet trên X/Twitter (dùng social_search hoặc timeline), hoặc khi tìm thảo luận trên Hacker News (dùng hackernews)."
     parameters:
       type: object
       properties:
@@ -119,3 +119,23 @@ tools:
         sort_by: {type: string, enum: [relevance, date], default: "relevance", description: "Sắp xếp theo độ liên quan ('relevance' - bài nổi bật/nhiều điểm) hoặc mới nhất theo thời gian ('date')."}
         max_results: {type: integer, default: 5, description: "Số lượng bài viết trả về (1 đến 20, mặc định 5)."}
       required: [query]
+
+  - name: current_time
+    description: "Lấy thời gian hệ thống thực tế hiện tại (ngày, tháng, năm, thứ trong tuần, giờ:phút:giây, múi giờ). BẮT BUỘC gọi khi người dùng hỏi về ngày, tháng, năm, thứ, giờ hiện tại (ví dụ: 'Hôm nay là ngày bao nhiêu?', 'Bây giờ là mấy giờ?', 'Năm nay là năm nào?', 'Hôm nay thứ mấy?') HOẶC khi cần biết chính xác con số ngày/tháng/năm hiện tại trước khi trả lời hay gọi tool khác. Tuyệt đối KHÔNG tự trả lời ngày tháng năm từ dữ liệu huấn luyện và KHÔNG dùng lookup để tra ngày hiện tại. (Lưu ý: với câu tìm tin tức thông thường chỉ dùng mốc tương đối như 'tin AI hôm nay', 'tin tuần này' thì gọi thẳng lookup với timeframe='day'|'week')."
+    parameters:
+      type: object
+      properties:
+        timezone: {type: string, default: "Asia/Ho_Chi_Minh", description: "Múi giờ IANA cần lấy thời gian (mặc định 'Asia/Ho_Chi_Minh' cho giờ Việt Nam UTC+7, hoặc 'UTC', 'America/New_York', 'Asia/Tokyo')."}
+      required: []
+
+  - name: check_url
+    description: "Kiểm tra tính hợp lệ (validate) của một hoặc nhiều đường dẫn URL trước khi trả lời người dùng hoặc khi người dùng yêu cầu kiểm tra link có hoạt động không. Công cụ kiểm tra HTTP status code (phát hiện lỗi 404, 410, 5xx, soft-404) và kiểm tra chuyển hướng (redirect) để phát hiện link bị redirect sang một trang khác, trang chủ, hoặc trang lỗi, đồng thời trả về final_url đã xác thực. Dùng để validate các link lấy từ bài báo (fetch) hoặc kết quả tìm kiếm (lookup, hackernews) trước khi đưa vào câu trả lời cuối cùng, hoặc khi người dùng yêu cầu kiểm tra URL. KHÔNG dùng thay cho fetch ở lượt đầu khi người dùng yêu cầu đọc/tóm tắt nội dung một bài viết."
+    parameters:
+      type: object
+      properties:
+        urls:
+          type: array
+          default: []
+          items: {type: string}
+          description: "Danh sách các đường dẫn URL đầy đủ (bắt đầu bằng http:// hoặc https://) cần kiểm tra lỗi 404 hoặc redirect."
+      required: [urls]

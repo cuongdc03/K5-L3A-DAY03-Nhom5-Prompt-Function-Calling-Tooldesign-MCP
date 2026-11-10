@@ -19,6 +19,8 @@ timeline_tool = TOOL_FUNCTIONS["timeline"]
 social_search_tool = TOOL_FUNCTIONS["social_search"]
 policy_tool = TOOL_FUNCTIONS["policy"]
 hackernews_tool = TOOL_FUNCTIONS["hackernews"]
+current_time_tool = TOOL_FUNCTIONS["current_time"]
+check_url_tool = TOOL_FUNCTIONS["check_url"]
 
 
 # ---------------- clarify ----------------
@@ -239,3 +241,93 @@ def test_hackernews_http_failure_returns_error_dict(fake_http) -> None:
 
     assert result["error"] == "HTTPError"
     assert "503" in result["message"]
+
+
+# ---------------- YOUR NEW TOOL: current_time ----------------
+
+def test_current_time_default_returns_vietnam_timezone_and_date_fields() -> None:
+    result = current_time_tool()
+
+    assert result["tool"] == "get_current_time"
+    assert result["timezone"] == "Asia/Ho_Chi_Minh"
+    assert isinstance(result["year"], int) and result["year"] >= 2024
+    assert 1 <= result["month"] <= 12
+    assert 1 <= result["day"] <= 31
+    assert len(result["date"]) == 10
+    assert "năm" in result["formatted"]
+
+
+def test_current_time_blank_timezone_falls_back_to_vietnam() -> None:
+    result = current_time_tool(timezone="   ")
+
+    assert "error" not in result
+    assert result["timezone"] == "Asia/Ho_Chi_Minh"
+
+
+def test_current_time_invalid_timezone_returns_error_dict() -> None:
+    result = current_time_tool(timezone="Invalid/NoSuchZone_999")
+
+    assert result["error"] == "ValueError"
+    assert "timezone" in result["message"].lower()
+
+
+# ---------------- YOUR NEW TOOL: check_url ----------------
+
+def test_check_url_valid_200_returns_in_valid_urls(fake_http) -> None:
+    calls = fake_http(FakeResponse(
+        status_code=200,
+        text="<html><head><title>OpenAI GPT-5 Post</title></head><body>ok</body></html>",
+    ))
+
+    result = check_url_tool(urls=["https://openai.com/blog/gpt-5"])
+
+    assert len(calls) == 1
+    assert calls[0]["method"] == "GET"
+    assert calls[0]["url"] == "https://openai.com/blog/gpt-5"
+    assert calls[0]["allow_redirects"] is True
+    assert result["valid_urls"] == ["https://openai.com/blog/gpt-5"]
+    assert result["invalid_urls"] == []
+    assert result["results"][0]["is_valid"] is True
+    assert result["results"][0]["redirected"] is False
+    assert result["results"][0]["title"] == "OpenAI GPT-5 Post"
+
+
+def test_check_url_404_marks_link_invalid(fake_http) -> None:
+    calls = fake_http(FakeResponse(status_code=404, text="Not Found"))
+
+    result = check_url_tool(urls=["https://example.com/broken-article"])
+
+    assert len(calls) == 1
+    assert result["valid_urls"] == []
+    assert result["invalid_urls"] == ["https://example.com/broken-article"]
+    assert result["results"][0]["is_valid"] is False
+    assert result["results"][0]["status_code"] == 404
+    assert result["results"][0]["status"] == "not_found_404"
+
+
+def test_check_url_detects_redirect_to_homepage_as_invalid(fake_http) -> None:
+    fake_http(FakeResponse(
+        {"final_url": "https://example.com/"},
+        status_code=200,
+        text="<html><title>Example Home</title></html>",
+    ))
+
+    result = check_url_tool(urls=["https://example.com/2026/11/deleted-post"])
+
+    assert result["results"][0]["redirected"] is True
+    assert result["results"][0]["final_url"] == "https://example.com/"
+    assert result["results"][0]["is_valid"] is False
+    assert result["results"][0]["status"] == "redirected_to_invalid_page"
+    assert result["invalid_urls"] == ["https://example.com/2026/11/deleted-post"]
+
+
+def test_check_url_bad_input_returns_error_dict_without_network(fake_http) -> None:
+    calls = fake_http(FakeResponse(status_code=200))
+
+    empty_res = check_url_tool(urls=[])
+    bad_scheme_res = check_url_tool(urls=["not-a-valid-url"])
+
+    assert empty_res["error"] == "ValueError"
+    assert bad_scheme_res["error"] == "ValueError"
+    assert calls == []
+
