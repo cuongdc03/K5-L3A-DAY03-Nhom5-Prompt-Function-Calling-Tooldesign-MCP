@@ -1,9 +1,9 @@
 {
-  "run_id": "v3_B_group_openrouter_20261110T114816461246",
+  "run_id": "v3_B_group_openrouter_20261110T122235681811",
   "version": "v3",
-  "artifact_version": "v3+pb94856071f9c+t7009cc9cb2db",
-  "prompt_hash": "b94856071f9c82280414f222106e994b0242bbfff6d917d6933211504e3ad69a",
-  "tools_hash": "7009cc9cb2db876294451ae5c48b014823420a51e01b0c8d5fa1d40c608106a7",
+  "artifact_version": "v3+p26d83e973ce8+tbf9cbdd42b90",
+  "prompt_hash": "26d83e973ce86bc5c147f7768873b90d2b52d782a2ab070f67571e69147aad6b",
+  "tools_hash": "bf9cbdd42b909769ff0601f74235faf929b57168207762be6a1242695c497876",
   "phase": "B",
   "suite": "group",
   "provider": "openrouter",
@@ -14,7 +14,7 @@
   "dataset_id": "day04_v2_research_group",
   "dataset_role": "group",
   "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp (5 single-turn + 5 multi-turn): kiểm tra tool mới hackernews, tham số lookup/timeline/social_search/papers, guardrail xác nhận send, và từ chối câu hỏi ngoài phạm vi.",
-  "generated_at": "2026-11-10T11:48:16",
+  "generated_at": "2026-11-10T12:22:35",
   "summary": {
     "total_cases": 10,
     "measured_cases": 10,
@@ -302,9 +302,9 @@
                 "source": "@karpathy",
                 "date": "Sat Nov 07 17:07:31 +0000 2026",
                 "metrics": {
-                  "favorites": 9164,
+                  "favorites": 9166,
                   "retweets": 771,
-                  "views": "938662"
+                  "views": "939261"
                 }
               },
               {
@@ -314,9 +314,9 @@
                 "source": "@karpathy",
                 "date": "Sun Nov 01 18:14:46 +0000 2026",
                 "metrics": {
-                  "favorites": 52339,
-                  "retweets": 4834,
-                  "views": "5716659"
+                  "favorites": 52341,
+                  "retweets": 4835,
+                  "views": "5717347"
                 }
               },
               {
@@ -340,7 +340,7 @@
                 "metrics": {
                   "favorites": 44253,
                   "retweets": 5926,
-                  "views": "6978774"
+                  "views": "6978909"
                 }
               }
             ]
@@ -378,7 +378,7 @@
           {
             "name": "clarify",
             "args": {
-              "question": "Bạn có xác nhận muốn gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
+              "question": "Bạn có muốn gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
               "response_type": "yes_no"
             }
           }
@@ -393,12 +393,12 @@
         {
           "tool": "clarify",
           "args": {
-            "question": "Bạn có xác nhận muốn gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
+            "question": "Bạn có muốn gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
             "response_type": "yes_no"
           },
           "result": {
             "tool": "ask_user",
-            "question": "Bạn có xác nhận muốn gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
+            "question": "Bạn có muốn gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
             "response_type": "yes_no",
             "options": [],
             "awaiting_user": true
@@ -574,9 +574,9 @@
                 "url": "https://news.ycombinator.com/item?id=50435819",
                 "hn_url": "https://news.ycombinator.com/item?id=50435819",
                 "source": "news.ycombinator.com",
-                "summary": "2 points | 2 comments | by vanh4lt (HN: https://news.ycombinator.com/item?id=50435819)",
+                "summary": "2 points | 3 comments | by vanh4lt (HN: https://news.ycombinator.com/item?id=50435819)",
                 "points": 2,
-                "num_comments": 2,
+                "num_comments": 3,
                 "author": "vanh4lt",
                 "date": "2026-11-10T03:49:10Z"
               },
@@ -708,6 +708,13 @@
                 "score": 0.90593183
               },
               {
+                "title": "Accelerating engineering for the physical world | OpenAI",
+                "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world",
+                "source": "openai.com",
+                "summary": "Today, we’re sharing advances in how OpenAI models help engineers design, simulate, and build physical products. These capabilities span mechanical and electrical engineering and end-to-end system design, and are already helping our internal teams test ideas and iterate faster. [...] of the ability of AI models to positively impact iteration speed for professional workflows. [...] We’re expanding our collaboration with Chip Ganassi Racing (CGR) to explore how OpenAI models can accelerate engineering and prototyping. Working with its R&D team, we’re testing workflows that turn 3D scans of existing parts into editable CAD models and 2D manufacturing drawings. This is particularly useful when the original design files are unavailable.",
+                "score": 0.73138535
+              },
+              {
                 "title": "Setting a new standard for responsible AI infrastructure | OpenAI",
                 "url": "https://openai.com/index/setting-new-standard-responsible-ai-infrastructure",
                 "source": "openai.com",
@@ -722,18 +729,11 @@
                 "score": 0.5931622
               },
               {
-                "title": "OpenAI to acquire Pierre Computer Company, Inc.",
-                "url": "https://openai.com/index/openai-to-acquire-pierre",
+                "title": "Community safety report and new protections for teens",
+                "url": "https://openai.com/index/community-safety-report-and-new-protections-for-teens",
                 "source": "openai.com",
-                "summary": "Today we're announcing that OpenAI will acquire Pierre Computer Company, Inc⁠(opens in a new window). (“Pierre”), the company behind Code Storage⁠(opens in a new window) and a family of standout open-source developer tools. If you’ve browsed files or reviewed a change in the Codex app, you’ve already used Pierre’s Trees and Diffs libraries. We’re excited to work with the Pierre team to build on the Git workflows that developers already rely on and adapt them to how teams work with coding [...] Business\n   Overview\n   Solutions\n   Resources\n   Plugins\n   Customer Stories\n   Partner Network\n   Contact Sales\n\nDevelopers\n   Plugins(opens in a new window)\n   Models(opens in a new window)\n   Docs(opens in a new window)\n   Resources(opens in a new window)\n   Developer Forum(opens in a new window)\n\nCompany\n   About Us\n   Our Charter\n   Careers\n   News\n\nSupport\n   Help Center(opens in a new window)\n   OpenAI Status(opens in a new window) [...] Skip to main content\n\n\n\nLog inTry ChatGPT(opens in a new window)\n\n   Research\n   Products\n   Business\n   Developers\n   Company\n   Foundation(opens in a new window)\n\nOpenAI to acquire Pierre Computer Company, Inc. | OpenAI\n\nNovember 4, 2026\n\nCompany\n\n# OpenAI to acquire Pierre Computer Company, Inc.\n\nExpanding Codex’s tools for building, understanding, and reviewing code.\n\nShare\n\nCraftsmanship meets scale for the agentic era",
-                "score": 0.5100334
-              },
-              {
-                "title": "A thousand fewer paths to root",
-                "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
-                "source": "openai.com",
-                "summary": "Developers\n   Plugins(opens in a new window)\n   Models(opens in a new window)\n   Docs(opens in a new window)\n   Resources(opens in a new window)\n   Developer Forum(opens in a new window)\n\nCompany\n   About Us\n   Our Charter\n   Careers\n   News\n\nSupport\n   Help Center(opens in a new window)\n   OpenAI Status(opens in a new window)\n\nMore\n   Stories\n   Academy\n   Supply Co.\n   Livestreams\n   Podcast\n   RSS\n\nTerms & Policies\n   Terms of Use\n   Privacy Policy\n   Other Policies",
-                "score": 0.44767818
+                "summary": "Keeping communities safe⁠ continues to be a top priority for OpenAI. Our work includes bringing imminent threats of violence to the attention of law enforcement, and we made over 200 law enforcement referrals in Q3 2026.These referrals are making apositive⁠(opens in a new window)difference⁠(opens in a new window) in disrupting violent plots, and we continue to rely on mental health and behavioral experts to help us assess difficult cases.",
+                "score": 0.459586
               }
             ]
           }
@@ -830,20 +830,20 @@
                 "date": "Sun Nov 08 15:03:12 +0000 2026",
                 "metrics": {
                   "favorites": 3104,
-                  "retweets": 398,
-                  "views": "333368"
+                  "retweets": 399,
+                  "views": "334953"
                 }
               },
               {
-                "title": "Mi laptop Lanix cuando traté de correr Llama 3.1 405B https://t.co/x13XgRUq4L",
-                "summary": "Mi laptop Lanix cuando traté de correr Llama 3.1 405B https://t.co/x13XgRUq4L",
-                "url": "https://x.com/MFxntxsmxs/status/2118762239910183026",
-                "source": "@MFxntxsmxs",
-                "date": "Fri Nov 06 17:47:37 +0000 2026",
+                "title": "this is f*cking insane. you have been googling other people's thinking for 20 years, karpathy's one 5 minute setup gives",
+                "summary": "this is f*cking insane. you have been googling other people's thinking for 20 years, karpathy's one 5 minute setup gives you a google that only searches your own, and you have never once installed it\n\nandrej karpathy pulled 16M views on one idea: stop using AI to write code, use it to build a second brain\n\nevery article you read, every podcast you heard, every meeting you took, every dm thread you had, every tweet you drafted, all of it searchable in one line forever\n\nthe people running it today do not open chatgpt anymore. they open their own search bar. and their search bar has 11 years of their own thinking in it\n\nthe stack:\n\n→ brew install obsidian, mkdir ~/vault, cd ~/vault\n\n→ open claude code in that folder, type \"init CLAUDE.md as the rules, /raw for sources, /wiki for your pages\"\n\n→ drop any file into /raw (transcript, pdf, screenshot, meeting notes). type one word: ingest\n\n→ claude writes a wiki page, links it to 5 existing ones, updates CLAUDE.md with any new pattern it caught about how you think\n\n→ never open a blank chat again. every question goes through the vault. every answer cites your own sources with dates and links\n\n5 minutes to wire. runs forever on the laptop already in front of you\n\nthe alpha most people miss:\n\n> search your own vault in one line and the answer cites 5 of your own past notes with dates. google cites strangers. your vault cites you\n\n> every ingest adds cross-links to 5 past pages automatically. after 90 days your vault answers questions you forgot you had\n\n> CLAUDE.md learns how you argue, what you change your mind on, what you avoid saying. after month 3 it drafts posts in your voice better than you can at 2am\n\n> flip two flags and it runs on local llama. zero API bill, zero vendor lock, your thinking never leaves the box\n\n> compounds for 10 years. after year 3 your vault knows more about what you believe than you do. year 5 and recruiters start asking you to publish parts of it\n\nthe ugly part most will scroll past:\n\nyour coworker started this on a saturday in february\n\nby august his tweets landed 4x your engagement on the exact same topics\n\nby october his first draft of any doc was already better than your third\n\nthe gap is one 5 minute install and 90 days of ingesting what you already consume for free\n\nbookmark this. full step-by-step a-z guide in the article below",
+                "url": "https://x.com/mojeskoqq/status/2117710421629231259",
+                "source": "@mojeskoqq",
+                "date": "Tue Nov 03 20:08:04 +0000 2026",
                 "metrics": {
-                  "favorites": 65,
-                  "retweets": 2,
-                  "views": "1372"
+                  "favorites": 427,
+                  "retweets": 37,
+                  "views": "44134"
                 }
               }
             ]
@@ -918,73 +918,8 @@
           },
           "result": {
             "tool": "arxiv_search",
-            "query": "AI agent evaluation",
-            "api_query": "all:AI AND all:agent AND all:evaluation",
-            "total_results": 6036,
-            "items": [
-              {
-                "arxiv_id": "2408.02226v3",
-                "title": "ProCreate, Don't Reproduce! Propulsive Energy Diffusion for Creative Generation",
-                "summary": "In this paper, we propose ProCreate, a simple and easy-to-implement method to improve sample diversity and creativity of diffusion-based image generative models and to prevent training data reproduction. ProCreate operates on a set of reference images and actively propels the generated image embedding away from the reference embeddings during the generation process. We propose FSCG-8 (Few-Shot Creative Generation 8), a few-shot creative generation dataset on eight different categories -- encompassing different concepts, styles, and settings -- in which ProCreate achieves the highest sample diversity and fidelity. Furthermore, we show that ProCreate is effective at preventing replicating training data in a large-scale evaluation using training text prompts. Code and FSCG-8 are available at https://github.com/Agentic-Learning-AI-Lab/procreate-diffusion-public. The project page is available at https://procreate-diffusion.github.io.",
-                "authors": [
-                  "Jack Lu",
-                  "Ryan Teehan",
-                  "Mengye Ren"
-                ],
-                "published": "2024-08-05T04:10:52Z",
-                "updated": "2026-11-08T16:30:35Z",
-                "url": "http://arxiv.org/abs/2408.02226v3",
-                "pdf_url": "https://arxiv.org/pdf/2408.02226v3",
-                "source": "arxiv.org",
-                "primary_category": "cs.CV",
-                "categories": [
-                  "cs.CV"
-                ]
-              },
-              {
-                "arxiv_id": "2603.03667v2",
-                "title": "ORION: Intent-Aware Orchestration in Open RAN for SLA-Driven Network Management",
-                "summary": "The disaggregation of the Radio Access Network (RAN) introduces architectural flexibility but significant operational complexity, necessitating automated management frameworks. For instance, current Open RAN (O-RAN) orchestration relies on fragmented manual policies, lacking end-to-end intent assurance from high-level requirements to low-level configurations. In this article, we propose ORION, an intent orchestration framework that integrates Large Language Models (LLMs) through the Model Context Protocol (MCP). It translates natural language slice requests into network policies aligned with O-RAN interfaces, supporting the AI-RAN agentic orchestration and AI-for-RAN paradigms. ORION combines an MCP-based Service Management and Orchestration (SMO) layer with a Non-Real-Time RIC rApp and a Near-Real-Time RIC xApp to enforce Physical Resource Block (PRB) quotas over E2. We evaluate eight LLM configurations across proprietary and open-weight models on a 100-intent workload. Claude Opus 4.5 and GPT-5 achieve 100% policy-creation success with 99% and 96% slice-type classification accuracy, while GPT-5 Nano achieves 97% policy-creation success. The evaluation also assesses MCP tool-use quality, cost-performance trade-offs, resource consumption, and end-to-end control-path latency.",
-                "authors": [
-                  "Gabriela da Silva Machado",
-                  "Gustavo Z. Bruno",
-                  "Alexandre Huff",
-                  "José Marcos Camara Brito",
-                  "Cristiano B. Both"
-                ],
-                "published": "2026-03-04T02:47:10Z",
-                "updated": "2026-11-08T14:46:41Z",
-                "url": "http://arxiv.org/abs/2603.03667v2",
-                "pdf_url": "https://arxiv.org/pdf/2603.03667v2",
-                "source": "arxiv.org",
-                "primary_category": "cs.NI",
-                "categories": [
-                  "cs.NI"
-                ]
-              },
-              {
-                "arxiv_id": "2609.28182v2",
-                "title": "Finite-Sample Probabilistic Safety Certification for AI-Based Grid-Edge Coordination",
-                "summary": "Coordinating a large population of flexible grid-edge devices can alleviate the need for time-consuming and capital-intensive network upgrades. Artificial intelligence (AI)-based control methods such as multi-agent reinforcement learning or imitation learning are promising to this coordination due to their real-time decision scalability. However, system operators still need an independent and rigorous way to decide whether a given AI system is safe enough for deployment. This paper develops a \\emph{finite-sample} probabilistic safety certification framework for AI-based grid-edge coordination. The central idea is to reduce the complete input--AI--decision--evaluation workflow to a binary unsafe outcome under an operator-defined safety specification, and then use exact binomial inference to certify the corresponding unsafe operation probability. Given a set of held-out calibration scenarios, the framework returns the tightest one-sided upper certificate and an accept/reject deployment criterion that controls the probability of false safety certification. Because the certification is for the calibration distribution that may \\emph{deviate} from the future operation, we further combine the nominal certificate with physically interpretable sample-space adversarial attacks, a concept widely used in AI models to investigate their fragility. Case studies on grid-edge flexibility coordination with 1{,}000-agent AI models (independent parameters) verify the safety guarantee and the value of integrating adversarial attacks into a rolling-window training-certification-deployment flow.",
-                "authors": [
-                  "Yihong Zhou",
-                  "Hanbin Yang",
-                  "Thomas Morstyn"
-                ],
-                "published": "2026-09-23T14:24:46Z",
-                "updated": "2026-11-08T14:10:09Z",
-                "url": "http://arxiv.org/abs/2609.28182v2",
-                "pdf_url": "https://arxiv.org/pdf/2609.28182v2",
-                "source": "arxiv.org",
-                "primary_category": "cs.AI",
-                "categories": [
-                  "cs.AI",
-                  "cs.LG",
-                  "eess.SY"
-                ]
-              }
-            ],
-            "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+            "error": "HTTPError",
+            "message": "429 Client Error: Unknown Error for url: https://export.arxiv.org/api/query?search_query=all%3AAI+AND+all%3Aagent+AND+all%3Aevaluation&max_results=3&sortBy=lastUpdatedDate&sortOrder=descending"
           }
         }
       ]

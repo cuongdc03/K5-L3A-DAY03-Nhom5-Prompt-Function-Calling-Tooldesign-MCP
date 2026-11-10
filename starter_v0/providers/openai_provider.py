@@ -46,6 +46,7 @@ class OpenAIProvider:
             "model": model or self.default_model,
             "messages": messages,
             "temperature": temperature,
+            "max_tokens": int(os.getenv("OPENAI_MAX_TOKENS", "1024")),
         }
         if tools:
             kwargs["tools"] = tools

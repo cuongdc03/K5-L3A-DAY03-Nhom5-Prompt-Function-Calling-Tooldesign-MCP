@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nhóm 5 — Research Agent v3 Poster</title>
+  <title>Nhóm 5 — Research Agent v3 Poster (Đức Anh)</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -117,21 +117,21 @@
       <div>
         <h1>Nhóm 5 — AI Research Agent (v3)</h1>
         <p class="subtitle">
-          Trợ lý nghiên cứu đa nguồn có kiểm chứng: tìm tin tức Web (Tavily), theo dõi Twitter/X, đọc URL (Firecrawl), tra cứu bài báo arXiv, kiểm tra Policy nội bộ, thảo luận Hacker News, Wikipedia, giá Crypto &amp; đăng bản tin Telegram có xác nhận.
+          Trợ lý nghiên cứu đa nguồn có kiểm chứng: tìm tin tức Web (Tavily), theo dõi Twitter/X, đọc URL (Firecrawl), tra cứu bài báo arXiv, kiểm tra Policy nội bộ, thảo luận lập trình viên trên Hacker News (`hackernews`) &amp; đăng bản tin Telegram có xác nhận.
         </p>
       </div>
       <div class="badges">
         <span class="badge">Base Eval: 20/20 (100%)</span>
         <span class="badge">Group Eval: 10/10 (100%)</span>
-        <span class="badge">Extension Eval: 10/10 (100%)</span>
-        <span class="badge purple">Pytest: 108/108 Passed</span>
+        <span class="badge">Extension Eval: 90–100%</span>
+        <span class="badge purple">Pytest: 84/84 Passed</span>
       </div>
     </header>
 
     <div class="grid">
       <div>
         <div class="card">
-          <h2>A2. Hệ sinh thái 14 Tools (6 Core + 4 Bonus + 4 Tool Mới)</h2>
+          <h2>A2. Hệ sinh thái 11 Tools (6 Core + 4 Bonus + 1 Tool Mới `hackernews`)</h2>
           <table>
             <thead>
               <tr>
@@ -151,10 +151,7 @@
               <tr><td><code>policy</code></td><td>Tra cứu quy định nội bộ công ty (trích dẫn nguồn, bảo mật dữ liệu, xuất bản)</td><td>Bonus</td></tr>
               <tr><td><code>papers</code></td><td>Tìm kiếm bài báo khoa học trên arXiv theo chủ đề</td><td>Bonus</td></tr>
               <tr><td><code>paper_text</code></td><td>Tải PDF và trích xuất nội dung văn bản bài báo arXiv theo ID</td><td>Bonus</td></tr>
-              <tr><td><code>hackernews</code></td><td>Tìm thảo luận &amp; tin công nghệ trên Hacker News qua Algolia API</td><td><span class="tag-new">MỚI #1</span></td></tr>
-              <tr><td><code>datetime_now</code></td><td>Lấy ngày, giờ, thứ hiện tại và đầu-cuối tuần theo múi giờ IANA</td><td><span class="tag-new">MỚI #2</span></td></tr>
-              <tr><td><code>wikipedia</code></td><td>Tra cứu tóm tắt bách khoa toàn thư mở Wikipedia đa ngôn ngữ</td><td><span class="tag-new">MỚI #3</span></td></tr>
-              <tr><td><code>crypto_price</code></td><td>Tra cứu giá tiền mã hóa thời gian thực qua CoinGecko API</td><td><span class="tag-new">MỚI #4</span></td></tr>
+              <tr><td><code>hackernews</code></td><td>Tìm thảo luận &amp; tin công nghệ trên Hacker News qua Algolia API (<code>relevance</code> / <code>date</code>)</td><td><span class="tag-new">TOOL MỚI</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -170,9 +167,9 @@
               <span>→ Gọi song song <code>lookup(topic='news', timeframe='day')</code> + <code>social_search(search_type='Top')</code></span>
             </li>
             <li>
-              <strong>2. Tool mới Hacker News + Wikipedia + Giá Crypto:</strong>
-              "Trên Hacker News đang bàn gì nổi bật về Rust? Nhân tiện xem giúp giá Bitcoin hiện tại bằng USD."
-              <span>→ Gọi <code>hackernews(query='Rust')</code> + <code>crypto_price(coin_id='bitcoin')</code></span>
+              <strong>2. Tool mới Hacker News (`hackernews`):</strong>
+              "Trên Hacker News đang có thảo luận gì nổi bật về Rust?"
+              <span>→ Gọi <code>hackernews(query='Rust', sort_by='relevance')</code></span>
             </li>
             <li>
               <strong>3. Kiểm tra Guardrail thiếu thông tin (Clarify):</strong>
@@ -208,7 +205,7 @@
               <tr><td><code>v0</code></td><td>Baseline chưa tối ưu (starter)</td><td>65%</td><td>—</td><td>—</td></tr>
               <tr><td><code>v1</code></td><td>Sửa <code>system_prompt.md</code> (bỏ đoán mò, thêm guardrails)</td><td><strong>100%</strong></td><td>—</td><td>—</td></tr>
               <tr><td><code>v2</code></td><td>Viết lại <code>tools.yaml</code> + thêm <code>hackernews</code> &amp; 10 group cases</td><td><strong>100%</strong></td><td><strong>100%</strong></td><td>—</td></tr>
-              <tr><td><code>v3</code></td><td>Hợp nhất 4 tool mới + tối ưu parallel &amp; policy/arXiv</td><td><strong>100%</strong></td><td><strong>100%</strong></td><td><strong>100%</strong></td></tr>
+              <tr><td><code>v3</code></td><td>Tối ưu <code>system_prompt.md</code> cho parallel &amp; policy/arXiv extension</td><td><strong>100%</strong></td><td><strong>100%</strong></td><td><strong>100%</strong></td></tr>
             </tbody>
           </table>
         </div>

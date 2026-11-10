@@ -1,9 +1,9 @@
 {
-  "run_id": "v3_B_extension_openrouter_20261110T114853949021",
+  "run_id": "v3_B_extension_openrouter_20261110T122309731187",
   "version": "v3",
-  "artifact_version": "v3+pb94856071f9c+t7009cc9cb2db",
-  "prompt_hash": "b94856071f9c82280414f222106e994b0242bbfff6d917d6933211504e3ad69a",
-  "tools_hash": "7009cc9cb2db876294451ae5c48b014823420a51e01b0c8d5fa1d40c608106a7",
+  "artifact_version": "v3+p26d83e973ce8+tbf9cbdd42b90",
+  "prompt_hash": "26d83e973ce86bc5c147f7768873b90d2b52d782a2ab070f67571e69147aad6b",
+  "tools_hash": "bf9cbdd42b909769ff0601f74235faf929b57168207762be6a1242695c497876",
   "phase": "B",
   "suite": "extension",
   "provider": "openrouter",
@@ -14,7 +14,7 @@
   "dataset_id": "day04_v2_research_extension",
   "dataset_role": "extension",
   "description": "Optional extension eval for Research Agent: company policy search + arXiv tools. Base eval remains data/eval_base.json.",
-  "generated_at": "2026-11-10T11:48:53",
+  "generated_at": "2026-11-10T12:23:09",
   "summary": {
     "total_cases": 10,
     "measured_cases": 10,
@@ -290,7 +290,7 @@
           {
             "name": "policy",
             "args": {
-              "query": "đăng Telegram",
+              "query": "đăng bản tin lên Telegram",
               "policy_area": "external_publishing"
             }
           }
@@ -305,12 +305,12 @@
         {
           "tool": "policy",
           "args": {
-            "query": "đăng Telegram",
+            "query": "đăng bản tin lên Telegram",
             "policy_area": "external_publishing"
           },
           "result": {
             "tool": "search_company_policy",
-            "query": "đăng Telegram",
+            "query": "đăng bản tin lên Telegram",
             "policy_area": "external_publishing",
             "results": [
               {
@@ -770,13 +770,13 @@
             "args": {
               "query": "AI agents",
               "max_results": 5,
-              "sort_by": "lastUpdatedDate"
+              "sort_by": "submittedDate"
             }
           },
           {
             "name": "policy",
             "args": {
-              "query": "viral tweet fact citation",
+              "query": "trích dẫn arXiv",
               "policy_area": "source_citation"
             }
           }
@@ -793,7 +793,7 @@
           "args": {
             "query": "AI agents",
             "max_results": 5,
-            "sort_by": "lastUpdatedDate"
+            "sort_by": "submittedDate"
           },
           "result": {
             "tool": "arxiv_search",
@@ -801,26 +801,6 @@
             "api_query": "all:AI AND all:agents",
             "total_results": 13700,
             "items": [
-              {
-                "arxiv_id": "2611.00627v2",
-                "title": "Autonomous Analysis of Thermoelectric Materials Big Data by Multi-Agentic AI and Construction of a Knowledge Base and Specialized AI",
-                "summary": "Large databases of paper-derived experimental materials data hide essential information on materials. Their analysis is demanding, large-scale and complex, making manual knowledge extraction very difficult. To address this challenge, we developed Multi-Agentic AI (MAA) for automated, autonomous analysis of materials experimental big data and a specialized AI built on the obtained knowledge. MAA's nine role-specific AI agents, under predefined instructions and quality checks, autonomously perform data extraction, compositional feature generation, machine-learning modeling, feature-importance analysis and knowledge-base recording, iterating while inheriting previous knowledge. Delegating numerical processing to code makes large-scale data tractable; recording every choice and result enables later tracing to sources. In four thermoelectric-data experiments varying theme and cycle counts, the knowledge graph grew: knowledge clustered by theme and vocabulary was shared across themes. The specialized AI, searching and reading these records, answered materials questions citing sources. Retrospective verification also revealed errors, traced through the records to their sources.",
-                "authors": [
-                  "Yusuke Hashimoto",
-                  "Takaaki Tomai"
-                ],
-                "published": "2026-10-31T04:51:41Z",
-                "updated": "2026-11-08T13:13:17Z",
-                "url": "http://arxiv.org/abs/2611.00627v2",
-                "pdf_url": "https://arxiv.org/pdf/2611.00627v2",
-                "source": "arxiv.org",
-                "primary_category": "cs.AI",
-                "categories": [
-                  "cs.AI",
-                  "cond-mat.mtrl-sci",
-                  "cs.MA"
-                ]
-              },
               {
                 "arxiv_id": "2611.11342v1",
                 "title": "Agent Self-Improvement with Frozen Weights: The Added Value and Limits of Failure Traces",
@@ -901,6 +881,25 @@
                   "cs.CL",
                   "cs.AI"
                 ]
+              },
+              {
+                "arxiv_id": "2611.11279v1",
+                "title": "How Efficient Is Your Agent? Online Predictive Bounds under Budget Constraints",
+                "summary": "We evaluate AI agents in an online setting where tasks arrive sequentially and, before running each task, we construct an upper predictive bound on its \\emph{time-to-success}---the number of interactions until the task is completed successfully. Under a limited budget, some runs are stopped early, so their time-to-success is unobserved (right-censored), and the correctness of the bound may be unknown. We introduce \\emph{\\textbf{PR}edictive Bounds for \\textbf{O}nline \\textbf{B}udget \\textbf{E}fficiency} (\\texttt{PROBE}), a method for constructing calibrated upper predictive bounds while adaptively allocating a limited budget across agent tasks to reduce the anticipated coverage deficit. Our method calibrates the bounds online using inverse-probability-weighted feedback together with a correction designed to minimize coverage deficit while remaining unbiased. We prove that \\texttt{PROBE} provides a coverage guarantee for any finite time horizon while satisfying the budget constraint. Experiments on software engineering, retrieval-augmented generation, and instruction following show that \\texttt{PROBE} attains a coverage rate closer to the target level with tighter predictive bounds than a calibrated baseline.",
+                "authors": [
+                  "Roy Maor Lotan",
+                  "Shai Feldman",
+                  "Yaniv Romano"
+                ],
+                "published": "2026-11-08T10:05:38Z",
+                "updated": "2026-11-08T10:05:38Z",
+                "url": "http://arxiv.org/abs/2611.11279v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.11279v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.LG",
+                "categories": [
+                  "cs.LG"
+                ]
               }
             ],
             "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
@@ -909,32 +908,14 @@
         {
           "tool": "policy",
           "args": {
-            "query": "viral tweet fact citation",
+            "query": "trích dẫn arXiv",
             "policy_area": "source_citation"
           },
           "result": {
             "tool": "search_company_policy",
-            "query": "viral tweet fact citation",
+            "query": "trích dẫn arXiv",
             "policy_area": "source_citation",
             "results": [
-              {
-                "doc_id": "source-citation-policy",
-                "policy_area": "source_citation",
-                "title": "Source And Citation Policy",
-                "section": "Source tiers",
-                "facts": "- Tier 1: primary source, official blog, documentation, paper, dataset, regulatory filing. - Tier 2: reputable reporting that links to primary evidence. - Tier 3: social posts, forum posts, anonymous claims, screenshots, and unverified summaries. - Tier 3 can be used as signal only. Do not present it as confirmed fact without Tier 1 or Tier 2 support.",
-                "source": "Company Research Policy Handbook v1",
-                "effective_date": "2026-06-01",
-                "tags": [
-                  "source",
-                  "citation",
-                  "tweet",
-                  "arxiv",
-                  "evidence"
-                ],
-                "score": 7,
-                "untrusted_text": []
-              },
               {
                 "doc_id": "source-citation-policy",
                 "policy_area": "source_citation",
@@ -950,7 +931,25 @@
                   "arxiv",
                   "evidence"
                 ],
-                "score": 7,
+                "score": 4,
+                "untrusted_text": []
+              },
+              {
+                "doc_id": "source-citation-policy",
+                "policy_area": "source_citation",
+                "title": "Source And Citation Policy",
+                "section": "Source tiers",
+                "facts": "- Tier 1: primary source, official blog, documentation, paper, dataset, regulatory filing. - Tier 2: reputable reporting that links to primary evidence. - Tier 3: social posts, forum posts, anonymous claims, screenshots, and unverified summaries. - Tier 3 can be used as signal only. Do not present it as confirmed fact without Tier 1 or Tier 2 support.",
+                "source": "Company Research Policy Handbook v1",
+                "effective_date": "2026-06-01",
+                "tags": [
+                  "source",
+                  "citation",
+                  "tweet",
+                  "arxiv",
+                  "evidence"
+                ],
+                "score": 3,
                 "untrusted_text": []
               },
               {
@@ -968,7 +967,7 @@
                   "arxiv",
                   "evidence"
                 ],
-                "score": 7,
+                "score": 3,
                 "untrusted_text": []
               }
             ],
@@ -1243,7 +1242,7 @@
             "args": {
               "query": "AI agent evaluation",
               "max_results": 5,
-              "sort_by": "lastUpdatedDate"
+              "sort_by": "submittedDate"
             }
           }
         ],
@@ -1259,35 +1258,14 @@
           "args": {
             "query": "AI agent evaluation",
             "max_results": 5,
-            "sort_by": "lastUpdatedDate"
+            "sort_by": "submittedDate"
           },
           "result": {
             "tool": "arxiv_search",
             "query": "AI agent evaluation",
             "api_query": "all:AI AND all:agent AND all:evaluation",
-            "total_results": 6035,
+            "total_results": 6036,
             "items": [
-              {
-                "arxiv_id": "2609.28182v2",
-                "title": "Finite-Sample Probabilistic Safety Certification for AI-Based Grid-Edge Coordination",
-                "summary": "Coordinating a large population of flexible grid-edge devices can alleviate the need for time-consuming and capital-intensive network upgrades. Artificial intelligence (AI)-based control methods such as multi-agent reinforcement learning or imitation learning are promising to this coordination due to their real-time decision scalability. However, system operators still need an independent and rigorous way to decide whether a given AI system is safe enough for deployment. This paper develops a \\emph{finite-sample} probabilistic safety certification framework for AI-based grid-edge coordination. The central idea is to reduce the complete input--AI--decision--evaluation workflow to a binary unsafe outcome under an operator-defined safety specification, and then use exact binomial inference to certify the corresponding unsafe operation probability. Given a set of held-out calibration scenarios, the framework returns the tightest one-sided upper certificate and an accept/reject deployment criterion that controls the probability of false safety certification. Because the certification is for the calibration distribution that may \\emph{deviate} from the future operation, we further combine the nominal certificate with physically interpretable sample-space adversarial attacks, a concept widely used in AI models to investigate their fragility. Case studies on grid-edge flexibility coordination with 1{,}000-agent AI models (independent parameters) verify the safety guarantee and the value of integrating adversarial attacks into a rolling-window training-certification-deployment flow.",
-                "authors": [
-                  "Yihong Zhou",
-                  "Hanbin Yang",
-                  "Thomas Morstyn"
-                ],
-                "published": "2026-09-23T14:24:46Z",
-                "updated": "2026-11-08T14:10:09Z",
-                "url": "http://arxiv.org/abs/2609.28182v2",
-                "pdf_url": "https://arxiv.org/pdf/2609.28182v2",
-                "source": "arxiv.org",
-                "primary_category": "cs.AI",
-                "categories": [
-                  "cs.AI",
-                  "cs.LG",
-                  "eess.SY"
-                ]
-              },
               {
                 "arxiv_id": "2611.11342v1",
                 "title": "Agent Self-Improvement with Frozen Weights: The Added Value and Limits of Failure Traces",
@@ -1365,6 +1343,25 @@
                 "primary_category": "cs.LG",
                 "categories": [
                   "cs.LG"
+                ]
+              },
+              {
+                "arxiv_id": "2611.11062v1",
+                "title": "What Does Multiple Choice Actually Measure? Disentangling Video Understanding from Option Exploitation",
+                "summary": "Video understanding evaluations are intended to measure a model's proficiency in video perception and task solving. However, current VideoQA benchmarks struggle to isolate these capabilities due to their reliance on multiple-choice (MC) answer guidance, language priors, and fragile scoring pipelines. Disentangling these confounding factors reveals how much of a model's score is supplied by the evaluation context rather than earned through faithful perception. Across six VideoQA benchmarks of varying length, we find that accuracy is significantly above chance without any visual input. This is caused by shortcutting and option-prior reliance. We express these effects in the language of faithfulness: option-exploitation and answer-conditioned reasoning traces are unfaithful even when they are correct. Together, our results show that a VideoQA score is jointly determined by language priors, option timing, and how outputs and labels are converted into correctness. We produce a novel Option-Delayed Replay (ODR) mechanism that discloses options at controlled stages of an open-ended (OE) trajectory, to obtain objective MC scores from faithful option-free inference. Our work demonstrates that agentic methods with ODR and faithful inference can match option-exploiting performance. Finally, we formalize our diagnostic collection and ODR as a reproducible evaluation protocol, and we release a human-relabelled edition of LVBench (correcting $20.5\\%$ of keys) to remove annotation noise as a confounding variable.",
+                "authors": [
+                  "Elliott Piercy",
+                  "Justin Chan",
+                  "Sepand Dyanatkar"
+                ],
+                "published": "2026-11-08T01:30:09Z",
+                "updated": "2026-11-08T01:30:09Z",
+                "url": "http://arxiv.org/abs/2611.11062v1",
+                "pdf_url": "https://arxiv.org/pdf/2611.11062v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CV",
+                "categories": [
+                  "cs.CV"
                 ]
               }
             ],

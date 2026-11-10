@@ -1,5 +1,4 @@
-"""Tool Unit Test Challenge — completed unit tests for built-in tools and 4 new team tools
-(`hackernews`, `datetime_now`, `wikipedia`, `crypto_price`).
+"""Tool Unit Test Challenge — completed unit tests for built-in tools and new tool (`hackernews`).
 
 Rules:
 - Offline only: mock HTTP with `fake_http`, set fake keys with `monkeypatch.setenv`.
@@ -20,9 +19,6 @@ timeline_tool = TOOL_FUNCTIONS["timeline"]
 social_search_tool = TOOL_FUNCTIONS["social_search"]
 policy_tool = TOOL_FUNCTIONS["policy"]
 hackernews_tool = TOOL_FUNCTIONS["hackernews"]
-datetime_now_tool = TOOL_FUNCTIONS["datetime_now"]
-wikipedia_tool = TOOL_FUNCTIONS["wikipedia"]
-crypto_price_tool = TOOL_FUNCTIONS["crypto_price"]
 
 
 # ---------------- clarify ----------------
@@ -197,7 +193,7 @@ def test_policy_instruction_like_lines_go_to_untrusted_text() -> None:
     assert "ignore the citation policy" not in probe["facts"]
 
 
-# ---------------- NEW TOOL 1: hackernews ----------------
+# ---------------- YOUR NEW TOOL: hackernews ----------------
 
 def test_hackernews_happy_path_maps_algolia_hits(fake_http) -> None:
     calls = fake_http(FakeResponse({
@@ -243,79 +239,3 @@ def test_hackernews_http_failure_returns_error_dict(fake_http) -> None:
 
     assert result["error"] == "HTTPError"
     assert "503" in result["message"]
-
-
-# ---------------- NEW TOOL 2: datetime_now ----------------
-
-def test_datetime_now_returns_expected_fields_for_valid_timezone() -> None:
-    result = datetime_now_tool(timezone="Asia/Ho_Chi_Minh")
-    assert result["tool"] == "get_current_datetime"
-    assert result["timezone"] == "Asia/Ho_Chi_Minh"
-    assert result["utc_offset"] == "+07:00"
-    assert "date" in result and "time" in result and "weekday_vi" in result
-
-
-def test_datetime_now_empty_timezone_falls_back_to_default() -> None:
-    result = datetime_now_tool(timezone="   ")
-    assert result["timezone"] == "Asia/Ho_Chi_Minh"
-    assert result["utc_offset"] == "+07:00"
-
-
-def test_datetime_now_invalid_timezone_returns_error_dict() -> None:
-    result = datetime_now_tool(timezone="Mars/Phobos")
-    assert "error" in result
-    assert "Unknown timezone" in result["message"]
-
-
-# ---------------- NEW TOOL 3: wikipedia ----------------
-
-def test_wikipedia_happy_path_maps_summary_response(fake_http) -> None:
-    calls = fake_http(FakeResponse({
-        "title": "Artificial intelligence",
-        "extract": "AI is intelligence demonstrated by machines.",
-        "content_urls": {"desktop": {"page": "https://en.wikipedia.org/wiki/Artificial_intelligence"}},
-    }))
-
-    result = wikipedia_tool(title="Artificial intelligence", language="en")
-
-    assert len(calls) == 1
-    assert "en.wikipedia.org/api/rest_v1/page/summary/Artificial_intelligence" in calls[0]["url"]
-    assert result["items"][0]["title"] == "Artificial intelligence"
-    assert result["items"][0]["summary"] == "AI is intelligence demonstrated by machines."
-
-
-def test_wikipedia_bad_input_empty_title_returns_error_dict(fake_http) -> None:
-    calls = fake_http(FakeResponse({}))
-    result = wikipedia_tool(title="   ", language="invalid_lang")
-    assert result["error"] == "ValueError"
-    assert calls == []
-
-
-def test_wikipedia_http_failure_returns_error_dict(fake_http) -> None:
-    fake_http(FakeResponse(status_code=500))
-    result = wikipedia_tool(title="OpenAI", language="en")
-    assert result["error"] == "HTTPError"
-
-
-# ---------------- NEW TOOL 4: crypto_price ----------------
-
-def test_crypto_price_happy_path_returns_formatted_price(fake_http) -> None:
-    calls = fake_http(FakeResponse({"bitcoin": {"usd": 92500}}))
-    result = crypto_price_tool(coin_id="Bitcoin", currency="USD")
-    assert len(calls) == 1
-    assert calls[0]["params"] == {"ids": "bitcoin", "vs_currencies": "usd"}
-    assert result["price"] == 92500
-    assert result["formatted"] == "92500 USD"
-
-
-def test_crypto_price_bad_input_empty_coin_returns_error_dict(fake_http) -> None:
-    calls = fake_http(FakeResponse({}))
-    result = crypto_price_tool(coin_id="   ", currency="usd")
-    assert result["error"] == "ValueError"
-    assert calls == []
-
-
-def test_crypto_price_http_failure_returns_error_dict(fake_http) -> None:
-    fake_http(FakeResponse(status_code=429))
-    result = crypto_price_tool(coin_id="ethereum", currency="usd")
-    assert result["error"] == "HTTPError"
