@@ -152,6 +152,117 @@
         "difficulty": "hard",
         "what_it_tests": "3 turns: bổ sung chủ đề 'AI agent evaluation' ở lượt 2 và áp dụng max_results=3, sort_by='lastUpdatedDate' ở lượt 3."
       }
+    },
+    {
+      "id": "G06_deduplicate_pasted_results",
+      "phase": "B",
+      "query": "Lọc giúp mình các link trùng trong danh sách này: [{\"title\":\"OpenAI ra mắt model mới\",\"url\":\"https://example.com/openai-model/#top\"},{\"title\":\"Model mới của OpenAI\",\"url\":\"https://example.com/openai-model\"},{\"title\":\"Nvidia Q3\",\"url\":\"https://example.com/nvidia\"}]",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "deduplicate",
+            "args": {}
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Yêu cầu lọc trùng danh sách có sẵn phải route tới tool mới deduplicate, không search lại. Chỉ chấm routing (run_eval gốc không so được list object); nội dung lọc kiểm bằng unit test."
+      }
+    },
+    {
+      "id": "G07_wiki_concept_definition",
+      "phase": "B",
+      "query": "Transformer trong deep learning là gì? Cho mình định nghĩa ngắn theo Wikipedia.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "wiki",
+            "args": {}
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Câu hỏi định nghĩa/kiến thức nền route tới wiki thay vì lookup."
+      }
+    },
+    {
+      "id": "G08_github_popular_python_repos",
+      "phase": "B",
+      "query": "Tìm các repo GitHub nổi bật nhất về LLM agent viết bằng Python.",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "sort": "stars",
+              "language": "Python"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Repo GitHub -> github_search; 'nổi bật nhất' -> sort=stars; ngôn ngữ tách ra arg language."
+      }
+    },
+    {
+      "id": "GM06_github_refine_language",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tìm repo GitHub phổ biến về RAG."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ lấy repo viết bằng TypeScript thôi."
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "sort": "stars",
+              "language": "TypeScript"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Multi-turn: giữ sort=stars từ lượt trước, thêm bộ lọc language=TypeScript cho github_search."
+      }
+    },
+    {
+      "id": "GM07_no_handle_inferred_from_context",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tin tức về OpenAI hôm nay có gì nổi bật?"
+        },
+        {
+          "role": "user",
+          "content": "Tóm tắt 5 tweet mới nhất giúp mình"
+        }
+      ],
+      "failure_type": "missing_info",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Phát hiện từ live chat v3: lượt trước nhắc tới OpenAI nhưng user KHÔNG nói lấy tweet của tài khoản nào -> phải clarify, không được tự suy ra handle từ ngữ cảnh."
+      }
     }
   ]
 }

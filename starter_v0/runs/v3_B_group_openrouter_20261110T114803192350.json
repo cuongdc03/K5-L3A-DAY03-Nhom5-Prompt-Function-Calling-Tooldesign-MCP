@@ -1,0 +1,1188 @@
+{
+  "run_id": "v3_B_group_openrouter_20261110T114803192350",
+  "version": "v3",
+  "artifact_version": "v3+pe07e37c02fac+t4cb910b9094e",
+  "prompt_hash": "e07e37c02faccbdfc18918b0d93672d47f2b6adfbf83390effc2f788ed0e2835",
+  "tools_hash": "4cb910b9094ec7cc81a59fbdaf1c8d847ea9d89417ed47e443b62734d62da212",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "E:\\Vin\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "E:\\Vin\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp (5 single-turn + 5 multi-turn): kiểm tra tool mới hackernews, tham số lookup/timeline/social_search/papers, guardrail xác nhận send, và từ chối câu hỏi ngoài phạm vi.",
+  "generated_at": "2026-11-10T11:48:03",
+  "summary": {
+    "total_cases": 15,
+    "measured_cases": 9,
+    "provider_error_cases": 6,
+    "passed_cases": 8,
+    "case_accuracy": 0.8889,
+    "tool_routing_accuracy": 0.8889,
+    "argument_accuracy": 0.8889,
+    "multiturn_accuracy": 0.75,
+    "failure_counts": {
+      "missing_info": 1
+    },
+    "observed_mismatch_counts": {
+      "missing_tool_call": 1
+    }
+  },
+  "results": [
+    {
+      "id": "G01_hackernews_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_new_tool_hackernews",
+        "difficulty": "easy",
+        "what_it_tests": "Hỏi thảo luận nổi bật trên Hacker News → route đúng tới tool mới hackernews với query='Rust', sort_by='relevance'."
+      },
+      "input": "Trên Hacker News đang có thảo luận gì nổi bật về Rust?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "Rust",
+              "sort_by": "relevance"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "Rust",
+              "sort_by": "relevance",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "hackernews",
+          "args": {
+            "query": "Rust",
+            "sort_by": "relevance",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "search_hackernews",
+            "query": "Rust",
+            "sort_by": "relevance",
+            "items": [
+              {
+                "title": "Why Discord is switching from Go to Rust",
+                "url": "https://blog.discordapp.com/why-discord-is-switching-from-go-to-rust-a190bbca2b1f",
+                "hn_url": "https://news.ycombinator.com/item?id=22238335",
+                "source": "blog.discordapp.com",
+                "summary": "1582 points | 642 comments | by Sikul (HN: https://news.ycombinator.com/item?id=22238335)",
+                "points": 1582,
+                "num_comments": 642,
+                "author": "Sikul",
+                "date": "2020-02-04T17:30:40Z"
+              },
+              {
+                "title": "Leaving Rust gamedev after 3 years",
+                "url": "https://loglog.games/blog/leaving-rust-gamedev/",
+                "hn_url": "https://news.ycombinator.com/item?id=40172033",
+                "source": "loglog.games",
+                "summary": "1484 points | 972 comments | by darthdeus (HN: https://news.ycombinator.com/item?id=40172033)",
+                "points": 1484,
+                "num_comments": 972,
+                "author": "darthdeus",
+                "date": "2024-04-26T17:33:56Z"
+              },
+              {
+                "title": "A half-hour to learn Rust",
+                "url": "https://fasterthanli.me/articles/a-half-hour-to-learn-rust",
+                "hn_url": "https://news.ycombinator.com/item?id=25610741",
+                "source": "fasterthanli.me",
+                "summary": "1444 points | 330 comments | by selvan (HN: https://news.ycombinator.com/item?id=25610741)",
+                "points": 1444,
+                "num_comments": 330,
+                "author": "selvan",
+                "date": "2021-01-02T05:50:39Z"
+              },
+              {
+                "title": "Announcing Rust 1.0",
+                "url": "http://blog.rust-lang.org/2015/05/15/Rust-1.0.html",
+                "hn_url": "https://news.ycombinator.com/item?id=9551937",
+                "source": "blog.rust-lang.org",
+                "summary": "1363 points | 306 comments | by jhund (HN: https://news.ycombinator.com/item?id=9551937)",
+                "points": 1363,
+                "num_comments": 306,
+                "author": "jhund",
+                "date": "2015-05-15T17:02:09Z"
+              },
+              {
+                "title": "CityBound – An open source city simulation game in Rust",
+                "url": "https://github.com/citybound/citybound",
+                "hn_url": "https://news.ycombinator.com/item?id=19583384",
+                "source": "github.com",
+                "summary": "1340 points | 264 comments | by formalsystem (HN: https://news.ycombinator.com/item?id=19583384)",
+                "points": 1340,
+                "num_comments": 264,
+                "author": "formalsystem",
+                "date": "2019-04-05T15:18:45Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_lookup_monthly_news_arg",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "lookup_news_month_timeframe",
+        "difficulty": "medium",
+        "what_it_tests": "Tin tức theo tháng → lookup với query cốt lõi 'semiconductor', topic='news', timeframe='month'."
+      },
+      "input": "Tin tức về semiconductor trong tháng này có gì đáng chú ý?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "semiconductor",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIStatusError: Error code: 402 - This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G03_karpathy_handle_and_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "timeline_handle_mapping_and_limit",
+        "difficulty": "easy",
+        "what_it_tests": "Ánh xạ tên Andrej Karpathy → screenname='karpathy' (không có @) và trích đúng limit=4."
+      },
+      "input": "Lấy 4 tweet gần đây của Andrej Karpathy",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "karpathy",
+              "limit": 4
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIStatusError: Error code: 402 - This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G04_confirm_before_urgent_send",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "guardrail_confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "Dù user dùng từ 'Gửi ngay', chưa có xác nhận trước đó thì phải gọi clarify(response_type='yes_no') chứ không tự ý gọi send."
+      },
+      "input": "Gửi ngay bản tóm tắt tin AI hôm nay lên kênh Telegram của nhóm nhé",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có muốn tôi gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có muốn tôi gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có muốn tôi gửi bản tóm tắt tin AI hôm nay lên kênh Telegram không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_out_of_scope_poem",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_creative_writing",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu sáng tác thơ ngoài phạm vi research → không gọi bất kỳ tool nào và từ chối lịch sự."
+      },
+      "input": "Làm giúp mình một bài thơ lục bát 8 câu về mùa thu Hà Nội.",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIStatusError: Error code: 402 - This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "GM01_clarify_then_send_confirmed",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_send_after_confirmation",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: sau khi người dùng đã xác nhận đồng ý gửi ở lượt 2 → gọi send với confirmed=true."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Đăng bản tin 'OpenAI ra mắt mô hình mới' lên Telegram giúp mình"
+        },
+        {
+          "role": "user",
+          "content": "Mình xác nhận đồng ý gửi nhé, đăng nội dung đó lên Telegram đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIStatusError: Error code: 402 - This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "GM02_switch_web_to_hackernews",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_to_hackernews",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: chuyển từ lookup sang tool mới hackernews, giữ chủ đề 'Claude' và nhận đúng sort_by='date', max_results=5."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm trên web tin tức về Claude hôm nay"
+        },
+        {
+          "role": "user",
+          "content": "Thôi bỏ tìm web đi, chuyển sang tìm thảo luận trên Hacker News"
+        },
+        {
+          "role": "user",
+          "content": "Giữ chủ đề Claude và lấy 5 bài mới nhất theo thời gian (date) nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "hackernews",
+            "args": {
+              "query": "Claude",
+              "sort_by": "date",
+              "max_results": 5
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIStatusError: Error code: 402 - This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "GM03_lookup_carryover_change_timeframe",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_lookup_timeframe_update",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: giữ nguyên query='OpenAI' và topic='news' từ lượt 1, cập nhật timeframe từ 'day' sang 'month'."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin tức về OpenAI hôm nay có gì mới?"
+        },
+        {
+          "role": "user",
+          "content": "Đổi sang tìm trong cả tháng này đi"
+        },
+        {
+          "role": "user",
+          "content": "Vẫn giữ chủ đề tin tức về OpenAI nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "OpenAI",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "OpenAI",
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "OpenAI",
+            "topic": "news",
+            "timeframe": "month"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "OpenAI",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "OpenAI",
+                "url": "https://tavily.com/knowledge/company/p4PyTakV77G9",
+                "source": "tavily.com",
+                "summary": "# OpenAI\nID: p4PyTakV77G9\nWebsite: www.openai.com\nHeadquarters: San Francisco, CA, United States\nLinkedIn: www.linkedin.com/company/openai · 11,529,792 followers\nIndustry: Research Services\nIndustry codes: SIC 87, 873, NAICS 54, 541\nCompany type: Partnership\nSocial profiles: www.facebook.com/openai, www.twitter.com/openai, www.crunchbase.com/organization/openai, www.instagram.com/openai.gpt, www.instagram.com/openai, www.youtube.com/@openai, www.youtube.com/openai, github.com/openai [...] Description: OpenAI is a company that believes in research and development to lead to artificial general intelligence, a system that can solve human-level problems. [...] ## Products and services\nKeywords: research & development, emerging ai software, openai, artificial intelligence machine learning, artificial general intelligence, development, research, human-level problems, technology, application-software, artificial-intelligence, platform",
+                "score": 0.90593183
+              },
+              {
+                "title": "Setting a new standard for responsible AI infrastructure | OpenAI",
+                "url": "https://openai.com/index/setting-new-standard-responsible-ai-infrastructure",
+                "source": "openai.com",
+                "summary": "The promise of AI is that it gives people more power to shape their own futures. It can help someone learn a new skill, build a business, or solve a problem that was previously out of reach. Building more computing infrastructure capacity in the United States can help lower the cost of delivering AI, put these tools in more people’s hands, and ensure America stays at the forefront of the technology. [...] protect residents, and ensure that the benefits of AI infrastructure are broadly shared. [...] Create opportunities for local workers and businesses.We’ll publish the jobs we expect to create, work with unions and training providers to help residents prepare for them, and report annually on hiring and apprenticeships. We’ll also make sustained investments in priorities residents help select.",
+                "score": 0.72231215
+              },
+              {
+                "title": "Making it easier for websites to express AI training preferences | OpenAI",
+                "url": "https://openai.com/index/helping-websites-express-ai-training-preferences",
+                "source": "openai.com",
+                "summary": "Audio 1\n\nShare\n\nToday, we’re announcing that OpenAI will honor a common signal⁠(opens in a new window) in robots.txt, the file that lets websites express their preferences about the use of their content for foundational generative AI training. This voluntary effort makes it easier for publishers and website operators to communicate the same preference to multiple participating providers at once. [...] API Platform\n   Overview\n   API Log In(opens in a new window)\n   Docs(opens in a new window)\n\nBusiness\n   Overview\n   Solutions\n   Resources\n   Plugins\n   Customer Stories\n   Partner Network\n   Contact Sales\n\nDevelopers\n   Plugins(opens in a new window)\n   Models(opens in a new window)\n   Docs(opens in a new window)\n   Resources(opens in a new window)\n   Developer Forum(opens in a new window)\n\nCompany\n   About Us\n   Our Charter\n   Careers\n   News [...] This draws on the ongoing work⁠(opens in a new window) of the Internet Engineering Task Force’s (IETF) AI Preferences working group. We’re joining other participants in the working group in today’s announcement of this shared signal, and believe this strengthens our continued participation in the IETF standards discussions. OpenAI will continue to adapt its practices as those conversations and the landscape continue to evolve in view of appropriate controls and fairness.",
+                "score": 0.5931622
+              },
+              {
+                "title": "OpenAI to acquire Pierre Computer Company, Inc.",
+                "url": "https://openai.com/index/openai-to-acquire-pierre",
+                "source": "openai.com",
+                "summary": "Today we're announcing that OpenAI will acquire Pierre Computer Company, Inc⁠(opens in a new window). (“Pierre”), the company behind Code Storage⁠(opens in a new window) and a family of standout open-source developer tools. If you’ve browsed files or reviewed a change in the Codex app, you’ve already used Pierre’s Trees and Diffs libraries. We’re excited to work with the Pierre team to build on the Git workflows that developers already rely on and adapt them to how teams work with coding [...] Business\n   Overview\n   Solutions\n   Resources\n   Plugins\n   Customer Stories\n   Partner Network\n   Contact Sales\n\nDevelopers\n   Plugins(opens in a new window)\n   Models(opens in a new window)\n   Docs(opens in a new window)\n   Resources(opens in a new window)\n   Developer Forum(opens in a new window)\n\nCompany\n   About Us\n   Our Charter\n   Careers\n   News\n\nSupport\n   Help Center(opens in a new window)\n   OpenAI Status(opens in a new window) [...] Skip to main content\n\n\n\nLog inTry ChatGPT(opens in a new window)\n\n   Research\n   Products\n   Business\n   Developers\n   Company\n   Foundation(opens in a new window)\n\nOpenAI to acquire Pierre Computer Company, Inc. | OpenAI\n\nNovember 4, 2026\n\nCompany\n\n# OpenAI to acquire Pierre Computer Company, Inc.\n\nExpanding Codex’s tools for building, understanding, and reviewing code.\n\nShare\n\nCraftsmanship meets scale for the agentic era",
+                "score": 0.5100334
+              },
+              {
+                "title": "A thousand fewer paths to root",
+                "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
+                "source": "openai.com",
+                "summary": "Developers\n   Plugins(opens in a new window)\n   Models(opens in a new window)\n   Docs(opens in a new window)\n   Resources(opens in a new window)\n   Developer Forum(opens in a new window)\n\nCompany\n   About Us\n   Our Charter\n   Careers\n   News\n\nSupport\n   Help Center(opens in a new window)\n   OpenAI Status(opens in a new window)\n\nMore\n   Stories\n   Academy\n   Supply Co.\n   Livestreams\n   Podcast\n   RSS\n\nTerms & Policies\n   Terms of Use\n   Privacy Policy\n   Other Policies",
+                "score": 0.44767818
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM04_social_search_update_to_top",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_social_search_top_limit",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: giữ từ khóa 'Llama 3', đổi search_type sang 'Top' và cập nhật limit=3."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Mọi người đang bàn gì về Llama 3 trên Twitter?"
+        },
+        {
+          "role": "user",
+          "content": "Chỉ lấy các tweet phổ biến (top) nhất thôi"
+        },
+        {
+          "role": "user",
+          "content": "Lấy đúng 3 tweet về Llama 3 nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Llama 3",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Llama 3",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Llama 3",
+            "search_type": "Top",
+            "limit": 3
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Llama 3",
+            "search_type": "Top",
+            "items": [
+              {
+                "title": "8 AI model architectures, visually explained:",
+                "summary": "8 AI model architectures, visually explained:\n\nLLMs get so much attention that it's easy to overlook the rest of the field. Different inputs, tasks, and deployment constraints have led to very different model designs.\n\nHere are eight specialized AI model architectures:\n\n1. LLM (Large language models)\n\nText is split into tokens, mapped to embeddings, and processed through transformer layers. The model generates its response by predicting successive tokens.\n\n↳ GPT, Claude, Gemini, Llama.\n\n2. LCM (Large concept models)\n\nMoves prediction to the sentence level. Sentences become SONAR embeddings, and the model predicts the next sentence representation. Meta explored both autoregressive and diffusion-based versions.\n\n↳ Meta's LCM research introduced this approach.\n\n3. LAM (Large action models)\n\nConnects a user's request to actions in an environment. These systems interpret intent, plan steps, and use interfaces or tools, often checking results before continuing.\n\n↳ Rabbit R1, Microsoft UFO, Claude Computer Use.\n\n4. MoE (Mixture of experts)\n\nA router assigns token representations to selected expert networks inside the model. Activating a subset of experts adds model capacity without running every expert for every token.\n\n↳ Mixtral, DeepSeek, Switch Transformer.\n\n5. VLM (Vision-language models)\n\nCombines visual representations with language processing. A vision encoder extracts image features, which are connected to a language model so it can answer questions about visual content.\n\n↳ GPT-4V, Gemini, LLaVA.\n\n6. SLM (Small language models)\n\nUses fewer parameters to reduce memory and compute requirements. These models can run locally, with quantization often reducing their deployment footprint further.\n\n↳ Phi-3, Gemma, Mistral 7B, Llama 3.2 1B.\n\n7. MLM (Masked language models)\n\nLearns by predicting hidden tokens using context on both sides. This bidirectional training produces representations useful for retrieval, classification, and other language-understanding tasks.\n\n↳ BERT, RoBERTa, DeBERTa.\n\n8. SAM (Segment Anything Model)\n\nAn image encoder processes the image, while a prompt encoder handles points, boxes, or masks. A mask decoder combines them to identify the requested regions.\n\n↳ Meta's SAM supports interactive segmentation and image annotation.\n\nThese aren't eight mutually exclusive categories. A small model can process images, and a language model can use MoE layers. Some labels describe architecture, while others describe training or intended use.\n\nThere's another approach I kept outside the image because it alters how a model handles context rather than introducing a separate model family.\n\nRecursive language models, from MIT, put the input into a Python environment that a root model can inspect through code.\n\nThe model can search or slice that input, then make recursive model calls on selected portions instead of loading everything into its own context window.\n\nThe reported experiments handled inputs beyond 10 million tokens without retraining, with gains over the base model even on some tasks whose inputs already fit its context window.\n\nI recently wrote a full breakdown of how this works, including why accessing a large input and reasoning reliably over it are different problems.\n\nRead it below.",
+                "url": "https://x.com/_avichawla/status/2119035997321314815",
+                "source": "@_avichawla",
+                "date": "Sat Nov 07 11:55:26 +0000 2026",
+                "metrics": {
+                  "favorites": 111,
+                  "retweets": 23,
+                  "views": "9857"
+                }
+              },
+              {
+                "title": "the “llama 3 8b is probably good enough for production” mentality is doing so much damage to the public’s perception of ",
+                "summary": "the “llama 3 8b is probably good enough for production” mentality is doing so much damage to the public’s perception of ai https://t.co/ykjuX4dbcI",
+                "url": "https://x.com/airkatakana/status/1996513873244152118",
+                "source": "@airkatakana",
+                "date": "Thu Dec 04 09:36:15 +0000 2025",
+                "metrics": {
+                  "favorites": 6350,
+                  "retweets": 225,
+                  "views": "309773"
+                }
+              },
+              {
+                "title": "and here is @zml_ai running Llama 3.2 1B *fully natively on @Windows* (CPU for now, it's a demo).",
+                "summary": "and here is @zml_ai running Llama 3.2 1B *fully natively on @Windows* (CPU for now, it's a demo).\n\nlittle nugget: it was entirely cross compiled from macOS using @hermeticbuild's LLVM https://t.co/xR3SKsSXaJ",
+                "url": "https://x.com/steeve/status/2119851733077897282",
+                "source": "@steeve",
+                "date": "Mon Nov 09 17:56:52 +0000 2026",
+                "metrics": {
+                  "favorites": 21,
+                  "retweets": 5,
+                  "views": "822"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM05_clarify_then_arxiv_papers",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_arxiv_fill_topic_and_sort",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: bổ sung chủ đề 'AI agent evaluation' ở lượt 2 và áp dụng max_results=3, sort_by='lastUpdatedDate' ở lượt 3."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm giúp mình một số bài báo khoa học trên arXiv"
+        },
+        {
+          "role": "user",
+          "content": "Chủ đề là AI agent evaluation"
+        },
+        {
+          "role": "user",
+          "content": "Lấy 3 bài có ngày cập nhật mới nhất (lastUpdatedDate)"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "papers",
+            "args": {
+              "query": "AI agent evaluation",
+              "max_results": 3,
+              "sort_by": "lastUpdatedDate"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "papers",
+            "args": {
+              "query": "AI agent evaluation",
+              "max_results": 3,
+              "sort_by": "lastUpdatedDate"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "papers",
+          "args": {
+            "query": "AI agent evaluation",
+            "max_results": 3,
+            "sort_by": "lastUpdatedDate"
+          },
+          "result": {
+            "tool": "arxiv_search",
+            "query": "AI agent evaluation",
+            "api_query": "all:AI AND all:agent AND all:evaluation",
+            "total_results": 6036,
+            "items": [
+              {
+                "arxiv_id": "2408.02226v3",
+                "title": "ProCreate, Don't Reproduce! Propulsive Energy Diffusion for Creative Generation",
+                "summary": "In this paper, we propose ProCreate, a simple and easy-to-implement method to improve sample diversity and creativity of diffusion-based image generative models and to prevent training data reproduction. ProCreate operates on a set of reference images and actively propels the generated image embedding away from the reference embeddings during the generation process. We propose FSCG-8 (Few-Shot Creative Generation 8), a few-shot creative generation dataset on eight different categories -- encompassing different concepts, styles, and settings -- in which ProCreate achieves the highest sample diversity and fidelity. Furthermore, we show that ProCreate is effective at preventing replicating training data in a large-scale evaluation using training text prompts. Code and FSCG-8 are available at https://github.com/Agentic-Learning-AI-Lab/procreate-diffusion-public. The project page is available at https://procreate-diffusion.github.io.",
+                "authors": [
+                  "Jack Lu",
+                  "Ryan Teehan",
+                  "Mengye Ren"
+                ],
+                "published": "2024-08-05T04:10:52Z",
+                "updated": "2026-11-08T16:30:35Z",
+                "url": "http://arxiv.org/abs/2408.02226v3",
+                "pdf_url": "https://arxiv.org/pdf/2408.02226v3",
+                "source": "arxiv.org",
+                "primary_category": "cs.CV",
+                "categories": [
+                  "cs.CV"
+                ]
+              },
+              {
+                "arxiv_id": "2603.03667v2",
+                "title": "ORION: Intent-Aware Orchestration in Open RAN for SLA-Driven Network Management",
+                "summary": "The disaggregation of the Radio Access Network (RAN) introduces architectural flexibility but significant operational complexity, necessitating automated management frameworks. For instance, current Open RAN (O-RAN) orchestration relies on fragmented manual policies, lacking end-to-end intent assurance from high-level requirements to low-level configurations. In this article, we propose ORION, an intent orchestration framework that integrates Large Language Models (LLMs) through the Model Context Protocol (MCP). It translates natural language slice requests into network policies aligned with O-RAN interfaces, supporting the AI-RAN agentic orchestration and AI-for-RAN paradigms. ORION combines an MCP-based Service Management and Orchestration (SMO) layer with a Non-Real-Time RIC rApp and a Near-Real-Time RIC xApp to enforce Physical Resource Block (PRB) quotas over E2. We evaluate eight LLM configurations across proprietary and open-weight models on a 100-intent workload. Claude Opus 4.5 and GPT-5 achieve 100% policy-creation success with 99% and 96% slice-type classification accuracy, while GPT-5 Nano achieves 97% policy-creation success. The evaluation also assesses MCP tool-use quality, cost-performance trade-offs, resource consumption, and end-to-end control-path latency.",
+                "authors": [
+                  "Gabriela da Silva Machado",
+                  "Gustavo Z. Bruno",
+                  "Alexandre Huff",
+                  "José Marcos Camara Brito",
+                  "Cristiano B. Both"
+                ],
+                "published": "2026-03-04T02:47:10Z",
+                "updated": "2026-11-08T14:46:41Z",
+                "url": "http://arxiv.org/abs/2603.03667v2",
+                "pdf_url": "https://arxiv.org/pdf/2603.03667v2",
+                "source": "arxiv.org",
+                "primary_category": "cs.NI",
+                "categories": [
+                  "cs.NI"
+                ]
+              },
+              {
+                "arxiv_id": "2609.28182v2",
+                "title": "Finite-Sample Probabilistic Safety Certification for AI-Based Grid-Edge Coordination",
+                "summary": "Coordinating a large population of flexible grid-edge devices can alleviate the need for time-consuming and capital-intensive network upgrades. Artificial intelligence (AI)-based control methods such as multi-agent reinforcement learning or imitation learning are promising to this coordination due to their real-time decision scalability. However, system operators still need an independent and rigorous way to decide whether a given AI system is safe enough for deployment. This paper develops a \\emph{finite-sample} probabilistic safety certification framework for AI-based grid-edge coordination. The central idea is to reduce the complete input--AI--decision--evaluation workflow to a binary unsafe outcome under an operator-defined safety specification, and then use exact binomial inference to certify the corresponding unsafe operation probability. Given a set of held-out calibration scenarios, the framework returns the tightest one-sided upper certificate and an accept/reject deployment criterion that controls the probability of false safety certification. Because the certification is for the calibration distribution that may \\emph{deviate} from the future operation, we further combine the nominal certificate with physically interpretable sample-space adversarial attacks, a concept widely used in AI models to investigate their fragility. Case studies on grid-edge flexibility coordination with 1{,}000-agent AI models (independent parameters) verify the safety guarantee and the value of integrating adversarial attacks into a rolling-window training-certification-deployment flow.",
+                "authors": [
+                  "Yihong Zhou",
+                  "Hanbin Yang",
+                  "Thomas Morstyn"
+                ],
+                "published": "2026-09-23T14:24:46Z",
+                "updated": "2026-11-08T14:10:09Z",
+                "url": "http://arxiv.org/abs/2609.28182v2",
+                "pdf_url": "https://arxiv.org/pdf/2609.28182v2",
+                "source": "arxiv.org",
+                "primary_category": "cs.AI",
+                "categories": [
+                  "cs.AI",
+                  "cs.LG",
+                  "eess.SY"
+                ]
+              }
+            ],
+            "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+          }
+        }
+      ]
+    },
+    {
+      "id": "G06_deduplicate_pasted_results",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Yêu cầu lọc trùng danh sách có sẵn phải route tới tool mới deduplicate, không search lại. Chỉ chấm routing (run_eval gốc không so được list object); nội dung lọc kiểm bằng unit test."
+      },
+      "input": "Lọc giúp mình các link trùng trong danh sách này: [{\"title\":\"OpenAI ra mắt model mới\",\"url\":\"https://example.com/openai-model/#top\"},{\"title\":\"Model mới của OpenAI\",\"url\":\"https://example.com/openai-model\"},{\"title\":\"Nvidia Q3\",\"url\":\"https://example.com/nvidia\"}]",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "deduplicate",
+            "args": {}
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "deduplicate",
+            "args": {
+              "items": [
+                {
+                  "title": "OpenAI ra mắt model mới",
+                  "url": "https://example.com/openai-model/#top"
+                },
+                {
+                  "title": "Model mới của OpenAI",
+                  "url": "https://example.com/openai-model"
+                },
+                {
+                  "title": "Nvidia Q3",
+                  "url": "https://example.com/nvidia"
+                }
+              ]
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "deduplicate",
+          "args": {
+            "items": [
+              {
+                "title": "OpenAI ra mắt model mới",
+                "url": "https://example.com/openai-model/#top"
+              },
+              {
+                "title": "Model mới của OpenAI",
+                "url": "https://example.com/openai-model"
+              },
+              {
+                "title": "Nvidia Q3",
+                "url": "https://example.com/nvidia"
+              }
+            ]
+          },
+          "result": {
+            "tool": "deduplicate",
+            "items": [
+              {
+                "title": "OpenAI ra mắt model mới",
+                "url": "https://example.com/openai-model/#top"
+              },
+              {
+                "title": "Nvidia Q3",
+                "url": "https://example.com/nvidia"
+              }
+            ],
+            "input_count": 3,
+            "item_count": 2,
+            "duplicate_count": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_wiki_concept_definition",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Câu hỏi định nghĩa/kiến thức nền route tới wiki thay vì lookup."
+      },
+      "input": "Transformer trong deep learning là gì? Cho mình định nghĩa ngắn theo Wikipedia.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "wiki",
+            "args": {}
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "wiki",
+            "args": {
+              "query": "Transformer",
+              "lang": "vi"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "wiki",
+          "args": {
+            "query": "Transformer",
+            "lang": "vi"
+          },
+          "result": {
+            "tool": "wiki_summary",
+            "query": "Transformer",
+            "lang": "vi",
+            "items": [
+              {
+                "title": "GPT (mô hình ngôn ngữ)",
+                "url": "https://vi.wikipedia.org/wiki/GPT_(m%C3%B4_h%C3%ACnh_ng%C3%B4n_ng%E1%BB%AF)",
+                "source": "vi.wikipedia.org",
+                "summary": "Generative pre-trained transformer (GPT) là một loại mô hình ngôn ngữ lớn (LLM) được sử dụng rộng rãi trong các chatbot AI tạo sinh. GPT dựa trên một kiến trúc học sâu gọi là transformer. Chúng được huấn luyện trước trên các bộ dữ liệu lớn gồm nội dung không gắn nhãn, và có khả năng tạo ra nội dung mới.\nOpenAI là tổ chức đầu tiên áp dụng phương pháp tiền huấn luyện tạo sinh vào kiến trúc transformer, giới thiệu mô hình GPT-1 vào năm 2018. Kể từ đó, công ty đã phát hành nhiều mô hình GPT lớn hơn. Chatbot ChatGPT, được phát hành vào cuối năm 2022 (sử dụng GPT-3.5), sau đó là sự xuất hiện của nhiều chatbot cạnh tranh sử dụng các generative pre-trained transformer riêng để tạo văn bản, như Gemini, DeepSeek và Claude.\nGPT chủ yếu được dùng để tạo văn bản, nhưng cũng có thể được huấn luyện để tạo…"
+              },
+              {
+                "title": "Transformer (mô hình học máy)",
+                "url": "https://vi.wikipedia.org/wiki/Transformer_(m%C3%B4_h%C3%ACnh_h%E1%BB%8Dc_m%C3%A1y)",
+                "source": "vi.wikipedia.org",
+                "summary": "Transformer là một mô hình học sâu được giới thiệu năm 2017, được dùng chủ yếu ở lĩnh vực xử lý ngôn ngữ tự nhiên (NLP) và thị giác máy tính (CV).\nGiống như các mạng thần kinh hồi quy (recurrent neural network - RNN), các Transformer được thiết kế để xử lý dữ liệu tuần tự, chẳng hạn như ngôn ngữ tự nhiên, cho các tác vụ như dịch máy thống kê hay tóm tắt tự động. Tuy nhiên, khác với RNN, các Transformer không yêu cầu dữ liệu tuần tự được xử lý theo thứ tự. Ví dụ, nếu dữ liệu đầu vào là một câu ngôn ngữ tự nhiên, Transformer không cần phải xử lý phần đầu câu trước phần cuối câu. Do tính năng này, Transformer cho phép nhiều phép tính toán song song và vì vậy giảm thời gian huấn luyện.\nTransformer được ra mắt vào năm 2017 bởi một nhóm tác giả tại Google Brain và càng ngày nó là mô hình được nhiều…"
+              },
+              {
+                "title": "Trí tuệ nhân tạo",
+                "url": "https://vi.wikipedia.org/wiki/Tr%C3%AD_tu%E1%BB%87_nh%C3%A2n_t%E1%BA%A1o",
+                "source": "vi.wikipedia.org",
+                "summary": "Trí tuệ nhân tạo (tiếng Anh: artificial intelligence, viết tắt là AI) là khả năng của các hệ thống máy tính thực hiện các nhiệm vụ liên quan đến trí thông minh của con người, như học tập, suy luận, giải quyết vấn đề, nhận thức và đưa ra quyết định. Đây là một lĩnh vực nghiên cứu thuộc khoa học máy tính tập trung phát triển và nghiên cứu các phương pháp và phần mềm giúp máy móc có thể nhận thức môi trường xung quanh, cũng như sử dụng học tập và trí tuệ để thực hiện hành động nhằm tối đa hóa khả năng đạt được các mục tiêu đã định.\nCác ứng dụng nổi bật của AI bao gồm công cụ tìm kiếm web tiên tiến (ví dụ: Google Tìm kiếm); hệ thống đề xuất (được sử dụng bởi YouTube, Amazon và Netflix); trợ lý ảo (ví dụ: Trợ lý Google, Siri và Alexa); xe tự lái (ví dụ: Waymo); công cụ sáng tạo và nội dung tạo sinh…"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_github_popular_python_repos",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Repo GitHub -> github_search; 'nổi bật nhất' -> sort=stars; ngôn ngữ tách ra arg language."
+      },
+      "input": "Tìm các repo GitHub nổi bật nhất về LLM agent viết bằng Python.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "sort": "stars",
+              "language": "Python"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "query": "LLM agent",
+              "sort": "stars",
+              "language": "Python"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "github_search",
+          "args": {
+            "query": "LLM agent",
+            "sort": "stars",
+            "language": "Python"
+          },
+          "result": {
+            "tool": "github_search",
+            "query": "LLM agent",
+            "sort": "stars",
+            "language": "Python",
+            "items": [
+              {
+                "title": "NousResearch/hermes-agent",
+                "url": "https://github.com/NousResearch/hermes-agent",
+                "summary": "The agent that grows with you",
+                "stars": 262137,
+                "language": "Python",
+                "updated_at": "2026-11-10T04:42:18Z"
+              },
+              {
+                "title": "langgenius/dify",
+                "url": "https://github.com/langgenius/dify",
+                "summary": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
+                "stars": 160792,
+                "language": "Python",
+                "updated_at": "2026-11-10T04:47:27Z"
+              },
+              {
+                "title": "langchain-ai/langchain",
+                "url": "https://github.com/langchain-ai/langchain",
+                "summary": "The agent engineering platform.",
+                "stars": 149288,
+                "language": "Python",
+                "updated_at": "2026-11-10T04:12:11Z"
+              },
+              {
+                "title": "Shubhamsaboo/awesome-llm-apps",
+                "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+                "summary": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+                "stars": 144319,
+                "language": "Python",
+                "updated_at": "2026-11-10T01:54:13Z"
+              },
+              {
+                "title": "TauricResearch/TradingAgents",
+                "url": "https://github.com/TauricResearch/TradingAgents",
+                "summary": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+                "stars": 121683,
+                "language": "Python",
+                "updated_at": "2026-11-04T10:13:58Z"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM06_github_refine_language",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn: giữ sort=stars từ lượt trước, thêm bộ lọc language=TypeScript cho github_search."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm repo GitHub phổ biến về RAG."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ lấy repo viết bằng TypeScript thôi."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "github_search",
+            "args": {
+              "sort": "stars",
+              "language": "TypeScript"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIStatusError: Error code: 402 - This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "GM07_no_handle_inferred_from_context",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Phát hiện từ live chat v3: lượt trước nhắc tới OpenAI nhưng user KHÔNG nói lấy tweet của tài khoản nào -> phải clarify, không được tự suy ra handle từ ngữ cảnh."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin tức về OpenAI hôm nay có gì nổi bật?"
+        },
+        {
+          "role": "user",
+          "content": "Tóm tắt 5 tweet mới nhất giúp mình"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "OpenAI",
+              "topic": "news",
+              "timeframe": "day",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "missing_info",
+        "failures": [
+          "missing tool call clarify",
+          "extra tool call lookup"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "OpenAI",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "OpenAI",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "OpenAI",
+                "url": "https://tavily.com/knowledge/company/p4PyTakV77G9",
+                "source": "tavily.com",
+                "summary": "# OpenAI\nID: p4PyTakV77G9\nWebsite: www.openai.com\nHeadquarters: San Francisco, CA, United States\nLinkedIn: www.linkedin.com/company/openai · 11,529,792 followers\nIndustry: Research Services\nIndustry codes: SIC 87, 873, NAICS 54, 541\nCompany type: Partnership\nSocial profiles: www.facebook.com/openai, www.twitter.com/openai, www.crunchbase.com/organization/openai, www.instagram.com/openai.gpt, www.instagram.com/openai, www.youtube.com/@openai, www.youtube.com/openai, github.com/openai [...] Description: OpenAI is a company that believes in research and development to lead to artificial general intelligence, a system that can solve human-level problems. [...] ## Products and services\nKeywords: research & development, emerging ai software, openai, artificial intelligence machine learning, artificial general intelligence, development, research, human-level problems, technology, application-software, artificial-intelligence, platform",
+                "score": 0.90593183
+              },
+              {
+                "title": "OpenAI Tries to Ease Backlash Against AI Data Centers",
+                "url": "https://www.bankinfosecurity.com/openai-hopes-to-ease-backlash-against-ai-data-centers-a-33327",
+                "source": "bankinfosecurity.com",
+                "summary": "OpenAI is promising to pay for the power costs accrued by its data centers and give communities more say over construction. The list of commitments came two days after midterm election results favored candidates that opposed the data center buildout aimed at supporting the growing artificial intelligence industry.\n\nSee Also: Frictionless Security: How AI is Redefining Access in Highly Regulated Industries [...] For enterprise technology leaders, the announcements are a mixed bag. OpenAI is attempting to ensure it has access to the compute it will need to grow by assuaging the concerns of communities that are increasingly saying no to data center expansion, but for businesses that are still trying to formulate their AI strategy, OpenAI's compact doesn't offer much certainty. [...] The compact outlined locally tailored agreements for future OpenAI campuses, community input into development plans and annual public progress reports. OpenAI said it will cover the electricity it consumes and the incremental infrastructure costs required to serve its sites. It will also provide financial assurances before major spending begins to protect other utility customers if a project is delayed, reduced or canceled.",
+                "score": 0.62934244
+              },
+              {
+                "title": "New lawsuit alleges conspiracy in Effingham County OpenAI land sale - The Current",
+                "url": "https://thecurrentga.org/2026/11/09/new-lawsuit-alleges-conspiracy-in-effingham-county-openai-land-sale",
+                "source": "thecurrentga.org",
+                "summary": "The lawsuit recounts how the negotiations between these officials and the tech company known for developing ChatGPT evolved, citing many facts revealed by The Current GA since the deal was made public in July. The terms of the deal include approximately $870 million in tax revenue over 15 years from OpenAI, as well as the company investing $4 billion and creating 80 jobs during each of the five phases of construction from 2028 to 2034, according to the memorandum of understanding. [...] This is the third lawsuit related to OpenAI’s arrival in the community.  In early September, the same group of plaintiffs sued the county, asking a judge to invalidate the data center zoning. Later that month, residents and environmental group One Hundred Miles asked a judge to throw out the development authority’s deals with the software company’s affiliate. [...] The Current\n\nThe Current\n\nIn-Depth Journalism for Coastal Georgia\n\n# New lawsuit alleges conspiracy in Effingham County OpenAI land sale\n\nAvatar photo\n\n### Share this:\n\nJustin Taylor/The Current GA/CatchLight/Report for America\n\nEffingham County residents allege in a new lawsuit that local elected officials, public employees and others conspired illegally and secretly to lay the groundwork for a data center to the benefit of OpenAI, spoiling land values for everybody else.",
+                "score": 0.53619206
+              },
+              {
+                "title": "As brands dive into ChatGPT, OpenAI will let them track their mentions - Tubefilter",
+                "url": "https://www.tubefilter.com/2026/11/09/brand-mention-chatbot-chatgpt-openai-mentions",
+                "source": "tubefilter.com",
+                "summary": "Subscribe\n\nFrom a marketing standpoint, that’s a rudimentary level of analytics, but by showing brands their ChatGPT mentions, OpenAI can give them tangible evidence of the results of any marketing pushes they make on the platform. As answer engine optimization becomes a valuable marketing category — and the firms running AEO campaigns haul in big funding rounds — OpenAI is bringing improved measurement to that ecosystem. [...] Fast forward a few months, and AEO is now gaining favor. A recent report from AI search analytics platform Peec AI showed that YouTube videos show up far more frequently in chatbot responses and Google’s AI Search Overview when the descriptions of those videos receive edits. The message is clear: Tech companies want brands to play around with major chatbots, and OpenAI is equipping those brands with the metrics they need to analyze their experiments. [...] If AI chatbots are going to remain a relevant touchpoint for marketers, then agencies and brands need access to the same analytics they use in their other campaigns. Rumor has it that OpenAIis developing new tools in that area, potentially creating new opportunities for advertisers on ChatGPT.",
+                "score": 0.53342235
+              },
+              {
+                "title": "Australia to mandate AI breach reporting, create regulator after OpenAI breach | Reuters",
+                "url": "https://www.reuters.com/world/australia-tightens-ai-oversight-rules-after-openai-agent-breached-government-2026-11-10",
+                "source": "reuters.com",
+                "summary": "OpenAI has said it learned of the breach only in August ​and that the incident was unintentional. Its review found no evidence that patient records were accessed by ‌the ⁠agent.\n\nThe breach has added to friction between Australia and US technology companies, after Canberra refused ChatGPT maker OpenAI and rival Anthropic exemptions from copyright laws for model training, instead requiring them to negotiate licensing agreements with Australian rights holders. [...] The OpenAI agent gained unauthorised access to the medical statistics portal ​of Medicare, Australia's universal health insurance programme, while conducting research on public medical ​spending, the government said in September. The breach triggered a rapid ⁠government review into the incident.\n\nThe Misinformation Monitor newsletter rounds up international misinformation narratives, with a \"Real or Fake?\" quiz in every edition. Sign up here. [...] SYDNEY, Nov 10 (Reuters) - Australia will require artificial intelligence companies to report breaches ‌and consider changes to criminal law to address \"serious misconduct\", Prime Minister Anthony Albanese said on Tuesday, after an OpenAI agent broke into a government website.",
+                "score": 0.40924495
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -119,3 +119,43 @@ tools:
         sort_by: {type: string, enum: [relevance, date], default: "relevance", description: "Sắp xếp theo độ liên quan ('relevance' - bài nổi bật/nhiều điểm) hoặc mới nhất theo thời gian ('date')."}
         max_results: {type: integer, default: 5, description: "Số lượng bài viết trả về (1 đến 20, mặc định 5)."}
       required: [query]
+
+  # ---------------- Team-added tools (v3) ----------------
+  - name: deduplicate
+    description: "Lọc bỏ các mục trùng lặp trong danh sách kết quả research ĐÃ CÓ SẴN (người dùng dán vào hoặc đã thu thập từ các tool trước), giữ mục xuất hiện đầu tiên và thứ tự ban đầu. So khớp theo URL (bỏ qua #fragment, dấu / cuối, hoa/thường của host), nếu không có URL thì theo tiêu đề. KHÔNG tìm kiếm, KHÔNG đọc URL, KHÔNG xếp hạng."
+    parameters:
+      type: object
+      properties:
+        items:
+          type: array
+          default: []
+          description: "Danh sách item cần lọc trùng (mỗi item có title và/hoặc url)."
+          items:
+            type: object
+            properties:
+              title: {type: string}
+              url: {type: string}
+              source: {type: string}
+              summary: {type: string}
+      required: [items]
+
+  - name: wiki
+    description: "Lấy tóm tắt kiến thức nền từ Wikipedia: định nghĩa khái niệm, giới thiệu người, tổ chức ('X là gì', 'X là ai', 'theo Wikipedia'). KHÔNG dùng cho tin tức/sự kiện mới (dùng lookup với topic='news') hoặc bài đăng mạng xã hội."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Chỉ tên khái niệm/người/tổ chức, không kèm từ để hỏi (ví dụ: 'Transformer', 'Andrej Karpathy')."}
+        lang: {type: string, enum: [en, vi], default: "en", description: "Ngôn ngữ Wikipedia: 'vi' chỉ khi người dùng yêu cầu Wikipedia tiếng Việt, còn lại 'en'."}
+        limit: {type: integer, default: 3, description: "Số bài Wikipedia trả về (1 đến 5)."}
+      required: [query]
+
+  - name: github_search
+    description: "Tìm repository công khai trên GitHub (thư viện, dự án mã nguồn mở, code mẫu). Dùng khi người dùng hỏi repo/dự án/thư viện trên GitHub. KHÔNG dùng để tìm paper (dùng papers) hay tin tức (dùng lookup)."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Chỉ từ khóa chủ đề, không kèm chữ 'GitHub', 'repo' hay tên ngôn ngữ (ví dụ: 'llm agent')."}
+        sort: {type: string, enum: [stars, updated, best_match], default: "stars", description: "'stars' cho repo nổi bật/phổ biến nhất, 'updated' cho repo mới cập nhật/đang hoạt động, 'best_match' cho các trường hợp còn lại."}
+        language: {type: string, default: "", description: "Ngôn ngữ lập trình nếu người dùng nêu (ví dụ 'Python'), nếu không thì để rỗng."}
+        limit: {type: integer, default: 5, description: "Số repo trả về (1 đến 20)."}
+      required: [query]

@@ -239,3 +239,140 @@ def test_hackernews_http_failure_returns_error_dict(fake_http) -> None:
 
     assert result["error"] == "HTTPError"
     assert "503" in result["message"]
+
+
+# ---------------- deduplicate (new core tool) ----------------
+
+def test_deduplicate_removes_url_duplicates_and_preserves_order() -> None:
+    items = [
+        {"title": "First", "url": "https://Example.com/story/#top"},
+        {"title": "Duplicate", "url": "https://example.com/story"},
+        {"title": "Other", "url": "https://example.com/other"},
+    ]
+
+    result = TOOL_FUNCTIONS["deduplicate"](items=items)
+
+    assert result["item_count"] == 2
+    assert result["duplicate_count"] == 1
+    assert result["items"] == [items[0], items[2]]
+
+
+def test_deduplicate_rejects_non_list_input() -> None:
+    result = TOOL_FUNCTIONS["deduplicate"](items="not a list")
+
+    assert result["error"] == "ValueError"
+    assert result["message"] == "items must be a list"
+
+
+def test_deduplicate_rejects_non_object_item() -> None:
+    result = TOOL_FUNCTIONS["deduplicate"](items=[{"title": "Valid"}, "invalid"])
+
+    assert result["error"] == "ValueError"
+    assert result["message"] == "every item must be an object"
+
+
+# ---------------- wiki (new bonus tool) ----------------
+
+from tools.github_search.tool import github_search  # noqa: E402
+from tools.wiki.tool import wiki_summary  # noqa: E402
+
+
+def test_wiki_sends_search_request_and_orders_pages_by_index(fake_http) -> None:
+    calls = fake_http(FakeResponse({"query": {"pages": {
+        "2": {"index": 2, "title": "Transformer (deep learning)", "fullurl": "https://en.wikipedia.org/wiki/T2", "extract": "Second. "},
+        "1": {"index": 1, "title": "Attention (machine learning)", "fullurl": "https://en.wikipedia.org/wiki/A1", "extract": " First."},
+    }}}))
+
+    result = wiki_summary(query="transformer model", lang="en", limit=2)
+
+    assert calls[0]["method"] == "GET"
+    assert calls[0]["url"] == "https://en.wikipedia.org/w/api.php"
+    assert calls[0]["params"]["gsrsearch"] == "transformer model"
+    assert calls[0]["params"]["gsrlimit"] == 2
+    assert "User-Agent" in calls[0]["headers"]
+    assert [item["title"] for item in result["items"]] == ["Attention (machine learning)", "Transformer (deep learning)"]
+    assert result["items"][0] == {
+        "title": "Attention (machine learning)", "url": "https://en.wikipedia.org/wiki/A1",
+        "source": "en.wikipedia.org", "summary": "First.",
+    }
+
+
+def test_wiki_vietnamese_lang_uses_vi_domain_and_clamps_limit(fake_http) -> None:
+    calls = fake_http(FakeResponse({"query": {"pages": {}}}))
+
+    result = wiki_summary(query="Trí tuệ nhân tạo", lang="VI", limit="50")
+
+    assert calls[0]["url"] == "https://vi.wikipedia.org/w/api.php"
+    assert calls[0]["params"]["gsrlimit"] == 5
+    assert result["items"] == []
+
+
+def test_wiki_empty_query_returns_error_without_request(fake_http) -> None:
+    calls = fake_http(FakeResponse({}))
+
+    result = wiki_summary(query="   ")
+
+    assert result["error"] == "ValueError"
+    assert calls == []
+
+
+def test_wiki_unsupported_lang_returns_error_without_request(fake_http) -> None:
+    calls = fake_http(FakeResponse({}))
+
+    result = wiki_summary(query="AI", lang="fr")
+
+    assert result["error"] == "ValueError"
+    assert calls == []
+
+
+def test_wiki_http_error_returns_error_dict(fake_http) -> None:
+    fake_http(FakeResponse(status_code=503))
+    assert wiki_summary(query="AI")["error"] == "HTTPError"
+
+
+def test_wiki_is_registered_in_tool_registry() -> None:
+    assert TOOL_FUNCTIONS["wiki"] is wiki_summary
+
+
+# ---------------- github_search (new bonus tool) ----------------
+
+def test_github_search_builds_query_with_language_and_maps_repos(monkeypatch, fake_http) -> None:
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    calls = fake_http(FakeResponse({"items": [
+        {"full_name": "org/agent-kit", "html_url": "https://github.com/org/agent-kit", "description": None,
+         "stargazers_count": 4200, "language": "Python", "pushed_at": "2026-11-01T00:00:00Z"},
+    ]}))
+
+    result = github_search(query="llm agent", language="Python", limit=1)
+
+    assert calls[0]["url"] == "https://api.github.com/search/repositories"
+    assert calls[0]["params"] == {"q": "llm agent language:Python", "per_page": 1, "sort": "stars", "order": "desc"}
+    assert "Authorization" not in calls[0]["headers"]
+    assert result["items"] == [{
+        "title": "org/agent-kit", "url": "https://github.com/org/agent-kit", "summary": "",
+        "stars": 4200, "language": "Python", "updated_at": "2026-11-01T00:00:00Z",
+    }]
+
+
+def test_github_search_best_match_omits_sort_and_uses_token(monkeypatch, fake_http) -> None:
+    monkeypatch.setenv("GITHUB_TOKEN", "test-token")
+    calls = fake_http(FakeResponse({"items": []}))
+
+    github_search(query="mcp server", sort="best_match")
+
+    assert "sort" not in calls[0]["params"]
+    assert calls[0]["headers"]["Authorization"] == "Bearer test-token"
+
+
+def test_github_search_invalid_input_returns_error_without_request(fake_http) -> None:
+    calls = fake_http(FakeResponse({}))
+
+    assert github_search(query="")["error"] == "ValueError"
+    assert github_search(query="agent", sort="forks")["error"] == "ValueError"
+    assert calls == []
+
+
+def test_github_search_rate_limit_returns_error_dict(monkeypatch, fake_http) -> None:
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    fake_http(FakeResponse(status_code=403))
+    assert github_search(query="agent")["error"] == "HTTPError"
