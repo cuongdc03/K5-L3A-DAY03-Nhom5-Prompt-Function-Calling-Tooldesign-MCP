@@ -45,14 +45,14 @@ tools:
       required: [query]
 
   - name: lookup
-    description: "Tra cứu thông tin trên internet."
+    description: "Tìm kiếm thông tin chung hoặc tin tức thời sự trên web qua Tavily. Dùng khi cần tra cứu tin tức mới (topic='news') hoặc kiến thức trên internet (topic='general'). KHÔNG dùng khi đã có URL cụ thể (dùng fetch), khi tìm tweet trên X/Twitter (dùng social_search hoặc timeline), hoặc khi tìm thảo luận trên Hacker News (dùng hackernews)."
     parameters:
       type: object
       properties:
-        query: {type: string, default: "", description: "Truy vấn"}
-        topic: {type: string, enum: [general, news], default: "general", description: "Phân loại"}
-        timeframe: {type: string, enum: [day, week, month, year], default: "week", description: "Khoảng thời gian"}
-        max_results: {type: integer, default: 5, description: "Số kết quả"}
+        query: {type: string, default: "", description: "Từ khóa chủ đề cốt lõi ngắn gọn (ví dụ: 'AI', 'robotics', 'OpenAI'). Không thêm từ 'news', 'tin tức' hay 'today' vào query."}
+        topic: {type: string, enum: [general, news], default: "general", description: "Chọn 'news' khi người dùng hỏi tin tức, thời sự, có gì mới/nổi bật; chọn 'general' khi tra cứu thông tin chung."}
+        timeframe: {type: string, enum: [day, week, month, year], default: "week", description: "Khoảng thời gian: 'hôm nay' -> 'day', 'tuần này' -> 'week', 'tháng này' -> 'month', 'năm nay' -> 'year'."}
+        max_results: {type: integer, default: 5, description: "Số kết quả trả về tối đa (mặc định 5)."}
       required: [query]
 
   - name: fetch
@@ -123,3 +123,13 @@ tools:
         max_pages: {type: integer, default: 5, description: "Số trang"}
         max_chars: {type: integer, default: 8000, description: "Số ký tự"}
       required: [arxiv_url]
+
+  - name: hackernews
+    description: "Tìm các bài đăng, tin công nghệ và thảo luận của lập trình viên trên Hacker News (HN). Dùng khi người dùng hỏi các chủ đề đang được bàn luận trên Hacker News. KHÔNG dùng cho tìm kiếm web chung (dùng lookup) hoặc Twitter/X (dùng social_search)."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Từ khóa tìm kiếm trên Hacker News (ví dụ: 'LLM', 'Rust', 'OpenAI')."}
+        sort_by: {type: string, enum: [relevance, date], default: "relevance", description: "Sắp xếp theo độ liên quan ('relevance' - bài nổi bật/nhiều điểm) hoặc mới nhất ('date')."}
+        max_results: {type: integer, default: 5, description: "Số lượng bài viết trả về (1 đến 20, mặc định 5)."}
+      required: [query]
