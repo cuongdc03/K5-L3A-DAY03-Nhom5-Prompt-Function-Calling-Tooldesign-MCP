@@ -1,7 +1,157 @@
 {
   "dataset_id": "day04_v2_research_group",
   "dataset_role": "group",
-  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
+  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp (5 single-turn + 5 multi-turn): kiểm tra tool mới hackernews, tham số lookup/timeline/social_search/papers, guardrail xác nhận send, và từ chối câu hỏi ngoài phạm vi.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_hackernews_routing",
+      "phase": "B",
+      "suite": "group",
+      "query": "Trên Hacker News đang có thảo luận gì nổi bật về Rust?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "hackernews", "args": {"query": "Rust", "sort_by": "relevance"}}]},
+      "metadata": {
+        "skill": "routing_new_tool_hackernews",
+        "difficulty": "easy",
+        "what_it_tests": "Hỏi thảo luận nổi bật trên Hacker News → route đúng tới tool mới hackernews với query='Rust', sort_by='relevance'."
+      }
+    },
+    {
+      "id": "G02_lookup_monthly_news_arg",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tin tức về semiconductor trong tháng này có gì đáng chú ý?",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "semiconductor", "topic": "news", "timeframe": "month"}}]},
+      "metadata": {
+        "skill": "lookup_news_month_timeframe",
+        "difficulty": "medium",
+        "what_it_tests": "Tin tức theo tháng → lookup với query cốt lõi 'semiconductor', topic='news', timeframe='month'."
+      }
+    },
+    {
+      "id": "G03_karpathy_handle_and_limit",
+      "phase": "B",
+      "suite": "group",
+      "query": "Lấy 4 tweet gần đây của Andrej Karpathy",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "karpathy", "limit": 4}}]},
+      "metadata": {
+        "skill": "timeline_handle_mapping_and_limit",
+        "difficulty": "easy",
+        "what_it_tests": "Ánh xạ tên Andrej Karpathy → screenname='karpathy' (không có @) và trích đúng limit=4."
+      }
+    },
+    {
+      "id": "G04_confirm_before_urgent_send",
+      "phase": "B",
+      "suite": "group",
+      "query": "Gửi ngay bản tóm tắt tin AI hôm nay lên kênh Telegram của nhóm nhé",
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {
+        "skill": "guardrail_confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "Dù user dùng từ 'Gửi ngay', chưa có xác nhận trước đó thì phải gọi clarify(response_type='yes_no') chứ không tự ý gọi send."
+      }
+    },
+    {
+      "id": "G05_out_of_scope_poem",
+      "phase": "B",
+      "suite": "group",
+      "query": "Làm giúp mình một bài thơ lục bát 8 câu về mùa thu Hà Nội.",
+      "failure_type": "out_of_scope",
+      "expect": {"no_tool": true, "behavior": "refuse"},
+      "metadata": {
+        "skill": "out_of_scope_creative_writing",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu sáng tác thơ ngoài phạm vi research → không gọi bất kỳ tool nào và từ chối lịch sự."
+      }
+    },
+    {
+      "id": "GM01_clarify_then_send_confirmed",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Đăng bản tin 'OpenAI ra mắt mô hình mới' lên Telegram giúp mình"},
+        {"role": "user", "content": "Mình xác nhận đồng ý gửi nhé, đăng nội dung đó lên Telegram đi"}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "send", "args": {"confirmed": true}}]},
+      "metadata": {
+        "skill": "multiturn_send_after_confirmation",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: sau khi người dùng đã xác nhận đồng ý gửi ở lượt 2 → gọi send với confirmed=true."
+      }
+    },
+    {
+      "id": "GM02_switch_web_to_hackernews",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tìm trên web tin tức về Claude hôm nay"},
+        {"role": "user", "content": "Thôi bỏ tìm web đi, chuyển sang tìm thảo luận trên Hacker News"},
+        {"role": "user", "content": "Giữ chủ đề Claude và lấy 5 bài mới nhất theo thời gian (date) nhé"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "hackernews", "args": {"query": "Claude", "sort_by": "date", "max_results": 5}}]},
+      "metadata": {
+        "skill": "multiturn_switch_to_hackernews",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: chuyển từ lookup sang tool mới hackernews, giữ chủ đề 'Claude' và nhận đúng sort_by='date', max_results=5."
+      }
+    },
+    {
+      "id": "GM03_lookup_carryover_change_timeframe",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tin tức về OpenAI hôm nay có gì mới?"},
+        {"role": "user", "content": "Đổi sang tìm trong cả tháng này đi"},
+        {"role": "user", "content": "Vẫn giữ chủ đề tin tức về OpenAI nhé"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "OpenAI", "topic": "news", "timeframe": "month"}}]},
+      "metadata": {
+        "skill": "multiturn_lookup_timeframe_update",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: giữ nguyên query='OpenAI' và topic='news' từ lượt 1, cập nhật timeframe từ 'day' sang 'month'."
+      }
+    },
+    {
+      "id": "GM04_social_search_update_to_top",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Mọi người đang bàn gì về Llama 3 trên Twitter?"},
+        {"role": "user", "content": "Chỉ lấy các tweet phổ biến (top) nhất thôi"},
+        {"role": "user", "content": "Lấy đúng 3 tweet về Llama 3 nhé"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "social_search", "args": {"query": "Llama 3", "search_type": "Top", "limit": 3}}]},
+      "metadata": {
+        "skill": "multiturn_social_search_top_limit",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: giữ từ khóa 'Llama 3', đổi search_type sang 'Top' và cập nhật limit=3."
+      }
+    },
+    {
+      "id": "GM05_clarify_then_arxiv_papers",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tìm giúp mình một số bài báo khoa học trên arXiv"},
+        {"role": "user", "content": "Chủ đề là AI agent evaluation"},
+        {"role": "user", "content": "Lấy 3 bài có ngày cập nhật mới nhất (lastUpdatedDate)"}
+      ],
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "papers", "args": {"query": "AI agent evaluation", "max_results": 3, "sort_by": "lastUpdatedDate"}}]},
+      "metadata": {
+        "skill": "multiturn_arxiv_fill_topic_and_sort",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: bổ sung chủ đề 'AI agent evaluation' ở lượt 2 và áp dụng max_results=3, sort_by='lastUpdatedDate' ở lượt 3."
+      }
+    }
+  ]
 }

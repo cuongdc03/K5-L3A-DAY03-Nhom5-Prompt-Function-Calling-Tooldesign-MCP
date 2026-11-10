@@ -1,0 +1,333 @@
+{
+  "transcript_id": "v0_openrouter_20261110T102924931410",
+  "version": "v0",
+  "artifact_version": "v0+peb1c8179815b+t5b22a2476d41",
+  "prompt_hash": "eb1c8179815bd79d34de7d326420bb99b3072e6e8ae96464c02d4411f905fc68",
+  "tools_hash": "5b22a2476d41b989d5dc1e54f24ce7890e781909deb2f7afafb856ab53a6d7c0",
+  "provider": "openrouter",
+  "model": null,
+  "system_prompt": "D:\\AI thuc chien\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\AI thuc chien\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\tools.yaml",
+  "interface": "streamlit",
+  "created_at": "2026-11-10T10:29:24",
+  "updated_at": "2026-11-10T11:15:36",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-10T11:14:34",
+      "user": "Tin mới nhất về OpenAI trong tuần này?",
+      "status": "answered",
+      "assistant_text": "Dưới đây là những tin tức mới nhất về OpenAI trong tuần này:\n\n1. **OpenAI nhận được 11 tỷ USD tài trợ với định giá 1,25 nghìn tỷ USD**  \n   OpenAI đã hoàn tất vòng tài trợ mới trị giá 11 tỷ USD, phần đầu tiên trong một vòng gọi vốn mà công ty định giá ở mức 1,25 nghìn tỷ USD. Số tiền này chỉ là một phần trong mục tiêu ban đầu lên tới 30 tỷ USD. (Nguồn: [Reuters](https://www.reuters.com/business/openai-secures-11-billion-funding-125-trillion-valuation-bloomberg-news-reports-2026-11-06))\n\n2. **OpenAI khởi động chiến dịch thay đổi quan điểm của cử tri về các trung tâm dữ liệu**  \n   OpenAI đã công bố các chính sách nhằm xây dựng lòng tin với cộng đồng địa phương và thuyết phục họ rằng các trung tâm dữ liệu sẽ mang lại lợi ích cho họ. Công ty sẽ không còn sử dụng các thỏa thuận không tiết lộ với các quan chức công khi thảo luận về các địa điểm tương lai. (Nguồn: [Reuters](https://www.reuters.com/business/openai-kicks-off-charm-offensive-change-voters-view-data-centers-2026-11-05))\n\n3. **Nhân viên OpenAI cảnh báo về các lỗ hổng an ninh hoạt động**  \n   Một số nhân viên OpenAI bày tỏ lo ngại về việc quản lý không hành động đối với các vấn đề an ninh, cho rằng các biện pháp kiểm soát của công ty quá lỏng lẻo, cho phép bên ngoài dễ dàng tiếp cận thông tin nhạy cảm. (Nguồn: [Reuters](https://www.reuters.com/business/openai-employees-warned-about-operational-security-lapses-years-sources-say-2026-11-03))\n\n4. **OpenAI thiết lập tiêu chuẩn mới cho cơ sở hạ tầng AI có trách nhiệm**  \n   OpenAI nhấn mạnh tầm quan trọng của việc xây dựng cơ sở hạ tầng tính toán tại Hoa Kỳ để giảm chi phí cung cấp AI và đảm bảo rằng công nghệ này được chia sẻ rộng rãi. (Nguồn: [OpenAI](https://openai.com/index/setting-new-standard-responsible-ai-infrastructure))\n\n5. **Thông tin tổng quan về OpenAI**  \n   OpenAI là một công ty nghiên cứu có trụ sở tại San Francisco, CA, với mục tiêu phát triển trí tuệ nhân tạo tổng quát. (Nguồn: [Tavily](https://tavily.com/knowledge/company/p4PyTakV77G9))\n\nNếu bạn cần thêm thông tin chi tiết về bất kỳ tin tức nào, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "OpenAI",
+                "topic": "news",
+                "timeframe": "week"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "OpenAI",
+                "topic": "news",
+                "timeframe": "week"
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "OpenAI",
+                "topic": "news",
+                "timeframe": "week",
+                "items": [
+                  {
+                    "title": "OpenAI",
+                    "url": "https://tavily.com/knowledge/company/p4PyTakV77G9",
+                    "source": "tavily.com",
+                    "summary": "# OpenAI\nID: p4PyTakV77G9\nWebsite: www.openai.com\nHeadquarters: San Francisco, CA, United States\nLinkedIn: www.linkedin.com/company/openai · 11,529,792 followers\nIndustry: Research Services\nIndustry codes: SIC 87, 873, NAICS 54, 541\nCompany type: Partnership\nSocial profiles: www.facebook.com/openai, www.twitter.com/openai, www.crunchbase.com/organization/openai, www.instagram.com/openai.gpt, www.instagram.com/openai, www.youtube.com/@openai, www.youtube.com/openai, github.com/openai [...] Description: OpenAI is a company that believes in research and development to lead to artificial general intelligence, a system that can solve human-level problems. [...] ## Products and services\nKeywords: research & development, emerging ai software, openai, artificial intelligence machine learning, artificial general intelligence, development, research, human-level problems, technology, application-software, artificial-intelligence, platform",
+                    "score": 0.90593183
+                  },
+                  {
+                    "title": "Setting a new standard for responsible AI infrastructure | OpenAI",
+                    "url": "https://openai.com/index/setting-new-standard-responsible-ai-infrastructure",
+                    "source": "openai.com",
+                    "summary": "The promise of AI is that it gives people more power to shape their own futures. It can help someone learn a new skill, build a business, or solve a problem that was previously out of reach. Building more computing infrastructure capacity in the United States can help lower the cost of delivering AI, put these tools in more people’s hands, and ensure America stays at the forefront of the technology. [...] protect residents, and ensure that the benefits of AI infrastructure are broadly shared. [...] Create opportunities for local workers and businesses.We’ll publish the jobs we expect to create, work with unions and training providers to help residents prepare for them, and report annually on hiring and apprenticeships. We’ll also make sustained investments in priorities residents help select.",
+                    "score": 0.72231215
+                  },
+                  {
+                    "title": "OpenAI gets $11 billion funding at $1.25 trillion valuation, source says | Reuters",
+                    "url": "https://www.reuters.com/business/openai-secures-11-billion-funding-125-trillion-valuation-bloomberg-news-reports-2026-11-06",
+                    "source": "reuters.com",
+                    "summary": "Nov 6 (Reuters) - OpenAI has closed ‌on new funding of $11 billion, the initial part of a round ​that values the company ​at $1.25 trillion, a source familiar with ⁠the matter said on Friday.\n\nThe $11 ​billion raised so far represents ​only a portion of OpenAI's original target of up to $30 billion, while ​the company's valuation has ​come down from the $1.5 trillion level it ‌had ⁠initially sought, two investors said. [...] The Reuters Daily Briefing newsletter provides all the news you need to start your day. Sign up here.\n\nAdvertisement · Scroll to continue\n\nSoftBank and MGX participated in the funding, the investors said.\n\nBloomberg News reported ​on the ​funding ⁠earlier on Friday.\n\nSentiment toward AI companies has ​cooled in the last ​month, ⁠with some investors valuing rival Anthropic's planned IPO at about $1.5 ⁠trillion, ​below earlier expectations ​of roughly $2 trillion.",
+                    "score": 0.7147281
+                  },
+                  {
+                    "title": "OpenAI kicks off charm offensive to change voters' view of data centers | Reuters",
+                    "url": "https://www.reuters.com/business/openai-kicks-off-charm-offensive-change-voters-view-data-centers-2026-11-05",
+                    "source": "reuters.com",
+                    "summary": "SAN FRANCISCO, Nov 5 (Reuters) - Stunning ​victories by Democrats in US midterm elections this week have been interpreted by many as Americans repudiating tech ‌industry plans to build data centers across the country. OpenAI has now embarked on new strategies to change their minds.\n\nThe AI lab on Thursday laid out policies — in the works since August — intended to help the company build more trust with local communities and convince them that data centers will ​benefit them. [...] OpenAI officials, along with many of their peers in tech, ​have spent the last ⁠two years trying to build ties with the administration of US President Donald Trump in hopes of shaping federal policy around AI.\n\nOpenAI CEO Sam Altman donated $1 million to Trump's inaugural committee and later attended Trump's second inauguration. Last year, Brockman donated $25 million in his personal capacity to ⁠a Trump ​super PAC. [...] The Reuters Daily Briefing newsletter provides all the news you need to start your day. Sign up here.\n\nOpenAI said it will no longer use non-disclosure agreements with public officials when negotiating or discussing future sites, although ​proprietary information would still be under wraps. It will also give residents access to construction plans ⁠and their potential effect on traffic, noise and lighting.",
+                    "score": 0.66569364
+                  },
+                  {
+                    "title": "OpenAI employees warned about operational security lapses for years, sources say | Reuters",
+                    "url": "https://www.reuters.com/business/openai-employees-warned-about-operational-security-lapses-years-sources-say-2026-11-03",
+                    "source": "reuters.com",
+                    "summary": "OpenAI and Anthropic have tried to ​maintain a more open research culture to both ⁠attract employees and foster creativity that can lead to breakthroughs. The AI field is rooted in academia, where machine-learning scientists have openly discussed their research.\n\nSome OpenAI employees are increasingly worried about this approach as AI grows more capable, according to the five people. [...] When asked about employees' concerns and their view that management did not act on these issues, OpenAI spokesperson Elana Widmann ​said that OpenAI is one of the most targeted organizations in the world. As a result, the company invests heavily in its security program to protect against attacks from insiders, cybercriminals and nation-states, she said. [...] The Reuters Daily Briefing newsletter provides all the news you need to start your day. Sign up here.\n\nThese workers argued that OpenAI's controls were so lax ‌that outsiders, including foreign governments, could obtain sensitive information about the AI lab's technology with relative ease, the people said. For example, anybody at OpenAI who could access its code could see the technical details underlying many company projects.",
+                    "score": 0.6213807
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Dưới đây là những tin tức mới nhất về OpenAI trong tuần này:\n\n1. **OpenAI nhận được 11 tỷ USD tài trợ với định giá 1,25 nghìn tỷ USD**  \n   OpenAI đã hoàn tất vòng tài trợ mới trị giá 11 tỷ USD, phần đầu tiên trong một vòng gọi vốn mà công ty định giá ở mức 1,25 nghìn tỷ USD. Số tiền này chỉ là một phần trong mục tiêu ban đầu lên tới 30 tỷ USD. (Nguồn: [Reuters](https://www.reuters.com/business/openai-secures-11-billion-funding-125-trillion-valuation-bloomberg-news-reports-2026-11-06))\n\n2. **OpenAI khởi động chiến dịch thay đổi quan điểm của cử tri về các trung tâm dữ liệu**  \n   OpenAI đã công bố các chính sách nhằm xây dựng lòng tin với cộng đồng địa phương và thuyết phục họ rằng các trung tâm dữ liệu sẽ mang lại lợi ích cho họ. Công ty sẽ không còn sử dụng các thỏa thuận không tiết lộ với các quan chức công khi thảo luận về các địa điểm tương lai. (Nguồn: [Reuters](https://www.reuters.com/business/openai-kicks-off-charm-offensive-change-voters-view-data-centers-2026-11-05))\n\n3. **Nhân viên OpenAI cảnh báo về các lỗ hổng an ninh hoạt động**  \n   Một số nhân viên OpenAI bày tỏ lo ngại về việc quản lý không hành động đối với các vấn đề an ninh, cho rằng các biện pháp kiểm soát của công ty quá lỏng lẻo, cho phép bên ngoài dễ dàng tiếp cận thông tin nhạy cảm. (Nguồn: [Reuters](https://www.reuters.com/business/openai-employees-warned-about-operational-security-lapses-years-sources-say-2026-11-03))\n\n4. **OpenAI thiết lập tiêu chuẩn mới cho cơ sở hạ tầng AI có trách nhiệm**  \n   OpenAI nhấn mạnh tầm quan trọng của việc xây dựng cơ sở hạ tầng tính toán tại Hoa Kỳ để giảm chi phí cung cấp AI và đảm bảo rằng công nghệ này được chia sẻ rộng rãi. (Nguồn: [OpenAI](https://openai.com/index/setting-new-standard-responsible-ai-infrastructure))\n\n5. **Thông tin tổng quan về OpenAI**  \n   OpenAI là một công ty nghiên cứu có trụ sở tại San Francisco, CA, với mục tiêu phát triển trí tuệ nhân tạo tổng quát. (Nguồn: [Tavily](https://tavily.com/knowledge/company/p4PyTakV77G9))\n\nNếu bạn cần thêm thông tin chi tiết về bất kỳ tin tức nào, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "OpenAI",
+            "topic": "news",
+            "timeframe": "week"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "OpenAI",
+            "topic": "news",
+            "timeframe": "week",
+            "items": [
+              {
+                "title": "OpenAI",
+                "url": "https://tavily.com/knowledge/company/p4PyTakV77G9",
+                "source": "tavily.com",
+                "summary": "# OpenAI\nID: p4PyTakV77G9\nWebsite: www.openai.com\nHeadquarters: San Francisco, CA, United States\nLinkedIn: www.linkedin.com/company/openai · 11,529,792 followers\nIndustry: Research Services\nIndustry codes: SIC 87, 873, NAICS 54, 541\nCompany type: Partnership\nSocial profiles: www.facebook.com/openai, www.twitter.com/openai, www.crunchbase.com/organization/openai, www.instagram.com/openai.gpt, www.instagram.com/openai, www.youtube.com/@openai, www.youtube.com/openai, github.com/openai [...] Description: OpenAI is a company that believes in research and development to lead to artificial general intelligence, a system that can solve human-level problems. [...] ## Products and services\nKeywords: research & development, emerging ai software, openai, artificial intelligence machine learning, artificial general intelligence, development, research, human-level problems, technology, application-software, artificial-intelligence, platform",
+                "score": 0.90593183
+              },
+              {
+                "title": "Setting a new standard for responsible AI infrastructure | OpenAI",
+                "url": "https://openai.com/index/setting-new-standard-responsible-ai-infrastructure",
+                "source": "openai.com",
+                "summary": "The promise of AI is that it gives people more power to shape their own futures. It can help someone learn a new skill, build a business, or solve a problem that was previously out of reach. Building more computing infrastructure capacity in the United States can help lower the cost of delivering AI, put these tools in more people’s hands, and ensure America stays at the forefront of the technology. [...] protect residents, and ensure that the benefits of AI infrastructure are broadly shared. [...] Create opportunities for local workers and businesses.We’ll publish the jobs we expect to create, work with unions and training providers to help residents prepare for them, and report annually on hiring and apprenticeships. We’ll also make sustained investments in priorities residents help select.",
+                "score": 0.72231215
+              },
+              {
+                "title": "OpenAI gets $11 billion funding at $1.25 trillion valuation, source says | Reuters",
+                "url": "https://www.reuters.com/business/openai-secures-11-billion-funding-125-trillion-valuation-bloomberg-news-reports-2026-11-06",
+                "source": "reuters.com",
+                "summary": "Nov 6 (Reuters) - OpenAI has closed ‌on new funding of $11 billion, the initial part of a round ​that values the company ​at $1.25 trillion, a source familiar with ⁠the matter said on Friday.\n\nThe $11 ​billion raised so far represents ​only a portion of OpenAI's original target of up to $30 billion, while ​the company's valuation has ​come down from the $1.5 trillion level it ‌had ⁠initially sought, two investors said. [...] The Reuters Daily Briefing newsletter provides all the news you need to start your day. Sign up here.\n\nAdvertisement · Scroll to continue\n\nSoftBank and MGX participated in the funding, the investors said.\n\nBloomberg News reported ​on the ​funding ⁠earlier on Friday.\n\nSentiment toward AI companies has ​cooled in the last ​month, ⁠with some investors valuing rival Anthropic's planned IPO at about $1.5 ⁠trillion, ​below earlier expectations ​of roughly $2 trillion.",
+                "score": 0.7147281
+              },
+              {
+                "title": "OpenAI kicks off charm offensive to change voters' view of data centers | Reuters",
+                "url": "https://www.reuters.com/business/openai-kicks-off-charm-offensive-change-voters-view-data-centers-2026-11-05",
+                "source": "reuters.com",
+                "summary": "SAN FRANCISCO, Nov 5 (Reuters) - Stunning ​victories by Democrats in US midterm elections this week have been interpreted by many as Americans repudiating tech ‌industry plans to build data centers across the country. OpenAI has now embarked on new strategies to change their minds.\n\nThe AI lab on Thursday laid out policies — in the works since August — intended to help the company build more trust with local communities and convince them that data centers will ​benefit them. [...] OpenAI officials, along with many of their peers in tech, ​have spent the last ⁠two years trying to build ties with the administration of US President Donald Trump in hopes of shaping federal policy around AI.\n\nOpenAI CEO Sam Altman donated $1 million to Trump's inaugural committee and later attended Trump's second inauguration. Last year, Brockman donated $25 million in his personal capacity to ⁠a Trump ​super PAC. [...] The Reuters Daily Briefing newsletter provides all the news you need to start your day. Sign up here.\n\nOpenAI said it will no longer use non-disclosure agreements with public officials when negotiating or discussing future sites, although ​proprietary information would still be under wraps. It will also give residents access to construction plans ⁠and their potential effect on traffic, noise and lighting.",
+                "score": 0.66569364
+              },
+              {
+                "title": "OpenAI employees warned about operational security lapses for years, sources say | Reuters",
+                "url": "https://www.reuters.com/business/openai-employees-warned-about-operational-security-lapses-years-sources-say-2026-11-03",
+                "source": "reuters.com",
+                "summary": "OpenAI and Anthropic have tried to ​maintain a more open research culture to both ⁠attract employees and foster creativity that can lead to breakthroughs. The AI field is rooted in academia, where machine-learning scientists have openly discussed their research.\n\nSome OpenAI employees are increasingly worried about this approach as AI grows more capable, according to the five people. [...] When asked about employees' concerns and their view that management did not act on these issues, OpenAI spokesperson Elana Widmann ​said that OpenAI is one of the most targeted organizations in the world. As a result, the company invests heavily in its security program to protect against attacks from insiders, cybercriminals and nation-states, she said. [...] The Reuters Daily Briefing newsletter provides all the news you need to start your day. Sign up here.\n\nThese workers argued that OpenAI's controls were so lax ‌that outsiders, including foreign governments, could obtain sensitive information about the AI lab's technology with relative ease, the people said. For example, anybody at OpenAI who could access its code could see the technical details underlying many company projects.",
+                "score": 0.6213807
+              }
+            ]
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T11:14:45"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-11-10T11:15:24",
+      "user": "drama gần đây ",
+      "status": "answered",
+      "assistant_text": "Dưới đây là một số drama gần đây liên quan đến OpenAI:\n\n1. **Nhân viên OpenAI bày tỏ lo ngại về an ninh trước khi ra mắt ChatGPT**  \n   Nhân viên đã cảnh báo lãnh đạo về các lỗ hổng an ninh trước khi phát hiện một thiết bị ghi âm vào tháng 10. Quản lý được cho là đã ưu tiên cạnh tranh với Google và Anthropic hơn là vấn đề an ninh. [Xem thêm](https://x.com/Web3__Youth/status/2117843530509164954) (Nguồn: @Web3__Youth)\n\n2. **Drama giữa JoyIn và OpenAI**  \n   Một người dùng đã chỉ ra rằng trong khi mọi người đang tranh cãi về vụ kiện giữa JoyIn và OpenAI, có một robot đang làm việc với mô hình Aether từ hai thương hiệu khác nhau. [Xem thêm](https://x.com/kate_osita_/status/2100249406973133149) (Nguồn: @kate_osita_)\n\n3. **Sam Altman nói về lý do Ilya, Mira, Dario và Elon rời OpenAI**  \n   Sam Altman đã chia sẻ rằng có một điều gì đó xảy ra trong tâm trí nhiều người khiến họ chỉ tin tưởng vào bản thân để xây dựng AI, vì stakes quá cao. Ông cũng nhấn mạnh rằng cách tiếp cận của một số người là không tốt và không thể để quyền lực tập trung vào tay họ. [Xem thêm](https://x.com/zhodonx/status/2118293599196463531) (Nguồn: @zhodonx)\n\n4. **Vụ kiện liên quan đến ChatGPT**  \n   Một người chồng cho rằng ChatGPT đã giúp vợ mình lên kế hoạch đầu độc anh ta và hiện đang kiện OpenAI. Vụ kiện này đặt ra nhiều câu hỏi về an toàn và trách nhiệm của AI. [Xem thêm](https://x.com/HenaDoba/status/2119283670926127559) (Nguồn: @HenaDoba)\n\n5. **Tin đồn về việc mua lại**  \n   Có thông tin cho rằng Apple sẽ mua Anthropic và Microsoft sẽ mua OpenAI, dẫn đến nhiều lo ngại và drama trong cộng đồng công nghệ. [Xem thêm](https://x.com/Data_Soong_/status/2118510124281070042) (Nguồn: @Data_Soong_)\n\nNếu bạn cần thêm thông tin chi tiết về bất kỳ drama nào, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "social_search",
+              "args": {
+                "query": "OpenAI drama",
+                "search_type": "Top"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "social_search",
+              "args": {
+                "query": "OpenAI drama",
+                "search_type": "Top"
+              },
+              "result": {
+                "tool": "search_tweets",
+                "query": "OpenAI drama",
+                "search_type": "Top",
+                "items": [
+                  {
+                    "title": "openai staff raised security concerns before chatgpt launch",
+                    "summary": "openai staff raised security concerns before chatgpt launch\n\nemployees warned leadership of lapses prior to october discovery of a recording device\n\nmanagement reportedly prioritized competition with google and anthropic over security\n\n#OpenAI #Security https://t.co/TL9UcmbfO9",
+                    "url": "https://x.com/Web3__Youth/status/2117843530509164954",
+                    "source": "@Web3__Youth",
+                    "date": "Wed Nov 04 04:56:59 +0000 2026",
+                    "metrics": {
+                      "favorites": 0,
+                      "retweets": 0,
+                      "views": "113"
+                    }
+                  },
+                  {
+                    "title": "been watching the #JoyIn vs #OpenAI drama and nobody's talking about the weird part:",
+                    "summary": "been watching the #JoyIn vs #OpenAI drama and nobody's talking about the weird part:\n\ntheir model Aether apparently runs robots from two different brands with one 4B model.\n\neveryone's busy fighting about the lawsuit and there's literally a robot doing chores.\n\nanyway\nhttps://t.co/OalTqZhWur",
+                    "url": "https://x.com/kate_osita_/status/2100249406973133149",
+                    "source": "@kate_osita_",
+                    "date": "Wed Sep 16 15:44:14 +0000 2026",
+                    "metrics": {
+                      "favorites": 73,
+                      "retweets": 54,
+                      "views": "30475"
+                    }
+                  },
+                  {
+                    "title": "Sam Altman on why Ilya, Mira, Dario & Elon all left OpenAI:",
+                    "summary": "Sam Altman on why Ilya, Mira, Dario & Elon all left OpenAI:\n\n\"There is something that happens in many people's brains where they only trust themselves to build this because the stakes feel so high.\"\n\n\"his approach is bad, and so I can't let power get concentrated in his hands.\"\n\nApproach & trust.\n\nI reckon this is the real AI drama: the fact that the people who built them are deciding they can't share the same room anymore.",
+                    "url": "https://x.com/zhodonx/status/2118293599196463531",
+                    "source": "@zhodonx",
+                    "date": "Thu Nov 05 10:45:24 +0000 2026",
+                    "metrics": {
+                      "favorites": 52,
+                      "retweets": 2,
+                      "views": "2414"
+                    }
+                  },
+                  {
+                    "title": "A husband says ChatGPT helped his wife plan to poison him. Now he’s suing OpenAI. I spoke with Jennifer Coffindaffer abo",
+                    "summary": "A husband says ChatGPT helped his wife plan to poison him. Now he’s suing OpenAI. I spoke with Jennifer Coffindaffer about the allegations and the questions they raise about AI safety and accountability. \n\n#ChatGPT #OpenAI #AISafety #JenniferCoffindaffer #Lawsuit https://t.co/Esbjr58GPg",
+                    "url": "https://x.com/HenaDoba/status/2119283670926127559",
+                    "source": "@HenaDoba",
+                    "date": "Sun Nov 08 04:19:36 +0000 2026",
+                    "metrics": {
+                      "favorites": 8,
+                      "retweets": 1,
+                      "views": "273"
+                    }
+                  },
+                  {
+                    "title": "So Apple will buy Anthropic and Microsoft will buy OpenAI right?",
+                    "summary": "So Apple will buy Anthropic and Microsoft will buy OpenAI right?\n\nMan, all the panic, all the drama, just for the next web iteration cycle lol\n\nMay the Shoggoth never stop growing https://t.co/vBOjWeypYw",
+                    "url": "https://x.com/Data_Soong_/status/2118510124281070042",
+                    "source": "@Data_Soong_",
+                    "date": "Fri Nov 06 01:05:48 +0000 2026",
+                    "metrics": {
+                      "favorites": 1,
+                      "retweets": 0,
+                      "views": "47"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Dưới đây là một số drama gần đây liên quan đến OpenAI:\n\n1. **Nhân viên OpenAI bày tỏ lo ngại về an ninh trước khi ra mắt ChatGPT**  \n   Nhân viên đã cảnh báo lãnh đạo về các lỗ hổng an ninh trước khi phát hiện một thiết bị ghi âm vào tháng 10. Quản lý được cho là đã ưu tiên cạnh tranh với Google và Anthropic hơn là vấn đề an ninh. [Xem thêm](https://x.com/Web3__Youth/status/2117843530509164954) (Nguồn: @Web3__Youth)\n\n2. **Drama giữa JoyIn và OpenAI**  \n   Một người dùng đã chỉ ra rằng trong khi mọi người đang tranh cãi về vụ kiện giữa JoyIn và OpenAI, có một robot đang làm việc với mô hình Aether từ hai thương hiệu khác nhau. [Xem thêm](https://x.com/kate_osita_/status/2100249406973133149) (Nguồn: @kate_osita_)\n\n3. **Sam Altman nói về lý do Ilya, Mira, Dario và Elon rời OpenAI**  \n   Sam Altman đã chia sẻ rằng có một điều gì đó xảy ra trong tâm trí nhiều người khiến họ chỉ tin tưởng vào bản thân để xây dựng AI, vì stakes quá cao. Ông cũng nhấn mạnh rằng cách tiếp cận của một số người là không tốt và không thể để quyền lực tập trung vào tay họ. [Xem thêm](https://x.com/zhodonx/status/2118293599196463531) (Nguồn: @zhodonx)\n\n4. **Vụ kiện liên quan đến ChatGPT**  \n   Một người chồng cho rằng ChatGPT đã giúp vợ mình lên kế hoạch đầu độc anh ta và hiện đang kiện OpenAI. Vụ kiện này đặt ra nhiều câu hỏi về an toàn và trách nhiệm của AI. [Xem thêm](https://x.com/HenaDoba/status/2119283670926127559) (Nguồn: @HenaDoba)\n\n5. **Tin đồn về việc mua lại**  \n   Có thông tin cho rằng Apple sẽ mua Anthropic và Microsoft sẽ mua OpenAI, dẫn đến nhiều lo ngại và drama trong cộng đồng công nghệ. [Xem thêm](https://x.com/Data_Soong_/status/2118510124281070042) (Nguồn: @Data_Soong_)\n\nNếu bạn cần thêm thông tin chi tiết về bất kỳ drama nào, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "OpenAI drama",
+            "search_type": "Top"
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "OpenAI drama",
+            "search_type": "Top",
+            "items": [
+              {
+                "title": "openai staff raised security concerns before chatgpt launch",
+                "summary": "openai staff raised security concerns before chatgpt launch\n\nemployees warned leadership of lapses prior to october discovery of a recording device\n\nmanagement reportedly prioritized competition with google and anthropic over security\n\n#OpenAI #Security https://t.co/TL9UcmbfO9",
+                "url": "https://x.com/Web3__Youth/status/2117843530509164954",
+                "source": "@Web3__Youth",
+                "date": "Wed Nov 04 04:56:59 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "113"
+                }
+              },
+              {
+                "title": "been watching the #JoyIn vs #OpenAI drama and nobody's talking about the weird part:",
+                "summary": "been watching the #JoyIn vs #OpenAI drama and nobody's talking about the weird part:\n\ntheir model Aether apparently runs robots from two different brands with one 4B model.\n\neveryone's busy fighting about the lawsuit and there's literally a robot doing chores.\n\nanyway\nhttps://t.co/OalTqZhWur",
+                "url": "https://x.com/kate_osita_/status/2100249406973133149",
+                "source": "@kate_osita_",
+                "date": "Wed Sep 16 15:44:14 +0000 2026",
+                "metrics": {
+                  "favorites": 73,
+                  "retweets": 54,
+                  "views": "30475"
+                }
+              },
+              {
+                "title": "Sam Altman on why Ilya, Mira, Dario & Elon all left OpenAI:",
+                "summary": "Sam Altman on why Ilya, Mira, Dario & Elon all left OpenAI:\n\n\"There is something that happens in many people's brains where they only trust themselves to build this because the stakes feel so high.\"\n\n\"his approach is bad, and so I can't let power get concentrated in his hands.\"\n\nApproach & trust.\n\nI reckon this is the real AI drama: the fact that the people who built them are deciding they can't share the same room anymore.",
+                "url": "https://x.com/zhodonx/status/2118293599196463531",
+                "source": "@zhodonx",
+                "date": "Thu Nov 05 10:45:24 +0000 2026",
+                "metrics": {
+                  "favorites": 52,
+                  "retweets": 2,
+                  "views": "2414"
+                }
+              },
+              {
+                "title": "A husband says ChatGPT helped his wife plan to poison him. Now he’s suing OpenAI. I spoke with Jennifer Coffindaffer abo",
+                "summary": "A husband says ChatGPT helped his wife plan to poison him. Now he’s suing OpenAI. I spoke with Jennifer Coffindaffer about the allegations and the questions they raise about AI safety and accountability. \n\n#ChatGPT #OpenAI #AISafety #JenniferCoffindaffer #Lawsuit https://t.co/Esbjr58GPg",
+                "url": "https://x.com/HenaDoba/status/2119283670926127559",
+                "source": "@HenaDoba",
+                "date": "Sun Nov 08 04:19:36 +0000 2026",
+                "metrics": {
+                  "favorites": 8,
+                  "retweets": 1,
+                  "views": "273"
+                }
+              },
+              {
+                "title": "So Apple will buy Anthropic and Microsoft will buy OpenAI right?",
+                "summary": "So Apple will buy Anthropic and Microsoft will buy OpenAI right?\n\nMan, all the panic, all the drama, just for the next web iteration cycle lol\n\nMay the Shoggoth never stop growing https://t.co/vBOjWeypYw",
+                "url": "https://x.com/Data_Soong_/status/2118510124281070042",
+                "source": "@Data_Soong_",
+                "date": "Fri Nov 06 01:05:48 +0000 2026",
+                "metrics": {
+                  "favorites": 1,
+                  "retweets": 0,
+                  "views": "47"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "ended_at": "2026-11-10T11:15:36"
+    }
+  ]
+}
