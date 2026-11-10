@@ -18,12 +18,12 @@ from .social_search.tool import search_tweets
 from .send.tool import send_telegram
 from .lookup.tool import web_search
 
+# New custom tools for Group 5
+from .wikipedia.tool import search_wikipedia
+from .calculator.tool import calculate
+from .crypto_price.tool import get_crypto_price
 
-# NOTE (starter_v0): tool names here are intentionally vague. These keys are the
-# names the model sees AND the names data/eval_base.json + data/eval_research_extension.json
-# match against. If a team renames a tool, it MUST stay in sync across ALL of:
-#   artifacts/tools.yaml  ->  this dict  ->  data/eval_base.json + data/eval_research_extension.json
-# Otherwise the eval raises "not declared in tools.yaml" or scores every call as a name mismatch.
+
 TOOL_FUNCTIONS = {
     "clarify": ask_user,
     "timeline": get_user_tweets,
@@ -35,8 +35,9 @@ TOOL_FUNCTIONS = {
     "policy": search_company_policy,
     "papers": arxiv_search,
     "paper_text": get_arxiv_paper_text,
-    # TODO(student): register your new tool here, e.g. "my_tool": my_tool_function,
-    # then declare it in artifacts/tools.yaml and run `pytest tests/test_tool_contract.py`.
+    "wikipedia": search_wikipedia,
+    "calculator": calculate,
+    "crypto_price": get_crypto_price,
 }
 
 
@@ -53,4 +54,3 @@ def to_openai_tools(declarations: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "parameters": item.get("parameters", {"type": "object", "properties": {}}),
         },
     } for item in declarations]
-

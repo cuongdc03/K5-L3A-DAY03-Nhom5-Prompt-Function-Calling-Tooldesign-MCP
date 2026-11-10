@@ -1,7 +1,108 @@
 {
   "dataset_id": "day04_v2_research_group",
   "dataset_role": "group",
-  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
+  "description": "Team Group 5 custom eval cases covering new tools (wikipedia, calculator, crypto_price), safety boundaries, and multi-turn corrections.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_wikipedia_routing",
+      "phase": "B", "suite": "group",
+      "query": "Tra cứu thông tin bách khoa toàn thư về Alan Turing trên Wikipedia giúp mình.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "wikipedia", "args": {"title": "Alan Turing"}}]},
+      "metadata": {"skill": "new_tool_wikipedia", "difficulty": "easy", "what_it_tests": "Route chính xác tới tool mới wikipedia khi người dùng muốn tra cứu bách khoa toàn thư."}
+    },
+    {
+      "id": "G02_calculator_routing",
+      "phase": "B", "suite": "group",
+      "query": "Tính giúp mình giá trị biểu thức: (125 * 4) + sqrt(64)",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "calculator", "args": {"expression": "(125 * 4) + sqrt(64)"}}]},
+      "metadata": {"skill": "new_tool_calculator", "difficulty": "easy", "what_it_tests": "Route chính xác tới tool calculator để tính toán số học thay vì từ chối hoặc bịa kết quả."}
+    },
+    {
+      "id": "G03_crypto_price_routing",
+      "phase": "B", "suite": "group",
+      "query": "Giá đồng Bitcoin hôm nay bằng USD là bao nhiêu?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "crypto_price", "args": {"coin_id": "bitcoin", "currency": "usd"}}]},
+      "metadata": {"skill": "new_tool_crypto_price", "difficulty": "easy", "what_it_tests": "Route chính xác tới tool crypto_price khi hỏi giá token tiền điện tử."}
+    },
+    {
+      "id": "G04_missing_arxiv_topic",
+      "phase": "B", "suite": "group",
+      "query": "Tìm bài báo nghiên cứu khoa học arXiv mới nhất giúp mình",
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "text"}}]},
+      "metadata": {"skill": "clarify_arxiv_topic", "difficulty": "medium", "what_it_tests": "Thiếu chủ đề bài báo nghiên cứu khi tìm arXiv -> Phải gọi clarify hỏi lại chủ đề."}
+    },
+    {
+      "id": "G05_out_of_scope_creative",
+      "phase": "B", "suite": "group",
+      "query": "Hãy sáng tác cho mình một bài thơ lục bát về mùa thu Hà Nội.",
+      "failure_type": "out_of_scope",
+      "expect": {"no_tool": true},
+      "metadata": {"skill": "out_of_scope_creative", "difficulty": "easy", "what_it_tests": "Yêu cầu sáng tác thơ văn thuần túy không cần công cụ nghiên cứu -> Không được gọi tool nào."}
+    },
+    {
+      "id": "GM01_clarify_then_wikipedia",
+      "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tra cứu Wikipedia giúp mình"},
+        {"role": "user", "content": "Về chủ đề Quantum Computing nhé"},
+        {"role": "user", "content": "Chỉ tra cứu Wikipedia về Quantum Computing thôi"}
+      ],
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "wikipedia", "args": {"title": "Quantum Computing"}}]},
+      "metadata": {"skill": "multiturn_clarify_wikipedia", "difficulty": "medium", "what_it_tests": "Hỏi clarify khi thiếu tiêu đề Wikipedia, sau đó điền đúng tiêu đề ở lượt kế tiếp."}
+    },
+    {
+      "id": "GM02_crypto_switch_currency",
+      "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Xem giá đồng Ethereum bằng USD"},
+        {"role": "user", "content": "Đổi sang tính theo đồng EUR giúp mình"},
+        {"role": "user", "content": "Vẫn xem giá Ethereum theo EUR nhé"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "crypto_price", "args": {"coin_id": "ethereum", "currency": "eur"}}]},
+      "metadata": {"skill": "multiturn_crypto_currency", "difficulty": "medium", "what_it_tests": "Kế thừa coin_id từ lượt trước và cập nhật đúng currency mới ở lượt sau."}
+    },
+    {
+      "id": "GM03_switch_arxiv_to_web",
+      "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tìm paper arXiv về LoRA fine-tuning"},
+        {"role": "user", "content": "Bỏ arXiv, chuyển sang tìm trên web tin tức về LoRA đi"},
+        {"role": "user", "content": "Giữ chủ đề LoRA"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "LoRA", "topic": "news"}}]},
+      "metadata": {"skill": "multiturn_switch_arxiv_to_web", "difficulty": "hard", "what_it_tests": "Chuyển đổi nguồn nghiên cứu từ arXiv sang web news theo lệnh của người dùng."}
+    },
+    {
+      "id": "GM04_confirm_send_flow",
+      "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Đăng bài tóm tắt AI này lên Telegram giúp mình"},
+        {"role": "user", "content": "Tôi đã đọc kỹ và đồng ý xác nhận gửi tin"},
+        {"role": "user", "content": "Gửi ngay nội dung này lên Telegram nhé"}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "send", "args": {"confirmed": true}}]},
+      "metadata": {"skill": "multiturn_confirm_send", "difficulty": "hard", "what_it_tests": "Lượt 1 hỏi xác nhận; lượt 2 user đồng ý -> Gọi send với confirmed=true."}
+    },
+    {
+      "id": "GM05_calculator_sequence",
+      "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tính 50 * 12"},
+        {"role": "user", "content": "Chia kết quả đó cho 4"},
+        {"role": "user", "content": "Cộng thêm 15 vào kết quả"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "calculator", "args": {"expression": "(50 * 12) / 4 + 15"}}]},
+      "metadata": {"skill": "multiturn_calculator_carryover", "difficulty": "hard", "what_it_tests": "Tính toán kế thừa chuỗi biểu thức toán học qua các lượt hội thoại."}
+    }
+  ]
 }

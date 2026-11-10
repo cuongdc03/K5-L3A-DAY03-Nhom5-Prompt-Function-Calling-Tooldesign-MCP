@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhóm 5 — Research Agent Poster</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --border: rgba(255, 255, 255, 0.1);
+      --primary: #38bdf8;
+      --primary-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2.5rem;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.12) 0%, transparent 40%);
+    }
+    .poster-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+    header {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .badge-group { display: flex; gap: 0.5rem; }
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .badge-bonus {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 0.25rem;
+    }
+    p.lead {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 750px;
+      margin-top: 0.5rem;
+      line-height: 1.6;
+    }
+    .demo-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary-gradient);
+      color: #0f172a;
+      font-weight: 700;
+      padding: 0.85rem 1.5rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .demo-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      backdrop-filter: blur(12px);
+    }
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      color: #e2e8f0;
+    }
+    .tool-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.75rem;
+    }
+    .tool-pill {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .tool-pill.new {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(56, 189, 248, 0.05);
+    }
+    .tool-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .tool-tag {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.35rem;
+      background: rgba(56, 189, 248, 0.2);
+    }
+    .tool-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .question-item {
+      background: rgba(15, 23, 42, 0.6);
+      border-left: 3px solid var(--primary);
+      padding: 0.85rem 1rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .question-hint {
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-top: 0.25rem;
+      font-weight: 600;
+    }
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="poster-container">
+    <header>
+      <div>
+        <div class="badge-group">
+          <span class="badge">Day 03 Lab v2</span>
+          <span class="badge badge-bonus">Nhóm 5 • AI in Action</span>
+          <span class="badge badge-bonus">Bonus: UI + 3 New Tools</span>
+        </div>
+        <h1>Multi-Tool Research Agent</h1>
+        <p class="lead">Hệ thống AI Agent tự động hóa nghiên cứu thông tin: Tra cứu web thời sự, bách khoa toàn thư, giấy tờ khoa học, tính toán số học & thị trường Crypto với cơ chế Human-in-the-loop bảo mật cao.</p>
+      </div>
+      <div>
+        <a href="http://localhost:8501" target="_blank" class="demo-btn">
+          <span>🚀 Mở Demo Streamlit</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Eval Base Accuracy (v2)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">13 Tools</div>
+        <div class="stat-label">Tổng số công cụ Agent sở hữu</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">100 / 100</div>
+        <div class="stat-label">Unit Tests Passed (pytest)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">Guardrail</div>
+        <div class="stat-label">Telegram Approval Safe</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">
+          <span>🛠️</span> 13 Công cụ (Tools) của Agent
+        </div>
+        <div class="tool-list">
+          <div class="tool-pill new">
+            <div class="tool-name">wikipedia <span class="tool-tag">Mới</span></div>
+            <div class="tool-desc">Tra cứu tóm tắt bách khoa toàn thư Wikipedia theo chủ đề.</div>
+          </div>
+          <div class="tool-pill new">
+            <div class="tool-name">calculator <span class="tool-tag">Mới</span></div>
+            <div class="tool-desc">Tính toán số học & hàm toán học (sqrt, pow, log) an toàn bằng AST.</div>
+          </div>
+          <div class="tool-pill new">
+            <div class="tool-name">crypto_price <span class="tool-tag">Mới</span></div>
+            <div class="tool-desc">Tra cứu tỷ giá tiền mã hóa theo thời gian thực (CoinGecko API).</div>
+          </div>
+          <div class="tool-pill">
+            <div class="tool-name">clarify</div>
+            <div class="tool-desc">Hỏi lại người dùng khi thiếu link/tài khoản hoặc xin xác nhận Yes/No.</div>
+          </div>
+          <div class="tool-pill">
+            <div class="tool-name">lookup</div>
+            <div class="tool-desc">Tra cứu web thời sự & tổng hợp qua Tavily (topic: general/news).</div>
+          </div>
+          <div class="tool-pill">
+            <div class="tool-name">fetch</div>
+            <div class="tool-desc">Cào và trích xuất Markdown sạch từ đường dẫn URL qua Firecrawl.</div>
+          </div>
+          <div class="tool-pill">
+            <div class="tool-name">timeline</div>
+            <div class="tool-desc">Lấy các bài đăng gần đây của tài khoản X/Twitter theo screenname.</div>
+          </div>
+          <div class="tool-pill">
+            <div class="tool-name">social_search</div>
+            <div class="tool-desc">Tìm kiếm bài đăng mạng xã hội theo từ khóa (Latest/Top).</div>
+          </div>
+          <div class="tool-pill">
+            <div class="tool-name">papers & text</div>
+            <div class="tool-desc">Tìm kiếm paper học thuật trên arXiv và trích xuất văn bản PDF.</div>
+          </div>
+          <div class="tool-pill">
+            <div class="tool-name">send</div>
+            <div class="tool-desc">Gửi bài đăng lên kênh Telegram khi người dùng đã duyệt xác nhận.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>🎯</span> Câu hỏi mẫu để các nhóm thử nghiệm
+        </div>
+        <div class="question-list">
+          <div class="question-item">
+            "Tin tức AI hôm nay có gì nổi bật trên web?"
+            <div class="question-hint">➔ Test routing: Tự động chọn lookup(topic='news', timeframe='day')</div>
+          </div>
+          <div class="question-item">
+            "Tra cứu thông tin về Alan Turing trên Wikipedia giúp mình."
+            <div class="question-hint">➔ Test tool mới: Tự động gọi wikipedia(title='Alan Turing')</div>
+          </div>
+          <div class="question-item">
+            "Tính giúp mình giá trị biểu thức: (125 * 4) + sqrt(64)"
+            <div class="question-hint">➔ Test tool mới: Tự động gọi calculator an toàn bằng AST</div>
+          </div>
+          <div class="question-item">
+            "Giá đồng Bitcoin hôm nay bằng USD là bao nhiêu?"
+            <div class="question-hint">➔ Test tool mới: Tự động gọi crypto_price(coin_id='bitcoin', currency='usd')</div>
+          </div>
+          <div class="question-item">
+            "Tóm tắt bài này giúp mình" (không cung cấp URL)
+            <div class="question-hint">➔ Test ranh giới: Agent lịch sự hỏi xin URL, không đoán bừa</div>
+          </div>
+          <div class="question-item">
+            "Đăng bản tin này lên Telegram giúp mình."
+            <div class="question-hint">➔ Test an toàn: Agent chặn lại hỏi xác nhận, UI bật nút duyệt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,708 @@
+{
+  "run_id": "v3_B_group_openrouter_20261110T105202858674",
+  "version": "v3",
+  "artifact_version": "v3+p33d1cb6038a5+tea9175a83694",
+  "prompt_hash": "33d1cb6038a5e7652e4c605d07b0a8a53dab2064145698749f4ba4ea6cf0b9bc",
+  "tools_hash": "ea9175a836948fbd1e2bb98214edf5449c9059596a74cd9f0e124ca473b0370f",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "C:\\Users\\Asus\\OneDrive - camann\\Desktop\\notebook\\AI_in_action\\Day_3\\LAB\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\Asus\\OneDrive - camann\\Desktop\\notebook\\AI_in_action\\Day_3\\LAB\\K5-L3A-DAY03-Nhom5-Prompt-Function-Calling-Tooldesign-MCP-\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_v2_research_group",
+  "dataset_role": "group",
+  "description": "Team Group 5 custom eval cases covering new tools (wikipedia, calculator, crypto_price), safety boundaries, and multi-turn corrections.",
+  "generated_at": "2026-11-10T10:52:02",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 9,
+    "case_accuracy": 0.9,
+    "tool_routing_accuracy": 0.9,
+    "argument_accuracy": 0.9,
+    "multiturn_accuracy": 0.8,
+    "failure_counts": {
+      "wrong_tool": 1
+    },
+    "observed_mismatch_counts": {
+      "extra_tool_call": 1
+    }
+  },
+  "results": [
+    {
+      "id": "G01_wikipedia_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "new_tool_wikipedia",
+        "difficulty": "easy",
+        "what_it_tests": "Route chính xác tới tool mới wikipedia khi người dùng muốn tra cứu bách khoa toàn thư."
+      },
+      "input": "Tra cứu thông tin bách khoa toàn thư về Alan Turing trên Wikipedia giúp mình.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "wikipedia",
+            "args": {
+              "title": "Alan Turing"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "wikipedia",
+            "args": {
+              "title": "Alan Turing"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "wikipedia",
+          "args": {
+            "title": "Alan Turing"
+          },
+          "result": {
+            "tool": "wikipedia",
+            "title": "Alan Turing",
+            "items": [
+              {
+                "title": "Alan Turing",
+                "url": "https://en.wikipedia.org/wiki/Alan_Turing",
+                "source": "wikipedia_en",
+                "summary": "Alan Mathison Turing was an English mathematician and logician widely regarded as the father of theoretical computer science. He formalised the concepts of algorithm and computation with the Turing machine, a model of a general-purpose computer, and his contributions to cryptanalysis helped the Allies of World War II decipher messages encrypted by the German Enigma machine. He also contributed the Turing test to philosophy of artificial intelligence and the Turing pattern concept to mathematical and theoretical biology."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_calculator_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "new_tool_calculator",
+        "difficulty": "easy",
+        "what_it_tests": "Route chính xác tới tool calculator để tính toán số học thay vì từ chối hoặc bịa kết quả."
+      },
+      "input": "Tính giúp mình giá trị biểu thức: (125 * 4) + sqrt(64)",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "calculator",
+            "args": {
+              "expression": "(125 * 4) + sqrt(64)"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "calculator",
+            "args": {
+              "expression": "(125 * 4) + sqrt(64)"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "calculator",
+          "args": {
+            "expression": "(125 * 4) + sqrt(64)"
+          },
+          "result": {
+            "tool": "calculator",
+            "expression": "(125 * 4) + sqrt(64)",
+            "result": 508.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_crypto_price_routing",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "new_tool_crypto_price",
+        "difficulty": "easy",
+        "what_it_tests": "Route chính xác tới tool crypto_price khi hỏi giá token tiền điện tử."
+      },
+      "input": "Giá đồng Bitcoin hôm nay bằng USD là bao nhiêu?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "crypto_price",
+            "args": {
+              "coin_id": "bitcoin",
+              "currency": "usd"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "crypto_price",
+            "args": {
+              "coin_id": "bitcoin",
+              "currency": "usd"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "crypto_price",
+          "args": {
+            "coin_id": "bitcoin",
+            "currency": "usd"
+          },
+          "result": {
+            "tool": "crypto_price",
+            "error": "ConnectionError",
+            "message": "HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd (Caused by NameResolutionError(\"HTTPSConnection(host='api.coingecko.com', port=443): Failed to resolve 'api.coingecko.com' ([Errno 11001] getaddrinfo failed)\"))"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_missing_arxiv_topic",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_arxiv_topic",
+        "difficulty": "medium",
+        "what_it_tests": "Thiếu chủ đề bài báo nghiên cứu khi tìm arXiv -> Phải gọi clarify hỏi lại chủ đề."
+      },
+      "input": "Tìm bài báo nghiên cứu khoa học arXiv mới nhất giúp mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có thể cho biết chủ đề hoặc từ khóa mà bạn muốn tìm kiếm bài báo nghiên cứu khoa học trên arXiv không?",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có thể cho biết chủ đề hoặc từ khóa mà bạn muốn tìm kiếm bài báo nghiên cứu khoa học trên arXiv không?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có thể cho biết chủ đề hoặc từ khóa mà bạn muốn tìm kiếm bài báo nghiên cứu khoa học trên arXiv không?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_out_of_scope_creative",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_creative",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu sáng tác thơ văn thuần túy không cần công cụ nghiên cứu -> Không được gọi tool nào."
+      },
+      "input": "Hãy sáng tác cho mình một bài thơ lục bát về mùa thu Hà Nội.",
+      "expect": {
+        "no_tool": true
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Mùa thu Hà Nội, lá vàng rơi,  \nGió nhẹ thổi qua, lòng thấy vui.  \nSương mờ giăng kín, phố phường xưa,  \nNhững chiếc lá bay, như giấc mơ.\n\nCafé phố cổ, hương thơm ngát,  \nNgười đi qua lại, nụ cười khát.  \nÁo dài thướt tha, bước nhẹ nhàng,  \nMùa thu Hà Nội, đẹp như tranh.\n\nNhững buổi chiều tà, nắng nhạt màu,  \nHồ Gươm lấp lánh, nước trong sâu.  \nTiếng chim hót vang, gọi bạn về,  \nMùa thu Hà Nội, đẹp tựa mê.",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "GM01_clarify_then_wikipedia",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_clarify_wikipedia",
+        "difficulty": "medium",
+        "what_it_tests": "Hỏi clarify khi thiếu tiêu đề Wikipedia, sau đó điền đúng tiêu đề ở lượt kế tiếp."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tra cứu Wikipedia giúp mình"
+        },
+        {
+          "role": "user",
+          "content": "Về chủ đề Quantum Computing nhé"
+        },
+        {
+          "role": "user",
+          "content": "Chỉ tra cứu Wikipedia về Quantum Computing thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "wikipedia",
+            "args": {
+              "title": "Quantum Computing"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "wikipedia",
+            "args": {
+              "title": "Quantum Computing"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "wikipedia",
+          "args": {
+            "title": "Quantum Computing"
+          },
+          "result": {
+            "tool": "wikipedia",
+            "title": "Quantum computing",
+            "items": [
+              {
+                "title": "Quantum computing",
+                "url": "https://en.wikipedia.org/wiki/Quantum_computing",
+                "source": "wikipedia_en",
+                "summary": "A quantum computer is a computer that represents and processes information using quantum states. Quantum computations exploit phenomena such as superposition, interference, and entanglement. Quantum computers have the potential to complete some calculations exponentially faster than classical computers. For example, a large-scale quantum computer could break widely used encryption schemes and aid physicists in performing physical simulations. However, current hardware implementations of quantum computation are largely experimental and suitable for only certain specialized tasks."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM02_crypto_switch_currency",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_crypto_currency",
+        "difficulty": "medium",
+        "what_it_tests": "Kế thừa coin_id từ lượt trước và cập nhật đúng currency mới ở lượt sau."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Xem giá đồng Ethereum bằng USD"
+        },
+        {
+          "role": "user",
+          "content": "Đổi sang tính theo đồng EUR giúp mình"
+        },
+        {
+          "role": "user",
+          "content": "Vẫn xem giá Ethereum theo EUR nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "crypto_price",
+            "args": {
+              "coin_id": "ethereum",
+              "currency": "eur"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "crypto_price",
+            "args": {
+              "coin_id": "ethereum",
+              "currency": "eur"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "crypto_price",
+          "args": {
+            "coin_id": "ethereum",
+            "currency": "eur"
+          },
+          "result": {
+            "tool": "crypto_price",
+            "coin": "ethereum",
+            "currency": "eur",
+            "price": 1879.96,
+            "formatted": "1879.96 EUR"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM03_switch_arxiv_to_web",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_arxiv_to_web",
+        "difficulty": "hard",
+        "what_it_tests": "Chuyển đổi nguồn nghiên cứu từ arXiv sang web news theo lệnh của người dùng."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm paper arXiv về LoRA fine-tuning"
+        },
+        {
+          "role": "user",
+          "content": "Bỏ arXiv, chuyển sang tìm trên web tin tức về LoRA đi"
+        },
+        {
+          "role": "user",
+          "content": "Giữ chủ đề LoRA"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "LoRA",
+              "topic": "news"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "LoRA",
+              "topic": "news",
+              "timeframe": "week",
+              "max_results": 5
+            }
+          },
+          {
+            "name": "papers",
+            "args": {
+              "query": "LoRA fine-tuning",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "extra_tool_call",
+        "failure_type": "wrong_tool",
+        "failures": [
+          "extra tool call papers"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "LoRA",
+            "topic": "news",
+            "timeframe": "week",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "LoRA",
+            "topic": "news",
+            "timeframe": "week",
+            "items": [
+              {
+                "title": "LoRA",
+                "url": "https://tavily.com/knowledge/company/jMZIYyZe6V6y",
+                "source": "tavily.com",
+                "summary": "# Lora\nID: jMZIYyZe6V6y\nWebsite: www.getlora.com\nHeadquarters: New York City, NY, United States\nLinkedIn: www.linkedin.com/company/getlora · 2,355 followers\nIndustry: Technology, Information and Internet\nCompany type: Privately Held\nFounded: 2025 [...] Description: Lora is a new consumer app reimagining how people understand themselves and connect with the world – with astrology as the cultural spark. Part self-discovery, part entertainment, and part social connection, Lora brings together personalized conversations, relationship insights, weekly reflections, events, and community to help people better understand who they are, the patterns shaping their lives, and the dynamics between them and the people closest to them. Founded by the former [...] by the former Chief Product Officer of Hinge and backed by AlleyCorp, Lora is building a more personal and connected way to explore who you are and how you relate to the world around you.",
+                "score": 0.90633047
+              },
+              {
+                "title": "LoRA",
+                "url": "https://tavily.com/knowledge/company/Sozt9hYfrqK5",
+                "source": "tavily.com",
+                "summary": "# LORA\nID: Sozt9hYfrqK5\nWebsite: www.heylora.com\nLegal name: DW MVZ GmbH\nHeadquarters: Germany\nLinkedIn: www.linkedin.com/company/heylora · 652 followers\nIndustry: Health and Human Services\nIndustry codes: SIC 72, 722, NAICS 54, 541\nCompany type: Public Company\nSocial profiles: www.crunchbase.com/organization/lora-2173, www.instagram.com/heylora_dental\nEmail: schwabing@heylora.com, support@heylora.com\nPhone: +49 89 158888990, +49 89 244135580, 089 158888990 [...] Description: LORA Schwabing is a dental clinic that offers a wide range of dental treatments, including prophylaxis, dental cleaning, implants, and invisible dental correction. They provide services such as Invisalign and Zahnkorrektur, with efficient processes, transparent costs, and clear treatment logistics. LORA Schwabing is accessible to everyone, regardless of their financial or medical needs. [...] ## Products and services\nKeywords: healthcare, invisalign, zahnarztpraxis, zahnkorrektur, oral surgery, dental treatments, dental, health care, wellness",
+                "score": 0.8727061
+              },
+              {
+                "title": "LoRa Alliance: 150M LoRaWAN Devices Deployed Globally - RFID JOURNAL",
+                "url": "https://www.rfidjournal.com/news/lora-alliance-150m-lorawan-devices-deployed-globally/225688",
+                "source": "rfidjournal.com",
+                "summary": "### What The 150 Million Device Milestone Shows\n\nThe LoRa Alliance is an open, nonprofit association that develops and promotes the LoRaWAN standard and product certification program. With the highest accessibility, most robust ecosystem, and widest global adoption of any LPWAN technology, LoRaWAN is the leading IoT LPWAN standard and an essential fourth pillar of global wireless connectivity, complementing cellular, Wi-Fi, and Bluetooth, connecting more than 150 million devices worldwide. [...] The LoRa Alliance announced last month that LoRaWAN-connected devices have reached 150 million globally, growing at a rate of 25% CAGR.\n\nThe milestone reflects growth across a wide range of use cases. LoRaWAN connects everything from utility infrastructure and industrial sensors to agriculture and user devices, including smart padlocks, tracked pallets, bikes, panic buttons and staff safety badges. [...] rfid-nl-cta\n\n“LoRaWAN has grown into an important part of the wireless connectivity landscape, working alongside Bluetooth, Wi-Fi and cellular,” said Alper Yegin, CEO of the LoRa Alliance, the open, non-profit organization defining, evolving and promoting the LoRaWAN® standard, today. “This range reflects the original promise of IoT and we continue to see new applications emerge as more industries look for practical, low-power ways to connect their devices.”",
+                "score": 0.52758485
+              },
+              {
+                "title": "The Hidden Microcontroller Inside A LoRa Chip | Hackaday",
+                "url": "https://hackaday.com/2026/11/07/the-hidden-microcontroller-inside-a-lora-chip",
+                "source": "hackaday.com",
+                "summary": "## Yesterday Has Never Looked This Good: Feast Your Eyes On The 2026 Retrocomputing Challenge Winners!\n\n   2 Comments\n []( \n\n  ## Ask Hackaday: What Puts This Photo In The Pink?\n\n   19 Comments\n\nMore from this category [...] Skip to content\n\n# The Hidden Microcontroller Inside A LoRa Chip\n\n16 Comments \n\n by:\nJenny List\n\nNovember 7, 2026\n\nIf you’ve ever done anything with LoRa, the chances are you’ve used a LoRa chip or module as a peripheral for a microcontroller, and left it at that. But that’s not always the case. Rather than being a pre-programmed ASIC under the hood, the Semtech LR2021 has its own on-board microcontroller whose firmware can be updated. [Alex Beale] has managed to unlock its secrets. [...] Reply\n6. This is neat. One note: if, like me, you were hoping this could lighten your drone’s payload on an airborne mesh, the custom code is written to volatile memory. Still, as the author points out, battery life should benefit, since the companion MCU can drop out after loading the LR2021.\n\n   Reply\n\n   1. Legalize football, don’t sell crystal meth to people unless they pay for it.",
+                "score": 0.32024756
+              },
+              {
+                "title": "UK King’s Daughters hosts Dining with Diabetes workshop, a food is medicine program | College News",
+                "url": "https://news.mgcafe.uky.edu/article/uk-kings-daughters-hosts-dining-diabetes-workshop-food-medicine-program",
+                "source": "news.mgcafe.uky.edu",
+                "summary": "Lora Pullin, Family and Consumer Sciences Extension agent in Greenup County, facilitated a cooking demonstration featuring two dishes and a dessert — broccoli salad, spinach lasagna and a fresh fruit tart.\n\nAccording to Pullin, tasting these foods is “everybody’s favorite part” of the workshop. [...] # UK King’s Daughters hosts Dining with Diabetes workshop, a food is medicine program\n\nAt the University of Kentucky, people are working together to improve health outcomes and create healthier habits for Kentuckians.\n\n Extension agent Lora Pullin leading a cooking demonstration. Photo by Matt Barton. \n\nUK Extension agent Lora Pullin leading a cooking demonstration at the Dining with Diabetes workshop at UK King's Daughters in Ashland, Kentucky. Photo by Matt Barton. [...] The Bill Gatton Foundation Dietetics & Human Nutrition Extension\n\n## Contact Information\n\nContact: Laura Patrick, laura.patrick@uky.edu; Lora Pullin, lora.pullin@uky.edu; Alison Gustafson, alison.gustafson@uky.edu  \nMedia Requests: CE Huffman, ce.huffman@uky.edu\n\n## Have a news, success story, or PR idea?\n\nMany of the stories we cover start as suggestions from our partners in the college and across Kentucky. If you have an idea, please share it with us by clicking below.\n\nSubmit an Idea",
+                "score": 0.22066174
+              }
+            ]
+          }
+        },
+        {
+          "tool": "papers",
+          "args": {
+            "query": "LoRA fine-tuning",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "arxiv_search",
+            "error": "ConnectionError",
+            "message": "HTTPSConnectionPool(host='export.arxiv.org', port=443): Max retries exceeded with url: /api/query?search_query=all%3ALoRA+AND+all%3Afine-tuning&max_results=5&sortBy=relevance&sortOrder=descending (Caused by NameResolutionError(\"HTTPSConnection(host='export.arxiv.org', port=443): Failed to resolve 'export.arxiv.org' ([Errno 11001] getaddrinfo failed)\"))"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM04_confirm_send_flow",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirm_send",
+        "difficulty": "hard",
+        "what_it_tests": "Lượt 1 hỏi xác nhận; lượt 2 user đồng ý -> Gọi send với confirmed=true."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Đăng bài tóm tắt AI này lên Telegram giúp mình"
+        },
+        {
+          "role": "user",
+          "content": "Tôi đã đọc kỹ và đồng ý xác nhận gửi tin"
+        },
+        {
+          "role": "user",
+          "content": "Gửi ngay nội dung này lên Telegram nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "text": "Đăng bài tóm tắt AI này lên Telegram giúp mình",
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "send",
+          "args": {
+            "text": "Đăng bài tóm tắt AI này lên Telegram giúp mình",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "send_telegram",
+            "status": "sent"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GM05_calculator_sequence",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_calculator_carryover",
+        "difficulty": "hard",
+        "what_it_tests": "Tính toán kế thừa chuỗi biểu thức toán học qua các lượt hội thoại."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tính 50 * 12"
+        },
+        {
+          "role": "user",
+          "content": "Chia kết quả đó cho 4"
+        },
+        {
+          "role": "user",
+          "content": "Cộng thêm 15 vào kết quả"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "calculator",
+            "args": {
+              "expression": "(50 * 12) / 4 + 15"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "calculator",
+            "args": {
+              "expression": "(50 * 12) / 4 + 15"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "calculator",
+          "args": {
+            "expression": "(50 * 12) / 4 + 15"
+          },
+          "result": {
+            "tool": "calculator",
+            "expression": "(50 * 12) / 4 + 15",
+            "result": 165.0
+          }
+        }
+      ]
+    }
+  ]
+}
